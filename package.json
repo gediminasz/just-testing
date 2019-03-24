@@ -17,6 +17,9 @@
         "taskDefinitions": [
             {
                 "type": "test-all"
+            },
+            {
+                "type": "test-file"
             }
         ]
     },

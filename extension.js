@@ -14,7 +14,14 @@ function activate() {
                         { type: 'test-all' },
                         'test-all',
                         'pytest',
-                        new vscode.ShellExecution('python -m pytest'),
+                        new vscode.ShellExecution('python -m pytest -v'),
+                        []
+                    ),
+                    new vscode.Task(
+                        { type: 'test-file' },
+                        'test-file',
+                        'pytest',
+                        new vscode.ShellExecution('python -m pytest -v ${file}'),
                         []
                     )
                 ]
