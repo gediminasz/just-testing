@@ -3,6 +3,11 @@
     "displayName": "just-testing",
     "description": "Simple tests runner",
     "version": "0.0.1",
+    "publisher": "gediminasz",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/gediminasz/just-testing"
+    },
     "engines": {
         "vscode": "^1.32.0"
     },
