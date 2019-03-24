@@ -15,16 +15,23 @@
         "Other"
     ],
     "activationEvents": [
+        "onCommand:extension.runOnCursor",
         "onCommand:workbench.action.tasks.runTask"
     ],
     "main": "./extension.js",
     "contributes": {
+        "commands": [
+            {
+                "command": "extension.runOnCursor",
+                "title": "Run test on cursor"
+            }
+        ],
         "taskDefinitions": [
             {
-                "type": "test-all"
+                "type": "testAll"
             },
             {
-                "type": "test-file"
+                "type": "testFile"
             }
         ]
     },
