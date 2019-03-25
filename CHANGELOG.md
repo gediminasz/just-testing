@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.0.2
 
 - Added "Run all tests" command
 - Added "Run all tests in file" command

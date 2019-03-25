@@ -1,8 +1,8 @@
 {
     "name": "just-testing",
     "displayName": "just-testing",
-    "description": "Simple tests runner",
-    "version": "0.0.1",
+    "description": "A Visual Studio Code extension for running tests in integrated terminal",
+    "version": "0.0.2",
     "publisher": "gediminasz",
     "repository": {
         "type": "git",
