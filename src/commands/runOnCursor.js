@@ -12,16 +12,13 @@ function command() {
 function findClosestTest() {
     let lineNumber = vscode.window.activeTextEditor.selection.active.line;
 
-    let line;
     while (lineNumber >= 0) {
-        line = vscode.window.activeTextEditor.document.lineAt(lineNumber).text;
-        if (line.includes("def test_")) break;
+        const line = vscode.window.activeTextEditor.document.lineAt(lineNumber).text;
+        const match = line.match(/def (test_.+)\(/);
+        if (match) return match[1];
+
         lineNumber--;
     }
-
-    return line.match(/def (test_.+)\(/)[1];
-
-    // TODO GZL replace line.includes with line.match and return from inside loop
     // TODO GZL when no test is detected
 }
 
