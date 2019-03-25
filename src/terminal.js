@@ -9,4 +9,10 @@ function obtainTerminal() {
     return vscode.window.createTerminal(TERMINAL_NAME);
 }
 
-module.exports = { obtainTerminal };
+function runInTerminal(command) {
+    const terminal = obtainTerminal();
+    terminal.show()
+    terminal.sendText(command);
+}
+
+module.exports = { runInTerminal };

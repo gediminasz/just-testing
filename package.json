@@ -15,6 +15,7 @@
         "Other"
     ],
     "activationEvents": [
+        "onCommand:extension.runAll",
         "onCommand:extension.runOnCursor",
         "onCommand:workbench.action.tasks.runTask"
     ],
@@ -27,25 +28,31 @@
                 "justTesting.regex": {
                     "type": "string",
                     "default": "def (test_.+)\\(",
-                    "description": "Regular expression for matching closest test name."
+                    "description": "Regular expression for matching closest test name"
                 },
                 "justTesting.runOnCursorCommand": {
                     "type": "string",
                     "default": "python -m pytest {fileName}::{testName}",
-                    "description": "runOnCursorCommand"
+                    "description": "Terminal command for \"Run test on cursor\""
+                },
+                "justTesting.runAllCommand": {
+                    "type": "string",
+                    "default": "python -m pytest -v",
+                    "description": "Terminal command for \"Run all tests\""
                 }
             }
         },
         "commands": [
+            {
+                "command": "extension.runAll",
+                "title": "Run all tests"
+            },
             {
                 "command": "extension.runOnCursor",
                 "title": "Run test on cursor"
             }
         ],
         "taskDefinitions": [
-            {
-                "type": "testAll"
-            },
             {
                 "type": "testFile"
             }

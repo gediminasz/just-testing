@@ -1,6 +1,6 @@
 const vscode = require("vscode");
 
-const { obtainTerminal } = require("../terminal");
+const { runInTerminal } = require("../terminal");
 const configuration = require("../configuration");
 
 function runOnCursor() {
@@ -12,14 +12,11 @@ function runOnCursor() {
 
     const fileName = vscode.workspace.asRelativePath(vscode.window.activeTextEditor.document.fileName);
 
-    const terminal = obtainTerminal();
-    terminal.show(true);
-
     const command = configuration.get("runOnCursorCommand")
         .replace("{fileName}", fileName)
         .replace("{testName}", testName);
 
-    terminal.sendText(command);
+    runInTerminal(command);
 }
 
 function findClosestTest() {

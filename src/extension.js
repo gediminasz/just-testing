@@ -1,6 +1,7 @@
 const vscode = require("vscode");
 
 const { runOnCursor } = require("./commands/runOnCursor");
+const { runAll } = require("./commands/runAll");
 
 let taskProvider;
 
@@ -11,6 +12,7 @@ function activate(context) {
         context.subscriptions.push(vscode.commands.registerCommand(command, callback));
     }
 
+    registerCommand('extension.runAll', runAll);
     registerCommand('extension.runOnCursor', runOnCursor);
 
     taskProvider = vscode.tasks.registerTaskProvider(
@@ -18,13 +20,6 @@ function activate(context) {
         {
             provideTasks: () => {
                 return [
-                    new vscode.Task(
-                        { type: 'testAll' },
-                        'testAll',
-                        'pytest',
-                        new vscode.ShellExecution('python -m pytest -v'),
-                        []
-                    ),
                     new vscode.Task(
                         { type: 'testFile' },
                         'testFile',

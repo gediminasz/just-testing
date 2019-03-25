@@ -6,7 +6,7 @@ A Visual Studio Code extension for running tests in integrated terminal.
 
 ### `justTesting.regex`
 
-Regular expression for matching closest test name.
+Regular expression for matching closest test name
 
 Example: `"def (test_.+)\\("`
 
@@ -16,7 +16,11 @@ Terminal command for "Run test on cursor"
 
 Example: `"python -m pytest {fileName}::{testName}"`
 
-###
+### `justTesting.runAllCommand`
+
+Terminal command for "Run all tests"
+
+Example: `"python -m pytest -v"`
 
 ## Installation
 
@@ -24,13 +28,3 @@ Example: `"python -m pytest {fileName}::{testName}"`
 vsce package
 code --install-extension just-testing-0.0.1.vsix
 ```
-
-## Changelog
-
-### Unreleased
-
-- Added "Run test on cursor" command
-
-### 0.0.1
-
-- Added `test-all` and `test-file` tasks

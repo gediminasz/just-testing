@@ -1,9 +1,10 @@
-# Change Log
+# Changelog
 
-All notable changes to the "just-testing" extension will be documented in this file.
+## Unreleased
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+- Added "Run all tests" command
+- Added "Run test on cursor" command
 
-## [Unreleased]
+## 0.0.1
 
-- Initial release
+- Added `test-all` and `test-file` tasks
