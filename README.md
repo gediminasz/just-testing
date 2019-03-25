@@ -8,21 +8,13 @@ A Visual Studio Code extension for running tests in integrated terminal.
 
 Regular expression for matching closest test name.
 
-#### Example
-
-```
-"def (test_.+)\\("
-````
+Example: `"def (test_.+)\\("`
 
 ### `justTesting.runOnCursorCommand`
 
 Terminal command for "Run test on cursor"
 
-#### Example
-
-```
-python -m pytest {fileName}::{testName}
-```
+Example: `"python -m pytest {fileName}::{testName}"`
 
 ###
 
