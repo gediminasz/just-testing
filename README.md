@@ -22,6 +22,12 @@ Terminal command for "Run all tests"
 
 Example: `"python -m pytest -v"`
 
+### `justTesting.runFileCommand`
+
+Terminal command for "Run all tests in file"
+
+Example: `"python -m pytest -v {fileName}"`
+
 ## Installation
 
 ```

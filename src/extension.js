@@ -1,9 +1,8 @@
 const vscode = require("vscode");
 
-const { runOnCursor } = require("./commands/runOnCursor");
 const { runAll } = require("./commands/runAll");
-
-let taskProvider;
+const { runFile } = require("./commands/runFile");
+const { runOnCursor } = require("./commands/runOnCursor");
 
 function activate(context) {
     console.debug('Activating just-testing...');
@@ -13,30 +12,12 @@ function activate(context) {
     }
 
     registerCommand('extension.runAll', runAll);
+    registerCommand('extension.runFile', runFile);
     registerCommand('extension.runOnCursor', runOnCursor);
-
-    taskProvider = vscode.tasks.registerTaskProvider(
-        'pytest',
-        {
-            provideTasks: () => {
-                return [
-                    new vscode.Task(
-                        { type: 'testFile' },
-                        'testFile',
-                        'pytest',
-                        new vscode.ShellExecution('python -m pytest -v ${file}'),
-                        []
-                    )
-                ]
-            }
-        }
-    );
 }
 
 function deactivate() {
     console.debug('Deactivating just-testing...');
-
-    if (taskProvider) taskProvider.dispose();
 }
 
 module.exports = {

@@ -1,6 +1,6 @@
 const { runInTerminal } = require("../terminal");
-const configuration = require("../configuration");
+const helpers = require("../helpers");
 
 module.exports = {
-    runAll: () => runInTerminal(configuration.get("runAllCommand"))
+    runAll: () => runInTerminal(helpers.getSetting("runAllCommand"))
 };

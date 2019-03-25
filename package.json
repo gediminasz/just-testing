@@ -16,8 +16,8 @@
     ],
     "activationEvents": [
         "onCommand:extension.runAll",
-        "onCommand:extension.runOnCursor",
-        "onCommand:workbench.action.tasks.runTask"
+        "onCommand:extension.runFile",
+        "onCommand:extension.runOnCursor"
     ],
     "main": "./src/extension.js",
     "contributes": {
@@ -39,6 +39,11 @@
                     "type": "string",
                     "default": "python -m pytest -v",
                     "description": "Terminal command for \"Run all tests\""
+                },
+                "justTesting.runFileCommand": {
+                    "type": "string",
+                    "default": "python -m pytest -v {fileName}",
+                    "description": "Terminal command for \"Run all tests in file\""
                 }
             }
         },
@@ -48,13 +53,12 @@
                 "title": "Run all tests"
             },
             {
+                "command": "extension.runFile",
+                "title": "Run all tests in file"
+            },
+            {
                 "command": "extension.runOnCursor",
                 "title": "Run test on cursor"
-            }
-        ],
-        "taskDefinitions": [
-            {
-                "type": "testFile"
             }
         ]
     },
