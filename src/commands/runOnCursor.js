@@ -2,6 +2,11 @@ const vscode = require("vscode");
 
 function command() {
     const testName = findClosestTest();
+    if (testName === undefined) {
+        vscode.window.showErrorMessage("No test detected!");
+        return;
+    }
+
     const fileName = vscode.workspace.asRelativePath(vscode.window.activeTextEditor.document.fileName);
 
     const terminal = obtainTerminal();
@@ -19,7 +24,6 @@ function findClosestTest() {
 
         lineNumber--;
     }
-    // TODO GZL when no test is detected
 }
 
 function obtainTerminal() {
