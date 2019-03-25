@@ -1,4 +1,10 @@
-# just-testing
+# Just Testing
+
+A Visual Studio Code extension for running tests in integrated terminal.
+
+Supported test runners:
+
+- `pytest`
 
 ## Installation
 
