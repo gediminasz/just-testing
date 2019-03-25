@@ -1,6 +1,8 @@
 const vscode = require("vscode");
 
-function command() {
+const { obtainTerminal } = require("../terminal");
+
+function runOnCursor() {
     const testName = findClosestTest();
     if (testName === undefined) {
         vscode.window.showErrorMessage("No test detected!");
@@ -26,13 +28,4 @@ function findClosestTest() {
     }
 }
 
-function obtainTerminal() {
-    if (vscode.window.terminals.length === 0) {
-        vscode.window.createTerminal("Just Testing");
-    }
-    return vscode.window.terminals[0]
-
-    // TODO GZL reuse terminal titled "Just Testing"
-}
-
-module.exports = { command };
+module.exports = { runOnCursor };

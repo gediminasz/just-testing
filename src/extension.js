@@ -1,5 +1,5 @@
 const vscode = require("vscode");
-const runOnCursor = require("./commands/runOnCursor");
+const { runOnCursor } = require("./commands/runOnCursor");
 
 let taskProvider;
 
@@ -10,7 +10,7 @@ function activate(context) {
         context.subscriptions.push(vscode.commands.registerCommand(command, callback));
     }
 
-    registerCommand('extension.runOnCursor', runOnCursor.command);
+    registerCommand('extension.runOnCursor', runOnCursor);
 
     taskProvider = vscode.tasks.registerTaskProvider(
         'pytest',
