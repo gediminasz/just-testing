@@ -1,5 +1,12 @@
 # just-testing
 
+## Installation
+
+```
+vsce package
+code --install-extension just-testing-0.0.1.vsix
+```
+
 ## Changelog
 
 ### Unreleased
