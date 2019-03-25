@@ -18,7 +18,7 @@
         "onCommand:extension.runOnCursor",
         "onCommand:workbench.action.tasks.runTask"
     ],
-    "main": "./extension.js",
+    "main": "./src/extension.js",
     "contributes": {
         "commands": [
             {
