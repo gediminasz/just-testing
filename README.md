@@ -2,9 +2,29 @@
 
 A Visual Studio Code extension for running tests in integrated terminal.
 
-Supported test runners:
+## Settings
 
-- `pytest`
+### `justTesting.regex`
+
+Regular expression for matching closest test name.
+
+#### Example
+
+```
+"def (test_.+)\\("
+````
+
+### `justTesting.runOnCursorCommand`
+
+Terminal command for "Run test on cursor"
+
+#### Example
+
+```
+python -m pytest {fileName}::{testName}
+```
+
+###
 
 ## Installation
 

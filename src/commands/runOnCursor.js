@@ -1,6 +1,7 @@
 const vscode = require("vscode");
 
 const { obtainTerminal } = require("../terminal");
+const configuration = require("../configuration");
 
 function runOnCursor() {
     const testName = findClosestTest();
@@ -13,7 +14,12 @@ function runOnCursor() {
 
     const terminal = obtainTerminal();
     terminal.show(true);
-    terminal.sendText(`python -m pytest ${fileName}::${testName}`);
+
+    const command = configuration.get("runOnCursorCommand")
+        .replace("{fileName}", fileName)
+        .replace("{testName}", testName);
+
+    terminal.sendText(command);
 }
 
 function findClosestTest() {
@@ -21,7 +27,7 @@ function findClosestTest() {
 
     while (lineNumber >= 0) {
         const line = vscode.window.activeTextEditor.document.lineAt(lineNumber).text;
-        const match = line.match(/def (test_.+)\(/);
+        const match = line.match(configuration.get("regex"));
         if (match) return match[1];
 
         lineNumber--;

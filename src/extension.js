@@ -1,4 +1,5 @@
 const vscode = require("vscode");
+
 const { runOnCursor } = require("./commands/runOnCursor");
 
 let taskProvider;

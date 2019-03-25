@@ -20,6 +20,22 @@
     ],
     "main": "./src/extension.js",
     "contributes": {
+        "configuration": {
+            "type": "object",
+            "title": "Just Testing",
+            "properties": {
+                "justTesting.regex": {
+                    "type": "string",
+                    "default": "def (test_.+)\\(",
+                    "description": "Regular expression for matching closest test name."
+                },
+                "justTesting.runOnCursorCommand": {
+                    "type": "string",
+                    "default": "python -m pytest {fileName}::{testName}",
+                    "description": "runOnCursorCommand"
+                }
+            }
+        },
         "commands": [
             {
                 "command": "extension.runOnCursor",
