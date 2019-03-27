@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.0
+
+- Added a list of available commands to readme
+- Added "Just Testing:" prefix to command names
+
 ## 0.0.2
 
 - Added "Run all tests" command
