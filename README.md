@@ -2,6 +2,12 @@
 
 A Visual Studio Code extension for running tests in integrated terminal.
 
+Available commands:
+
+- Run all tests
+- Run all tests in file
+- Run test on cursor
+
 ## Settings
 
 ### `justTesting.regex`
