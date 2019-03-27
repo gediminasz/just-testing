@@ -4,6 +4,10 @@
     "displayName": "Just Testing",
     "description": "A Visual Studio Code extension for running tests in integrated terminal",
     "icon": "logo.png",
+    "galleryBanner": {
+        "color": "#F6F6F6",
+        "theme": "light"
+    },
     "publisher": "gediminaszlatkus",
     "repository": {
         "type": "git",
