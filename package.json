@@ -50,15 +50,15 @@
         "commands": [
             {
                 "command": "extension.runAll",
-                "title": "Run all tests"
+                "title": "Just Testing: Run all tests"
             },
             {
                 "command": "extension.runFile",
-                "title": "Run all tests in file"
+                "title": "Just Testing: Run all tests in file"
             },
             {
                 "command": "extension.runOnCursor",
-                "title": "Run test on cursor"
+                "title": "Just Testing: Run test on cursor"
             }
         ]
     },
