@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.1
+
+- Improved marketplace presentation
+
 ## 0.1.0
 
 - Added a list of available commands to readme
