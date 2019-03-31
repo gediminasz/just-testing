@@ -10,6 +10,24 @@ Available commands:
 
 ## Settings
 
+### `justTesting.baseCommand`
+
+Base terminal command.
+
+Example: `"python -m pytest -v"`
+
+### `justTesting.runAllCommand`
+
+Terminal command for "Run all tests"
+
+Example: `"{base}"`
+
+### `justTesting.runFileCommand`
+
+Terminal command for "Run all tests in file"
+
+Example: `"{base} {fileName}"`
+
 ### `justTesting.runOnCursorRegex`
 
 Regular expression for matching closest test name
@@ -20,19 +38,7 @@ Example: `"def (test_.+)\\("`
 
 Terminal command for "Run test on cursor"
 
-Example: `"python -m pytest {fileName}::{testName}"`
-
-### `justTesting.runAllCommand`
-
-Terminal command for "Run all tests"
-
-Example: `"python -m pytest -v"`
-
-### `justTesting.runFileCommand`
-
-Terminal command for "Run all tests in file"
-
-Example: `"python -m pytest -v {fileName}"`
+Example: `"{base} {fileName}::{testName}"`
 
 ## Installation
 

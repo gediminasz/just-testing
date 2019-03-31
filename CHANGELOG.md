@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Added `baseCommand` setting
 - Renamed `regex` setting to `runOnCursorRegex`
 
 ## 0.1.1

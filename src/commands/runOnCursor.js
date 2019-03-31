@@ -12,6 +12,7 @@ function runOnCursor() {
     }
 
     const command = helpers.getSetting("runOnCursorCommand")
+        .replace("{base}", helpers.getSetting("baseCommand"))
         .replace("{fileName}", helpers.getActiveFile())
         .replace("{testName}", testName);
 

@@ -30,6 +30,21 @@
             "type": "object",
             "title": "Just Testing",
             "properties": {
+                "justTesting.baseCommand": {
+                    "type": "string",
+                    "default": "python -m pytest -v",
+                    "description": "Base terminal command"
+                },
+                "justTesting.runAllCommand": {
+                    "type": "string",
+                    "default": "{base}",
+                    "description": "Terminal command for \"Run all tests\""
+                },
+                "justTesting.runFileCommand": {
+                    "type": "string",
+                    "default": "{base} {fileName}",
+                    "description": "Terminal command for \"Run all tests in file\""
+                },
                 "justTesting.runOnCursorRegex": {
                     "type": "string",
                     "default": "def (test_.+)\\(",
@@ -37,18 +52,8 @@
                 },
                 "justTesting.runOnCursorCommand": {
                     "type": "string",
-                    "default": "python -m pytest {fileName}::{testName}",
+                    "default": "{base} {fileName}::{testName}",
                     "description": "Terminal command for \"Run test on cursor\""
-                },
-                "justTesting.runAllCommand": {
-                    "type": "string",
-                    "default": "python -m pytest -v",
-                    "description": "Terminal command for \"Run all tests\""
-                },
-                "justTesting.runFileCommand": {
-                    "type": "string",
-                    "default": "python -m pytest -v {fileName}",
-                    "description": "Terminal command for \"Run all tests in file\""
                 }
             }
         },
