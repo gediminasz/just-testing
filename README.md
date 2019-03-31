@@ -10,7 +10,7 @@ Available commands:
 
 ## Settings
 
-### `justTesting.regex`
+### `justTesting.runOnCursorRegex`
 
 Regular expression for matching closest test name
 

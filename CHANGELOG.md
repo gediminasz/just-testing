@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Renamed `regex` setting to `runOnCursorRegex`
+
 ## 0.1.1
 
 - Improved marketplace presentation

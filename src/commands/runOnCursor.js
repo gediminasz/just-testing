@@ -23,7 +23,7 @@ function findClosestTest() {
 
     while (lineNumber >= 0) {
         const line = vscode.window.activeTextEditor.document.lineAt(lineNumber).text;
-        const match = line.match(helpers.getSetting("regex"));
+        const match = line.match(helpers.getSetting("runOnCursorRegex"));
         if (match) return match[1];
 
         lineNumber--;

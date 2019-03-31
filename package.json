@@ -30,7 +30,7 @@
             "type": "object",
             "title": "Just Testing",
             "properties": {
-                "justTesting.regex": {
+                "justTesting.runOnCursorRegex": {
                     "type": "string",
                     "default": "def (test_.+)\\(",
                     "description": "Regular expression for matching closest test name"
