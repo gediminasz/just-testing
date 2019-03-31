@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.2.0
 
 - Added `baseCommand` setting
 - Renamed `regex` setting to `runOnCursorRegex`
