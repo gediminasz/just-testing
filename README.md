@@ -25,6 +25,16 @@ Available commands:
 "justTesting.runOnCursorCommand": "{base} {fileName} -k {testName}"
 ```
 
+### JavaScript
+
+#### Jest
+
+```
+"justTesting.baseCommand": "jest",
+"justTesting.runOnCursorRegex": "test\\((.+),",
+"justTesting.runOnCursorCommand": "{base} -t {testName}"
+```
+
 ## Settings Reference
 
 ### `justTesting.baseCommand`
