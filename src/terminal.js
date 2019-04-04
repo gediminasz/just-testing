@@ -11,7 +11,7 @@ function obtainTerminal() {
 
 function runInTerminal(command) {
     const terminal = obtainTerminal();
-    terminal.show(false)
+    terminal.show(true);
     terminal.sendText(command);
 }
 
