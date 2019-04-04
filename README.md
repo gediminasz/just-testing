@@ -8,13 +8,24 @@ Available commands:
 - Run all tests in file
 - Run test on cursor
 
-## FAQ
+## Configuration Examples
 
-### Can I use this with `poetry`?
+### Python
 
-Set the `justTesting.baseCommand` setting to e.g. `"poetry run python -m pytest -v"`.
+#### Poetry
 
-## Settings
+```
+"justTesting.baseCommand": "poetry run python -m pytest -v",
+```
+
+### `unittest`
+
+```
+"justTesting.baseCommand": "python -m unittest",
+"justTesting.runOnCursorCommand": "{base} {fileName} -k {testName}"
+```
+
+## Settings Reference
 
 ### `justTesting.baseCommand`
 
