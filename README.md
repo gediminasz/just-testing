@@ -18,7 +18,7 @@ Available commands:
 "justTesting.baseCommand": "poetry run python -m pytest -v",
 ```
 
-### `unittest`
+#### unittest
 
 ```
 "justTesting.baseCommand": "python -m unittest",
@@ -35,6 +35,15 @@ Available commands:
 "justTesting.runOnCursorCommand": "{base} -t {testName}"
 ```
 
+### Ruby
+
+#### RSpec
+
+```
+"justTesting.baseCommand": "rspec",
+"justTesting.runOnCursorCommand": "{base} {fileName}:{line}"
+```
+
 ## Settings Reference
 
 ### `justTesting.baseCommand`
@@ -45,24 +54,24 @@ Default: `"python -m pytest -v"`
 
 ### `justTesting.runAllCommand`
 
-Terminal command for "Run all tests"
+Terminal command for "Run all tests".
 
 Default: `"{base}"`
 
 ### `justTesting.runFileCommand`
 
-Terminal command for "Run all tests in file"
+Terminal command for "Run all tests in file".
 
 Default: `"{base} {fileName}"`
 
 ### `justTesting.runOnCursorRegex`
 
-Regular expression for matching closest test name
+Regular expression for matching closest test name.
 
 Default: `"def (test_.+)\\("`
 
 ### `justTesting.runOnCursorCommand`
 
-Terminal command for "Run test on cursor"
+Terminal command for "Run test on cursor". Available variables: `base`, `fileName`, `testName`, `line`.
 
 Default: `"{base} {fileName}::{testName}"`

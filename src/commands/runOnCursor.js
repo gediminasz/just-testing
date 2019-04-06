@@ -4,9 +4,10 @@ const { runInTerminal } = require("../terminal");
 const helpers = require("../helpers");
 
 function runOnCursor() {
-    const testName = findClosestTest();
+    const template = helpers.getSetting("runOnCursorCommand");
 
-    if (testName === undefined) {
+    const testName = findClosestTest();
+    if (template.includes("{testName}") && (testName === undefined)) {
         vscode.window.showErrorMessage("No test detected!");
         return;
     }
@@ -14,13 +15,14 @@ function runOnCursor() {
     const command = helpers.getSetting("runOnCursorCommand")
         .replace("{base}", helpers.getSetting("baseCommand"))
         .replace("{fileName}", helpers.getActiveFile())
-        .replace("{testName}", testName);
+        .replace("{testName}", testName)
+        .replace("{line}", getActiveLine());
 
     runInTerminal(command);
 }
 
 function findClosestTest() {
-    let lineNumber = vscode.window.activeTextEditor.selection.active.line;
+    let lineNumber = getActiveLine();
 
     while (lineNumber >= 0) {
         const line = vscode.window.activeTextEditor.document.lineAt(lineNumber).text;
@@ -29,6 +31,10 @@ function findClosestTest() {
 
         lineNumber--;
     }
+}
+
+function getActiveLine() {
+    return vscode.window.activeTextEditor.selection.active.line;
 }
 
 module.exports = { runOnCursor };
