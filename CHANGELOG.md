@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.3.0
 
 - Added `{line}` template variable for `justTesting.runOnCursorCommand` setting.
 - Added configuration examples for Jest, RSpec and Python's `unittest`.
