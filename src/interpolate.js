@@ -4,12 +4,23 @@ const helpers = require("./helpers");
 
 class InterpolationError extends Error { }
 
+const INTERPOLATIONS = {
+    base: () => helpers.getSetting("baseCommand"),
+    fileName: helpers.getActiveFile,
+    testName: findClosestTest,
+    line: getActiveLine
+}
+
 function interpolate(template) {
-    return template
-        .replace("{base}", helpers.getSetting("baseCommand"))
-        .replace("{fileName}", helpers.getActiveFile())
-        .replace("{testName}", findClosestTest())
-        .replace("{line}", getActiveLine());
+    return Object.entries(INTERPOLATIONS).reduce(
+        (template, [key, resolveValue]) => applyInterpolation(template, key, resolveValue),
+        template
+    )
+}
+
+function applyInterpolation(template, key, resolveValue) {
+    const tag = `{${key}}`;
+    return template.includes(tag) ? template.replace(tag, resolveValue()) : template;
 }
 
 function findClosestTest() {
