@@ -1,8 +1,6 @@
 const vscode = require("vscode");
 
-const { runAll } = require("./commands/runAll");
-const { runFile } = require("./commands/runFile");
-const { runOnCursor } = require("./commands/runOnCursor");
+const { makeCommand } = require("./terminal");
 
 function activate(context) {
     console.debug('Activating just-testing...');
@@ -11,9 +9,9 @@ function activate(context) {
         context.subscriptions.push(vscode.commands.registerCommand(command, callback));
     }
 
-    registerCommand('extension.runAll', runAll);
-    registerCommand('extension.runFile', runFile);
-    registerCommand('extension.runOnCursor', runOnCursor);
+    registerCommand('extension.runAll', makeCommand("runAllCommand"));
+    registerCommand('extension.runFile', makeCommand("runFileCommand"));
+    registerCommand('extension.runOnCursor', makeCommand("runOnCursorCommand"));
 }
 
 function deactivate() {

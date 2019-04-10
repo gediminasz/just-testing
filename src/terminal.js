@@ -1,8 +1,13 @@
 const vscode = require("vscode");
 
 const { interpolate, InterpolationError } = require("./interpolate");
+const helpers = require("./helpers");
 
 const TERMINAL_NAME = "Just Testing";
+
+function makeCommand(settingName) {
+    return () => runCommand(helpers.getSetting(settingName));
+}
 
 function runCommand(template) {
     try {
@@ -29,4 +34,4 @@ function obtainTerminal() {
     return vscode.window.createTerminal(TERMINAL_NAME);
 }
 
-module.exports = { runCommand, runInTerminal };
+module.exports = { makeCommand };

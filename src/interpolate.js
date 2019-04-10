@@ -8,14 +8,14 @@ const INTERPOLATIONS = {
     base: () => helpers.getSetting("baseCommand"),
     fileName: helpers.getActiveFile,
     testName: findClosestTest,
-    line: getActiveLine
+    line: helpers.getActiveLine
 }
 
 function interpolate(template) {
     return Object.entries(INTERPOLATIONS).reduce(
         (template, [key, resolveValue]) => applyInterpolation(template, key, resolveValue),
         template
-    )
+    );
 }
 
 function applyInterpolation(template, key, resolveValue) {
@@ -24,7 +24,7 @@ function applyInterpolation(template, key, resolveValue) {
 }
 
 function findClosestTest() {
-    let lineNumber = getActiveLine();
+    let lineNumber = helpers.getActiveLine();
 
     while (lineNumber >= 0) {
         const line = vscode.window.activeTextEditor.document.lineAt(lineNumber).text;
@@ -37,8 +37,5 @@ function findClosestTest() {
     throw new InterpolationError("No test detected!");
 }
 
-function getActiveLine() {
-    return vscode.window.activeTextEditor.selection.active.line;
-}
 
 module.exports = { interpolate, InterpolationError };
