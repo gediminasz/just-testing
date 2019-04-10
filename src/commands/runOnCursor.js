@@ -3,22 +3,23 @@ const vscode = require("vscode");
 const { runInTerminal } = require("../terminal");
 const helpers = require("../helpers");
 
+class InterpolationError extends Error { }
+
 function runOnCursor() {
-    const template = helpers.getSetting("runOnCursorCommand");
-
-    const testName = findClosestTest();
-    if (template.includes("{testName}") && (testName === undefined)) {
-        vscode.window.showErrorMessage("No test detected!");
-        return;
+    try {
+        const command = helpers.getSetting("runOnCursorCommand")
+            .replace("{base}", helpers.getSetting("baseCommand"))
+            .replace("{fileName}", helpers.getActiveFile())
+            .replace("{testName}", findClosestTest())
+            .replace("{line}", getActiveLine());
+        runInTerminal(command);
+    } catch (e) {
+        if (e instanceof InterpolationError) {
+            vscode.window.showErrorMessage(e.message);
+        } else {
+            throw e;
+        }
     }
-
-    const command = helpers.getSetting("runOnCursorCommand")
-        .replace("{base}", helpers.getSetting("baseCommand"))
-        .replace("{fileName}", helpers.getActiveFile())
-        .replace("{testName}", testName)
-        .replace("{line}", getActiveLine());
-
-    runInTerminal(command);
 }
 
 function findClosestTest() {
@@ -31,6 +32,8 @@ function findClosestTest() {
 
         lineNumber--;
     }
+
+    throw new InterpolationError("No test detected!");
 }
 
 function getActiveLine() {
