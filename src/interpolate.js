@@ -5,19 +5,11 @@ const helpers = require("./helpers");
 class InterpolationError extends Error { }
 
 function interpolate(template) {
-    try {
-        return template
-            .replace("{base}", helpers.getSetting("baseCommand"))
-            .replace("{fileName}", helpers.getActiveFile())
-            .replace("{testName}", findClosestTest())
-            .replace("{line}", getActiveLine());
-    } catch (e) {
-        if (e instanceof InterpolationError) {
-            vscode.window.showErrorMessage(e.message);
-        } else {
-            throw e;
-        }
-    }
+    return template
+        .replace("{base}", helpers.getSetting("baseCommand"))
+        .replace("{fileName}", helpers.getActiveFile())
+        .replace("{testName}", findClosestTest())
+        .replace("{line}", getActiveLine());
 }
 
 function findClosestTest() {
@@ -38,4 +30,4 @@ function getActiveLine() {
     return vscode.window.activeTextEditor.selection.active.line;
 }
 
-module.exports = { interpolate };
+module.exports = { interpolate, InterpolationError };

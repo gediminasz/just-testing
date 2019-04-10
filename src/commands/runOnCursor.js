@@ -1,12 +1,6 @@
-const vscode = require("vscode");
-
-const { runInTerminal } = require("../terminal");
-const { interpolate } = require("../interpolate");
+const { runCommand } = require("../terminal");
 const helpers = require("../helpers");
 
-function runOnCursor() {
-    const command = interpolate(helpers.getSetting("runOnCursorCommand"));
-    if (command) runInTerminal(command);
-}
-
-module.exports = { runOnCursor };
+module.exports = {
+    runOnCursor: () => runCommand(helpers.getSetting("runOnCursorCommand"))
+};
