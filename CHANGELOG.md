@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- All commands can now use the same interpolation tags: `{base}`, `{filename}`, `{testName}`, `{line}`
+
 ## 0.3.0
 
 - Added `{line}` template variable for `justTesting.runOnCursorCommand` setting.

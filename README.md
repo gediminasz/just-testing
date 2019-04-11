@@ -72,6 +72,15 @@ Default: `"def (test_.+)\\("`
 
 ### `justTesting.runOnCursorCommand`
 
-Terminal command for "Run test on cursor". Available variables: `base`, `fileName`, `testName`, `line`.
+Terminal command for "Run test on cursor".
 
 Default: `"{base} {fileName}::{testName}"`
+
+### Interpolation tags
+
+The following interpolation tags can be used in settings `runAllCommand`, `runFileCommand` and `runOnCursorCommand`:
+
+- `{base}`
+- `{filename}`
+- `{testName}`
+- `{line}`
