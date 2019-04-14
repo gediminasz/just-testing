@@ -1,5 +1,9 @@
 # Development notes
 
+## Test projects
+
+https://github.com/gediminasz/just-testing-examples
+
 ## Packaging a release
 
 ```
