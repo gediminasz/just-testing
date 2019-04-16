@@ -3,6 +3,7 @@
 ## Unreleased
 
 - All commands can now use the same interpolation tags: `{base}`, `{filename}`, `{testName}`, `{line}`
+- Fixed "Run all tests in file" and "Run test on cursor" commands failing when there is no file open
 
 ## 0.3.0
 

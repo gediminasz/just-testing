@@ -6,9 +6,9 @@ class InterpolationError extends Error { }
 
 const INTERPOLATIONS = {
     base: () => helpers.getSetting("baseCommand"),
-    fileName: helpers.getActiveFile,
-    testName: findClosestTest,
-    line: helpers.getActiveLine
+    fileName: resolveActiveFile,
+    testName: resolveTestName,
+    line: resolveActiveLine,
 }
 
 function interpolate(template) {
@@ -23,11 +23,15 @@ function applyInterpolation(template, key, resolveValue) {
     return template.includes(tag) ? template.replace(tag, resolveValue()) : template;
 }
 
-function findClosestTest() {
-    let lineNumber = helpers.getActiveLine();
+function resolveActiveFile() {
+    return vscode.workspace.asRelativePath(getActiveEditor().document.fileName);
+}
+
+function resolveTestName() {
+    let lineNumber = resolveActiveLine();
 
     while (lineNumber >= 0) {
-        const line = vscode.window.activeTextEditor.document.lineAt(lineNumber).text;
+        const line = getActiveEditor().document.lineAt(lineNumber).text;
         const match = line.match(helpers.getSetting("runOnCursorRegex"));
         if (match) return match[1];
 
@@ -37,5 +41,14 @@ function findClosestTest() {
     throw new InterpolationError("No test detected!");
 }
 
+function resolveActiveLine() {
+    return getActiveEditor().selection.active.line;
+}
+
+function getActiveEditor() {
+    const editor = vscode.window.activeTextEditor;
+    if (!editor) throw new InterpolationError("No file open!");
+    return editor;
+}
 
 module.exports = { interpolate, InterpolationError };
