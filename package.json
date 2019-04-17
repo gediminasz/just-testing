@@ -20,9 +20,9 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:extension.runAll",
-        "onCommand:extension.runFile",
-        "onCommand:extension.runOnCursor"
+        "onCommand:justTesting.runAll",
+        "onCommand:justTesting.runFile",
+        "onCommand:justTesting.runOnCursor"
     ],
     "main": "./src/extension.js",
     "contributes": {
@@ -59,15 +59,15 @@
         },
         "commands": [
             {
-                "command": "extension.runAll",
+                "command": "justTesting.runAll",
                 "title": "Just Testing: Run all tests"
             },
             {
-                "command": "extension.runFile",
+                "command": "justTesting.runFile",
                 "title": "Just Testing: Run all tests in file"
             },
             {
-                "command": "extension.runOnCursor",
+                "command": "justTesting.runOnCursor",
                 "title": "Just Testing: Run test on cursor"
             }
         ]

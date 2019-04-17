@@ -9,9 +9,9 @@ function activate(context) {
         context.subscriptions.push(vscode.commands.registerCommand(command, callback));
     }
 
-    registerCommand('extension.runAll', makeCommand("runAllCommand"));
-    registerCommand('extension.runFile', makeCommand("runFileCommand"));
-    registerCommand('extension.runOnCursor', makeCommand("runOnCursorCommand"));
+    registerCommand('justTesting.runAll', makeCommand("runAllCommand"));
+    registerCommand('justTesting.runFile', makeCommand("runFileCommand"));
+    registerCommand('justTesting.runOnCursor', makeCommand("runOnCursorCommand"));
 }
 
 function deactivate() {
