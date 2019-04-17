@@ -95,3 +95,9 @@ Just Testing tries to be non intrusive so it does not come with predefined keybo
     "command": "justTesting.runAll"
 }
 ```
+
+The available commands are:
+
+- `justTesting.runAll`
+- `justTesting.runFile`
+- `justTesting.runOnCursor`
