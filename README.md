@@ -84,3 +84,14 @@ The following interpolation tags can be used in settings `runAllCommand`, `runFi
 - `{filename}`
 - `{testName}`
 - `{line}`
+
+## Keyboard Shortcuts
+
+Just Testing tries to be non intrusive so it does not come with predefined keyboard shortcuts. However VS Code allows users to set up their own custom keybindings. For example:
+
+```
+{
+    "key": "ctrl+shift+r",
+    "command": "justTesting.runAll"
+}
+```
