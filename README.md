@@ -8,6 +8,14 @@ Available commands:
 - Run all tests in file
 - Run test on cursor
 
+Supported languages and frameworks:
+
+- Python `pytest` (default)
+- Python `unittest`
+- JavaScript Jest
+- Ruby RSpec
+
+
 ## Configuration Examples
 
 ### Python
@@ -74,7 +82,7 @@ Default: `"def (test_.+)\\("`
 
 Terminal command for "Run test on cursor".
 
-Default: `"{base} {fileName}::{testName}"`
+Default: `"{base} {fileName} -k {testName}"`
 
 ### Interpolation tags
 

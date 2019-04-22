@@ -52,7 +52,7 @@
                 },
                 "justTesting.runOnCursorCommand": {
                     "type": "string",
-                    "default": "{base} {fileName}::{testName}",
+                    "default": "{base} {fileName} -k {testName}",
                     "description": "Terminal command for \"Run test on cursor\""
                 }
             }
