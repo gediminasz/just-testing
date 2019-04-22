@@ -15,6 +15,7 @@ Supported languages and frameworks:
 - JavaScript Jest
 - Ruby RSpec
 
+However Just Testing is simple and flexible enough to make it work with any language of your choice!
 
 ## Configuration Examples
 
