@@ -6,29 +6,29 @@ class InterpolationError extends Error { }
 
 const INTERPOLATIONS = {
     base: () => helpers.getSetting("baseCommand"),
-    fileName: resolveActiveFile,
-    testName: resolveTestName,
-    line: resolveActiveLine,
+    fileName: getActiveFile,
+    testName: getTestName,
+    line: () => getActiveLine() + 1,
 }
 
 function interpolate(template) {
     return Object.entries(INTERPOLATIONS).reduce(
-        (template, [key, resolveValue]) => applyInterpolation(template, key, resolveValue),
+        (template, [key, valueFunction]) => applyInterpolation(template, key, valueFunction),
         template
     );
 }
 
-function applyInterpolation(template, key, resolveValue) {
+function applyInterpolation(template, key, valueFunction) {
     const tag = `{${key}}`;
-    return template.includes(tag) ? template.replace(tag, resolveValue()) : template;
+    return template.includes(tag) ? template.replace(tag, valueFunction()) : template;
 }
 
-function resolveActiveFile() {
+function getActiveFile() {
     return vscode.workspace.asRelativePath(getActiveEditor().document.fileName);
 }
 
-function resolveTestName() {
-    let lineNumber = resolveActiveLine();
+function getTestName() {
+    let lineNumber = getActiveLine();
 
     while (lineNumber >= 0) {
         const line = getActiveEditor().document.lineAt(lineNumber).text;
@@ -41,7 +41,7 @@ function resolveTestName() {
     throw new InterpolationError("No test detected!");
 }
 
-function resolveActiveLine() {
+function getActiveLine() {
     return getActiveEditor().selection.active.line;
 }
 

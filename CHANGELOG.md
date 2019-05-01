@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- `{line}` value is now one-based.
+
 ## 0.4.0
 
 - All commands can now use the same interpolation tags: `{base}`, `{filename}`, `{testName}`, `{line}`.
