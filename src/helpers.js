@@ -1,5 +1,5 @@
-const vscode = require("vscode");
+const vscode = require('vscode')
 
 module.exports = {
-    getSetting: (property) => vscode.workspace.getConfiguration("justTesting").get(property),
-};
+  getSetting: (property) => vscode.workspace.getConfiguration('justTesting').get(property)
+}
