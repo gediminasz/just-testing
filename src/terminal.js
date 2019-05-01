@@ -10,6 +10,8 @@ function makeCommand (settingName) {
 }
 
 function runCommand (template) {
+  vscode.workspace.saveAll()
+
   try {
     runInTerminal(interpolate(template))
   } catch (e) {

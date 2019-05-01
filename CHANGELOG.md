@@ -3,6 +3,7 @@
 ## Unreleased
 
 - `{line}` value is now one-based.
+- All dirty files are now saved before running a command.
 
 ## 0.4.0
 
