@@ -14,6 +14,18 @@
         "color": "#F6F6F6",
         "theme": "light"
     },
+    "badges": [
+        {
+            "url": "https://img.shields.io/github/last-commit/gediminasz/just-testing.svg",
+            "href": "https://github.com/gediminasz/just-testing",
+            "description": "last commit"
+        },
+        {
+            "url": "https://img.shields.io/github/release/gediminasz/just-testing.svg",
+            "href": "https://github.com/gediminasz/just-testing/blob/master/CHANGELOG.md",
+            "description": "release"
+        }
+    ],
     "publisher": "gediminaszlatkus",
     "repository": {
         "type": "git",
