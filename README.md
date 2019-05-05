@@ -55,39 +55,18 @@ However Just Testing is simple and flexible enough to make it work with any lang
 "justTesting.runOnCursorCommand": "{base} {fileName}:{line}"
 ```
 
-## Settings Reference
+## Settings
 
-### `justTesting.baseCommand`
+Setting | Description | Default value
+--- | --- | --- | ---
+`justTesting.baseCommand` | Base terminal command. | `"python -m pytest -v"`
+`justTesting.runAllCommand` | Terminal command for "Run all tests". | `"{base}"`
+`justTesting.runFileCommand` | Terminal command for "Run all tests in file". | `"{base} {fileName}"`
+`justTesting.runOnCursorRegex` | Regular expression for matching closest test name. | `"def (test_.+)\\("`
+`justTesting.runOnCursorCommand` | Terminal command for "Run test on cursor". | `"{base} {fileName} -k {testName}"`
+`justTesting.customExpressions` | Custom expressions for template variables | `{}`
 
-Base terminal command.
-
-Default: `"python -m pytest -v"`
-
-### `justTesting.runAllCommand`
-
-Terminal command for "Run all tests".
-
-Default: `"{base}"`
-
-### `justTesting.runFileCommand`
-
-Terminal command for "Run all tests in file".
-
-Default: `"{base} {fileName}"`
-
-### `justTesting.runOnCursorRegex`
-
-Regular expression for matching closest test name.
-
-Default: `"def (test_.+)\\("`
-
-### `justTesting.runOnCursorCommand`
-
-Terminal command for "Run test on cursor".
-
-Default: `"{base} {fileName} -k {testName}"`
-
-### Interpolation tags
+## Interpolation tags
 
 The following interpolation tags can be used in settings `runAllCommand`, `runFileCommand` and `runOnCursorCommand`:
 
