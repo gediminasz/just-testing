@@ -6,6 +6,7 @@
 - All dirty files are now saved before running a command.
 - Added `{module}` variable which returns a dotted path to active file.
 - Added `justTesting.expressions` setting.
+- Added a configuration example for Django.
 
 ## 0.4.0
 
