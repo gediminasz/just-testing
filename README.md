@@ -64,7 +64,7 @@ Setting | Description | Default value
 `justTesting.runFileCommand` | Terminal command for "Run all tests in file". | `"{base} {fileName}"`
 `justTesting.runOnCursorRegex` | Regular expression for matching closest test name. | `"def (test_.+)\\("`
 `justTesting.runOnCursorCommand` | Terminal command for "Run test on cursor". | `"{base} {fileName} -k {testName}"`
-`justTesting.customExpressions` | Custom expressions for template variables | `{}`
+`justTesting.expressions` | Custom expressions for template variables | `{}`
 
 ## Interpolation tags
 

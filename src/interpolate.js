@@ -14,7 +14,7 @@ const BUILT_IN_EXPRESSIONS = {
 }
 
 function interpolate (template) {
-  const expressions = { ...BUILT_IN_EXPRESSIONS, ...collectCustomExpressions() }
+  const expressions = { ...BUILT_IN_EXPRESSIONS, ...collectExpressions() }
 
   return Object.entries(expressions).reduce(
     (template, [key, valueFunction]) => applyInterpolation(template, key, valueFunction),
@@ -22,8 +22,8 @@ function interpolate (template) {
   )
 }
 
-function collectCustomExpressions () {
-  return Object.entries(helpers.getSetting('customExpressions')).reduce(
+function collectExpressions () {
+  return Object.entries(helpers.getSetting('expressions')).reduce(
     (acc, [key, expression]) => ({ ...acc, [key]: buildValueFunction(key, expression) }),
     {}
   )
