@@ -70,7 +70,7 @@ However Just Testing is simple and flexible enough to make it work with any lang
 ## Settings
 
 | Setting | Description | Default value |
-| --- | --- | --- | --- |
+| --- | --- | --- |
 | `justTesting.baseCommand` | Base terminal command. | `"python -m pytest -v"` |
 | `justTesting.runAllCommand` | Terminal command for "Run all tests". | `"{base}"` |
 | `justTesting.runFileCommand` | Terminal command for "Run all tests in file". | `"{base} {fileName}"` |
