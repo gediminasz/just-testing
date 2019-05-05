@@ -14,6 +14,7 @@ Supported languages and frameworks:
 
 - Python `pytest` (default)
 - Python `unittest`
+- Python Django
 - JavaScript Jest
 - Ruby RSpec
 
@@ -34,6 +35,17 @@ However Just Testing is simple and flexible enough to make it work with any lang
 ```
 "justTesting.baseCommand": "python -m unittest",
 "justTesting.runOnCursorCommand": "{base} {fileName} -k {testName}"
+```
+
+#### Django
+
+```
+"justTesting.baseCommand": "python manage.py test",
+"justTesting.runFileCommand": "{base} {module}",
+"justTesting.runOnCursorCommand": "{base} {module}.{className}.{testName}",
+"justTesting.expressions": {
+    "className": { "regex": "class (.+TestCase)\\(" }
+}
 ```
 
 ### JavaScript
@@ -66,7 +78,17 @@ Setting | Description | Default value
 `justTesting.runOnCursorCommand` | Terminal command for "Run test on cursor". | `"{base} {fileName} -k {testName}"`
 `justTesting.expressions` | Custom expressions for template variables | `{}`
 
-## Expressions
+## Interpolation tags
+
+The following interpolation tags can be used in settings `runAllCommand`, `runFileCommand` and `runOnCursorCommand`:
+
+- `{base}`
+- `{filename}`
+- `{module}`
+- `{testName}`
+- `{line}`
+
+## Custom expressions
 
 The `justTesting.expressions` setting may be used to define custom expressions of which there are two types:
 
@@ -82,15 +104,7 @@ For example:
 }
 ```
 
-## Interpolation tags
-
-The following interpolation tags can be used in settings `runAllCommand`, `runFileCommand` and `runOnCursorCommand`:
-
-- `{base}`
-- `{filename}`
-- `{module}`
-- `{testName}`
-- `{line}`
+The above expressions may then be inserted in commands using interpolation tags, e.g. `{foo}` and `{className}`.
 
 ## Keyboard Shortcuts
 
