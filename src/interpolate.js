@@ -1,4 +1,3 @@
-const path = require('path')
 const vscode = require('vscode')
 
 const helpers = require('./helpers')
@@ -47,7 +46,7 @@ function getFileName () {
 function getModule () {
   const components = getFileName().split('/')
   const baseName = components.pop()
-  const moduleName = path.parse(baseName).name
+  const moduleName = baseName.split('.')[0]
   return components.length ? components.join('.') + '.' + moduleName : moduleName
 }
 
