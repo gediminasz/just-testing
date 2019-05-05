@@ -1,3 +1,4 @@
+const path = require('path')
 const vscode = require('vscode')
 
 const helpers = require('./helpers')
@@ -6,7 +7,8 @@ class InterpolationError extends Error { }
 
 const INTERPOLATIONS = {
   base: () => helpers.getSetting('baseCommand'),
-  fileName: getActiveFile,
+  fileName: getFileName,
+  module: getModule,
   testName: getTestName,
   line: () => getActiveLine() + 1
 }
@@ -23,8 +25,15 @@ function applyInterpolation (template, key, valueFunction) {
   return template.includes(tag) ? template.replace(tag, valueFunction()) : template
 }
 
-function getActiveFile () {
+function getFileName () {
   return vscode.workspace.asRelativePath(getActiveEditor().document.fileName)
+}
+
+function getModule () {
+  const components = getFileName().split('/')
+  const baseName = components.pop()
+  const moduleName = path.parse(baseName).name
+  return components.length ? components.join('.') + '.' + moduleName : moduleName
 }
 
 function getTestName () {

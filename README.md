@@ -93,6 +93,7 @@ The following interpolation tags can be used in settings `runAllCommand`, `runFi
 
 - `{base}`
 - `{filename}`
+- `{module}`
 - `{testName}`
 - `{line}`
 

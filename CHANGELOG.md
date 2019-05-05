@@ -4,6 +4,7 @@
 
 - `{line}` value is now one-based.
 - All dirty files are now saved before running a command.
+- Added `{module}` variable which returns a dotted path to active file.
 
 ## 0.4.0
 
