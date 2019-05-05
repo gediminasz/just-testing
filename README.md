@@ -66,6 +66,22 @@ Setting | Description | Default value
 `justTesting.runOnCursorCommand` | Terminal command for "Run test on cursor". | `"{base} {fileName} -k {testName}"`
 `justTesting.expressions` | Custom expressions for template variables | `{}`
 
+## Expressions
+
+The `justTesting.expressions` setting may be used to define custom expressions of which there are two types:
+
+- `value` - translates to the provided static string
+- `regex` - translates to the closest matching string above active line
+
+For example:
+
+```json
+"justTesting.customExpressions": {
+    "foo": { "value": "bar" },
+    "className": { "regex": "class (.+TestCase)\\(" }
+}
+```
+
 ## Interpolation tags
 
 The following interpolation tags can be used in settings `runAllCommand`, `runFileCommand` and `runOnCursorCommand`:
