@@ -72,6 +72,11 @@
                     "type": "string",
                     "default": "{base} {fileName} -k {testName}",
                     "description": "Terminal command for \"Run test on cursor\""
+                },
+                "justTesting.customExpressions": {
+                    "type": "object",
+                    "default": {},
+                    "description": "Custom expressions for template variables"
                 }
             }
         },

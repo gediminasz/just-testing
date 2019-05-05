@@ -5,19 +5,34 @@ const helpers = require('./helpers')
 
 class InterpolationError extends Error { }
 
-const INTERPOLATIONS = {
+const BUILT_IN_EXPRESSIONS = {
   base: () => helpers.getSetting('baseCommand'),
   fileName: getFileName,
   module: getModule,
-  testName: getTestName,
+  testName: () => findMatch(helpers.getSetting('runOnCursorRegex')),
   line: () => getActiveLine() + 1
 }
 
 function interpolate (template) {
-  return Object.entries(INTERPOLATIONS).reduce(
+  const expressions = { ...BUILT_IN_EXPRESSIONS, ...collectCustomExpressions() }
+
+  return Object.entries(expressions).reduce(
     (template, [key, valueFunction]) => applyInterpolation(template, key, valueFunction),
     template
   )
+}
+
+function collectCustomExpressions () {
+  return Object.entries(helpers.getSetting('customExpressions')).reduce(
+    (acc, [key, expression]) => ({ ...acc, [key]: buildValueFunction(key, expression) }),
+    {}
+  )
+}
+
+function buildValueFunction (key, expression) {
+  if (expression.regex) return () => findMatch(expression.regex)
+  if (expression.value) return () => expression.value
+  throw new InterpolationError(`Invalid expression for "${key}"`)
 }
 
 function applyInterpolation (template, key, valueFunction) {
@@ -36,12 +51,12 @@ function getModule () {
   return components.length ? components.join('.') + '.' + moduleName : moduleName
 }
 
-function getTestName () {
+function findMatch (regex) {
   let lineNumber = getActiveLine()
 
   while (lineNumber >= 0) {
     const line = getActiveEditor().document.lineAt(lineNumber).text
-    const match = line.match(helpers.getSetting('runOnCursorRegex'))
+    const match = line.match(regex)
     if (match) return match[1]
 
     lineNumber--
