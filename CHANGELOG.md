@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.5.0
 
 - `{line}` value is now one-based.
 - All dirty files are now saved before running a command.
