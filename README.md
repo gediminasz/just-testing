@@ -83,7 +83,7 @@ However Just Testing is simple and flexible enough to make it work with any lang
 The following interpolation tags can be used in settings `runAllCommand`, `runFileCommand` and `runOnCursorCommand`:
 
 - `{base}`
-- `{filename}`
+- `{fileName}`
 - `{module}`
 - `{testName}`
 - `{line}`
