@@ -3,5 +3,8 @@
         "node_modules": true,
         "*.vsix": true,
     },
-    "editor.tabSize": 2
+    "editor.tabSize": 2,
+    "justTesting.baseCommand": "jest",
+    "justTesting.runOnCursorRegex": "it\\((.+),",
+    "justTesting.runOnCursorCommand": "{base} -t {testName}"
 }
