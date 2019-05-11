@@ -19,7 +19,7 @@ Supported languages and frameworks:
 - JavaScript Jest
 - Ruby RSpec
 
-However Just Testing is simple and flexible enough to make it work with any language of your choice!
+However Just Testing is simple and flexible enough to make it work with pretty much anything that runs in terminal!
 
 ## Configuration Examples
 
@@ -29,6 +29,12 @@ However Just Testing is simple and flexible enough to make it work with any lang
 
 ```
 "justTesting.baseCommand": "poetry run python -m pytest"
+```
+
+#### Pipenv
+
+```
+"justTesting.baseCommand": "pipenv run python -m pytest"
 ```
 
 #### virtualenv

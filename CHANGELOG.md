@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-- Added configuration examples for Python virtualenv and Nose.
+- Added configuration examples for Python Pipenv, virtualenv and Nose.
 
 ## 0.5.0
 
