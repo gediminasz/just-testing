@@ -15,6 +15,7 @@ Supported languages and frameworks:
 - Python `pytest` (default)
 - Python `unittest`
 - Python Django
+- Python Nose
 - JavaScript Jest
 - Ruby RSpec
 

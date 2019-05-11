@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Added configuration examples for Python virtualenv and Nose.
+
 ## 0.5.0
 
 - `{line}` value is now one-based.
