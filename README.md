@@ -27,7 +27,15 @@ However Just Testing is simple and flexible enough to make it work with any lang
 #### Poetry
 
 ```
-"justTesting.baseCommand": "poetry run python -m pytest -v",
+"justTesting.baseCommand": "poetry run python -m pytest"
+```
+
+#### virtualenv
+
+Point the base command to the `python` executable inside the virtualenv:
+
+```
+"justTesting.baseCommand": "path/to/virtualenv/python -m pytest"
 ```
 
 #### unittest
@@ -46,6 +54,13 @@ However Just Testing is simple and flexible enough to make it work with any lang
 "justTesting.expressions": {
     "className": { "regex": "class (.+TestCase)\\(" }
 }
+```
+
+#### Nose
+
+```
+"justTesting.baseCommand": "python -m nose",
+"justTesting.runOnCursorCommand": "{base} {fileName} -m {testName}"
 ```
 
 ### JavaScript
