@@ -1,77 +1,87 @@
-const vscode = require('vscode')
-
-const helpers = require('./helpers')
-
 class InterpolationError extends Error { }
 
-const BUILT_IN_EXPRESSIONS = {
-  base: () => helpers.getSetting('baseCommand'),
-  fileName: getFileName,
-  module: getModule,
-  testName: () => findMatch(helpers.getSetting('runOnCursorRegex')),
-  line: () => getActiveLine() + 1
-}
-
-function interpolate (template) {
-  const expressions = { ...BUILT_IN_EXPRESSIONS, ...collectExpressions() }
-
-  return Object.entries(expressions).reduce(
-    (template, [key, valueFunction]) => applyInterpolation(template, key, valueFunction),
-    template
-  )
-}
-
-function collectExpressions () {
-  return Object.entries(helpers.getSetting('expressions')).reduce(
-    (acc, [key, expression]) => ({ ...acc, [key]: buildValueFunction(key, expression) }),
-    {}
-  )
-}
-
-function buildValueFunction (key, expression) {
-  if (expression.regex) return () => findMatch(expression.regex)
-  if (expression.value) return () => expression.value
-  throw new InterpolationError(`Invalid expression for "${key}"`)
-}
-
-function applyInterpolation (template, key, valueFunction) {
-  const tag = `{${key}}`
-  return template.includes(tag) ? template.replace(tag, valueFunction()) : template
-}
-
-function getFileName () {
-  return vscode.workspace.asRelativePath(getActiveEditor().document.fileName)
-}
-
-function getModule () {
-  const components = getFileName().split('/')
-  const baseName = components.pop()
-  const moduleName = baseName.split('.')[0]
-  return components.length ? components.join('.') + '.' + moduleName : moduleName
-}
-
-function findMatch (regex) {
-  let lineNumber = getActiveLine()
-
-  while (lineNumber >= 0) {
-    const line = getActiveEditor().document.lineAt(lineNumber).text
-    const match = line.match(regex)
-    if (match) return match[1]
-
-    lineNumber--
+class Interpolator {
+  constructor (helpers = require('./helpers')) {
+    this.helpers = helpers
   }
 
-  throw new InterpolationError('No test detected!')
+  interpolate (template) {
+    return Object.entries(this.expressions).reduce(
+      (template, [key, valueFunction]) => this.applyInterpolation(template, key, valueFunction),
+      template
+    )
+  }
+
+  get expressions () {
+    return { ...this.builtInExpressions, ...this.customExpressions }
+  }
+
+  get builtInExpressions () {
+    return {
+      base: () => this.helpers.getSetting('baseCommand'),
+      fileName: () => this.activeFileName,
+      module: () => this.module,
+      testName: () => this.findMatch(this.helpers.getSetting('runOnCursorRegex')),
+      line: () => this.activeLine + 1
+    }
+  }
+
+  get customExpressions () {
+    return Object.entries(this.helpers.getSetting('expressions')).reduce(
+      (acc, [key, expression]) => ({ ...acc, [key]: this.buildValueFunction(key, expression) }),
+      {}
+    )
+  }
+
+  buildValueFunction (key, expression) {
+    if (expression.regex) return () => this.findMatch(expression.regex)
+    if (expression.value) return () => expression.value
+    throw new InterpolationError(`Invalid expression for "${key}"`)
+  }
+
+  applyInterpolation (template, key, valueFunction) {
+    const tag = `{${key}}`
+    return template.includes(tag) ? template.replace(tag, valueFunction()) : template
+  }
+
+  get module () {
+    const components = this.activeFileName.split('/')
+    const baseName = components.pop()
+    const moduleName = baseName.split('.')[0]
+    return components.length ? components.join('.') + '.' + moduleName : moduleName
+  }
+
+  get activeFileName () {
+    return this.helpers.asRelativePath(this.activeEditor.document.fileName)
+  }
+
+  findMatch (regex) {
+    let lineNumber = this.activeLine
+
+    while (lineNumber >= 0) {
+      const line = this.activeEditor.document.lineAt(lineNumber).text
+      const match = line.match(regex)
+      if (match) return match[1]
+
+      lineNumber--
+    }
+
+    throw new InterpolationError('No test detected!')
+  }
+
+  get activeLine () {
+    return this.activeEditor.selection.active.line
+  }
+
+  get activeEditor () {
+    const editor = this.helpers.getActiveEditor()
+    if (!editor) throw new InterpolationError('No file open!')
+    return editor
+  }
 }
 
-function getActiveLine () {
-  return getActiveEditor().selection.active.line
+module.exports = {
+  interpolate: (template) => (new Interpolator()).interpolate(template),
+  Interpolator,
+  InterpolationError
 }
-
-function getActiveEditor () {
-  const editor = vscode.window.activeTextEditor
-  if (!editor) throw new InterpolationError('No file open!')
-  return editor
-}
-
-module.exports = { interpolate, InterpolationError }

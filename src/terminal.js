@@ -18,6 +18,7 @@ function runCommand (template) {
     if (e instanceof InterpolationError) {
       vscode.window.showErrorMessage(e.message)
     } else {
+      console.error(e)
       throw e
     }
   }
