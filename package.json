@@ -40,7 +40,8 @@
     "activationEvents": [
         "onCommand:justTesting.runAll",
         "onCommand:justTesting.runFile",
-        "onCommand:justTesting.runOnCursor"
+        "onCommand:justTesting.runOnCursor",
+        "onCommand:justTesting.runLastCommand"
     ],
     "main": "./src/extension.js",
     "contributes": {
@@ -92,6 +93,10 @@
             {
                 "command": "justTesting.runOnCursor",
                 "title": "Just Testing: Run test on cursor"
+            },
+            {
+                "command": "justTesting.runLastCommand",
+                "title": "Just Testing: Run last command"
             }
         ]
     },

@@ -1,17 +1,18 @@
 const vscode = require('vscode')
 
-const { makeCommand } = require('./terminal')
+const { TemplateCommand, RunLastCommand } = require('./terminal')
 
 function activate (context) {
   console.debug('Activating just-testing...')
 
-  function registerCommand (command, callback) {
-    context.subscriptions.push(vscode.commands.registerCommand(command, callback))
+  function registerCommand (name, command) {
+    context.subscriptions.push(vscode.commands.registerCommand(name, () => command.run()))
   }
 
-  registerCommand('justTesting.runAll', makeCommand('runAllCommand'))
-  registerCommand('justTesting.runFile', makeCommand('runFileCommand'))
-  registerCommand('justTesting.runOnCursor', makeCommand('runOnCursorCommand'))
+  registerCommand('justTesting.runAll', TemplateCommand.fromSetting('runAllCommand', context))
+  registerCommand('justTesting.runFile', TemplateCommand.fromSetting('runFileCommand', context))
+  registerCommand('justTesting.runOnCursor', TemplateCommand.fromSetting('runOnCursorCommand', context))
+  registerCommand('justTesting.runLastCommand', new RunLastCommand(context))
 }
 
 function deactivate () {

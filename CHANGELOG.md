@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Added "Run last command".
 - Added configuration examples for Python Pipenv, virtualenv and Nose.
 
 ## 0.5.0

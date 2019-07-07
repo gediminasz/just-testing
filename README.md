@@ -9,6 +9,7 @@ Available commands:
 - Run all tests
 - Run all tests in file
 - Run test on cursor
+- Run last command
 
 Supported languages and frameworks:
 
