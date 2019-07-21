@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.6.0
 
 - Added "Run last command".
 - Added configuration examples for Python Pipenv, virtualenv and Nose.
