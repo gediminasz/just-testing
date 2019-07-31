@@ -1,6 +1,6 @@
 # Just Testing
 
-![last commit](https://img.shields.io/github/last-commit/gediminasz/just-testing.svg) ![release](https://img.shields.io/github/release/gediminasz/just-testing.svg)
+![last commit](https://img.shields.io/github/last-commit/gediminasz/just-testing.svg) ![build](https://img.shields.io/travis/gediminasz/just-testing.svg) ![release](https://img.shields.io/github/release/gediminasz/just-testing.svg)
 
 A Visual Studio Code extension for running tests in integrated terminal.
 

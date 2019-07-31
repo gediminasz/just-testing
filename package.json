@@ -21,6 +21,11 @@
             "description": "last commit"
         },
         {
+            "url": "https://img.shields.io/travis/gediminasz/just-testing.svg",
+            "href": "https://travis-ci.org/gediminasz/just-testing",
+            "description": "build"
+        },
+        {
             "url": "https://img.shields.io/github/release/gediminasz/just-testing.svg",
             "href": "https://github.com/gediminasz/just-testing/blob/master/CHANGELOG.md",
             "description": "release"
