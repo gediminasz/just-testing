@@ -29,19 +29,14 @@ class Command {
 }
 
 class TemplateCommand extends Command {
-  static fromSetting (settingName, extensionContext) {
-    const template = helpers.getSetting(settingName)
-    return new TemplateCommand(template, extensionContext)
-  }
-
-  constructor (template, extensionContext) {
+  constructor (settingName, extensionContext) {
     super(extensionContext)
-    this.template = template
+    this.settingName = settingName
   }
 
   run () {
     try {
-      this.runInTerminal(interpolate(this.template))
+      this.runInTerminal(this.command)
     } catch (e) {
       if (e instanceof InterpolationError) {
         vscode.window.showErrorMessage(e.message)
@@ -50,6 +45,11 @@ class TemplateCommand extends Command {
         throw e
       }
     }
+  }
+
+  get command () {
+    const template = helpers.getSetting(this.settingName)
+    return interpolate(template)
   }
 }
 

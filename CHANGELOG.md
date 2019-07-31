@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Fixed changes to settings like `runAllCommand` requiring vscode to be restarted
+
 ## 0.6.0
 
 - Added "Run last command".

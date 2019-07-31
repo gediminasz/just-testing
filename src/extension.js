@@ -9,9 +9,9 @@ function activate (context) {
     context.subscriptions.push(vscode.commands.registerCommand(name, () => command.run()))
   }
 
-  registerCommand('justTesting.runAll', TemplateCommand.fromSetting('runAllCommand', context))
-  registerCommand('justTesting.runFile', TemplateCommand.fromSetting('runFileCommand', context))
-  registerCommand('justTesting.runOnCursor', TemplateCommand.fromSetting('runOnCursorCommand', context))
+  registerCommand('justTesting.runAll', new TemplateCommand('runAllCommand', context))
+  registerCommand('justTesting.runFile', new TemplateCommand('runFileCommand', context))
+  registerCommand('justTesting.runOnCursor', new TemplateCommand('runOnCursorCommand', context))
   registerCommand('justTesting.runLastCommand', new RunLastCommand(context))
 }
 
