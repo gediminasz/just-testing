@@ -101,7 +101,8 @@
         ]
     },
     "scripts": {
-        "postinstall": "node ./node_modules/vscode/bin/install"
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "test": "jest"
     },
     "devDependencies": {
         "@types/mocha": "^2.2.42",
