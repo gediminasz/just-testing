@@ -1,8 +1,8 @@
 # Changelog
 
-## Unreleased
+## 0.6.1
 
-- Fixed changes to settings like `runAllCommand` requiring vscode to be restarted
+- Fixed changes to settings like `runAllCommand` requiring vscode to be restarted.
 
 ## 0.6.0
 
