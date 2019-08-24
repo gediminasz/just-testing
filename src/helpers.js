@@ -1,6 +1,6 @@
 const vscode = require('vscode')
 
-function getActiveEditor () {
+function getActiveEditor() {
   return vscode.window.activeTextEditor
 }
 

@@ -1,22 +1,22 @@
 class InterpolationError extends Error { }
 
 class Interpolator {
-  constructor (helpers = require('./helpers')) {
+  constructor(helpers = require('./helpers')) {
     this.helpers = helpers
   }
 
-  interpolate (template) {
+  interpolate(template) {
     return Object.entries(this.expressions).reduce(
       (template, [key, valueFunction]) => this.applyInterpolation(template, key, valueFunction),
       template
     )
   }
 
-  get expressions () {
+  get expressions() {
     return { ...this.builtInExpressions, ...this.customExpressions }
   }
 
-  get builtInExpressions () {
+  get builtInExpressions() {
     return {
       base: () => this.helpers.getSetting('baseCommand'),
       fileName: () => this.activeFileName,
@@ -26,36 +26,36 @@ class Interpolator {
     }
   }
 
-  get customExpressions () {
+  get customExpressions() {
     return Object.entries(this.helpers.getSetting('expressions')).reduce(
       (acc, [key, expression]) => ({ ...acc, [key]: this.buildValueFunction(key, expression) }),
       {}
     )
   }
 
-  buildValueFunction (key, expression) {
+  buildValueFunction(key, expression) {
     if (expression.regex) return () => this.findMatch(expression.regex)
     if (expression.value) return () => expression.value
     throw new InterpolationError(`Invalid expression for "${key}"`)
   }
 
-  applyInterpolation (template, key, valueFunction) {
+  applyInterpolation(template, key, valueFunction) {
     const tag = `{${key}}`
     return template.includes(tag) ? template.replace(tag, valueFunction()) : template
   }
 
-  get module () {
+  get module() {
     const components = this.activeFileName.split('/')
     const baseName = components.pop()
     const moduleName = baseName.split('.')[0]
     return components.length ? components.join('.') + '.' + moduleName : moduleName
   }
 
-  get activeFileName () {
+  get activeFileName() {
     return this.helpers.asRelativePath(this.activeEditor.document.fileName)
   }
 
-  findMatch (regex) {
+  findMatch(regex) {
     let lineNumber = this.activeLine
 
     while (lineNumber >= 0) {
@@ -69,11 +69,11 @@ class Interpolator {
     throw new InterpolationError('No test detected!')
   }
 
-  get activeLine () {
+  get activeLine() {
     return this.activeEditor.selection.active.line
   }
 
-  get activeEditor () {
+  get activeEditor() {
     const editor = this.helpers.getActiveEditor()
     if (!editor) throw new InterpolationError('No file open!')
     return editor
