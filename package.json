@@ -106,6 +106,7 @@
         ]
     },
     "scripts": {
+        "ci:lint": "eslint .",
         "ci:test": "jest"
     },
     "jest": {
@@ -126,7 +127,10 @@
             "no-console": "warn",
             "indent": [
                 "error",
-                2
+                2,
+                {
+                    "SwitchCase": 1
+                }
             ]
         }
     }
