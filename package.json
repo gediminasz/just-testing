@@ -113,7 +113,14 @@
         "collectCoverage": true,
         "collectCoverageFrom": [
             "src/**/*.js"
-        ]
+        ],
+        "coverageThreshold": {
+            "global": {
+                "statements": 40,
+                "branch": 40,
+                "lines": 40
+            }
+        }
     },
     "eslintConfig": {
         "extends": "eslint:recommended",
