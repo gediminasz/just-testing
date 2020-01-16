@@ -4,6 +4,7 @@
         "*.vsix": true,
     },
     "justTesting.baseCommand": "jest",
+    "justTesting.runAllCommand": "{base} --coverage",
     "justTesting.runOnCursorRegex": "it\\((.+),",
     "justTesting.runOnCursorCommand": "{base} -t {testName}"
 }

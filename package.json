@@ -107,10 +107,9 @@
     },
     "scripts": {
         "ci:lint": "eslint .",
-        "ci:test": "jest"
+        "ci:test": "jest --coverage"
     },
     "jest": {
-        "collectCoverage": true,
         "collectCoverageFrom": [
             "src/**/*.js"
         ],
