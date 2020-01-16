@@ -113,5 +113,21 @@
         "collectCoverageFrom": [
             "src/**/*.js"
         ]
+    },
+    "eslintConfig": {
+        "extends": "eslint:recommended",
+        "env": {
+            "node": true
+        },
+        "parserOptions": {
+            "ecmaVersion": 2018
+        },
+        "rules": {
+            "no-console": "warn",
+            "indent": [
+                "error",
+                2
+            ]
+        }
     }
 }
