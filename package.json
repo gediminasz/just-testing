@@ -106,16 +106,7 @@
         ]
     },
     "scripts": {
-        "postinstall": "node ./node_modules/vscode/bin/install",
-        "test": "jest"
-    },
-    "devDependencies": {
-        "@types/mocha": "^2.2.42",
-        "@types/node": "^10.12.21",
-        "eslint": "^5.13.0",
-        "jest": "^24.8.0",
-        "typescript": "^3.3.1",
-        "vscode": "^1.1.28"
+        "ci:test": "jest"
     },
     "jest": {
         "collectCoverage": true,
