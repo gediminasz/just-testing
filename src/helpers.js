@@ -7,5 +7,7 @@ function getActiveEditor() {
 module.exports = {
   getActiveEditor,
   asRelativePath: (path) => vscode.workspace.asRelativePath(path),
-  getSetting: (property) => vscode.workspace.getConfiguration('justTesting').get(property)
+  getSetting: (property) => vscode.workspace.getConfiguration('justTesting', {
+    languageId: getActiveEditor().document.languageId
+  }).get(property)
 }
