@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.7.0
+
+- Settings can now be language specific.
+
 ## 0.6.1
 
 - Fixed changes to settings like `runAllCommand` requiring vscode to be restarted.
