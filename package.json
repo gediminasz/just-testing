@@ -56,31 +56,37 @@
             "properties": {
                 "justTesting.baseCommand": {
                     "type": "string",
+                    "scope": "language-overridable",
                     "default": "python -m pytest -v",
                     "description": "Base terminal command"
                 },
                 "justTesting.runAllCommand": {
                     "type": "string",
+                    "scope": "language-overridable",
                     "default": "{base}",
                     "description": "Terminal command for \"Run all tests\""
                 },
                 "justTesting.runFileCommand": {
                     "type": "string",
+                    "scope": "language-overridable",
                     "default": "{base} {fileName}",
                     "description": "Terminal command for \"Run all tests in file\""
                 },
                 "justTesting.runOnCursorRegex": {
                     "type": "string",
+                    "scope": "language-overridable",
                     "default": "def (test_.+)\\(",
                     "description": "Regular expression for matching closest test name"
                 },
                 "justTesting.runOnCursorCommand": {
                     "type": "string",
+                    "scope": "language-overridable",
                     "default": "{base} {fileName} -k {testName}",
                     "description": "Terminal command for \"Run test on cursor\""
                 },
                 "justTesting.expressions": {
                     "type": "object",
+                    "scope": "language-overridable",
                     "default": {},
                     "description": "Custom expressions for template variables"
                 }

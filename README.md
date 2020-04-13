@@ -94,14 +94,29 @@ Point the base command to the `python` executable inside the virtualenv:
 
 ## Settings
 
-| Setting | Description | Default value |
-| --- | --- | --- |
-| `justTesting.baseCommand` | Base terminal command. | `"python -m pytest -v"` |
-| `justTesting.runAllCommand` | Terminal command for "Run all tests". | `"{base}"` |
-| `justTesting.runFileCommand` | Terminal command for "Run all tests in file". | `"{base} {fileName}"` |
-| `justTesting.runOnCursorRegex` | Regular expression for matching closest test name. | `"def (test_.+)\\("` |
-| `justTesting.runOnCursorCommand` | Terminal command for "Run test on cursor". | `"{base} {fileName} -k {testName}"` |
-| `justTesting.expressions` | Custom expressions for template variables | `{}` |
+| Setting                          | Description                                        | Default value                       |
+| -------------------------------- | -------------------------------------------------- | ----------------------------------- |
+| `justTesting.baseCommand`        | Base terminal command.                             | `"python -m pytest -v"`             |
+| `justTesting.runAllCommand`      | Terminal command for "Run all tests".              | `"{base}"`                          |
+| `justTesting.runFileCommand`     | Terminal command for "Run all tests in file".      | `"{base} {fileName}"`               |
+| `justTesting.runOnCursorRegex`   | Regular expression for matching closest test name. | `"def (test_.+)\\("`                |
+| `justTesting.runOnCursorCommand` | Terminal command for "Run test on cursor".         | `"{base} {fileName} -k {testName}"` |
+| `justTesting.expressions`        | Custom expressions for template variables          | `{}`                                |
+
+All settings can be made specific for a language, so it's possible to have multiple configurations in a single project:
+
+```
+{
+    "[javascript]": {
+        "justTesting.baseCommand": "jest",
+        ...
+    },
+    "[python]": {
+        "justTesting.baseCommand": "pytest",
+        ...
+    }
+}
+```
 
 ## Interpolation tags
 
