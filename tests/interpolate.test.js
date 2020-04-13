@@ -1,5 +1,3 @@
-/* global describe, it, expect */
-
 const { Interpolator } = require('../src/interpolate')
 
 describe('Interpolator', () => {
