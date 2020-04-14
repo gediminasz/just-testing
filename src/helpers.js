@@ -4,10 +4,15 @@ function getActiveEditor() {
   return vscode.window.activeTextEditor
 }
 
+function getActiveLanguageId() {
+  const editor = getActiveEditor()
+  return editor && editor.document.languageId
+}
+
 module.exports = {
   getActiveEditor,
   asRelativePath: (path) => vscode.workspace.asRelativePath(path),
   getSetting: (property) => vscode.workspace.getConfiguration('justTesting', {
-    languageId: getActiveEditor().document.languageId
+    languageId: getActiveLanguageId()
   }).get(property)
 }

@@ -128,8 +128,10 @@
         }
     },
     "eslintConfig": {
+        "plugins": ["jest"],
         "extends": "eslint:recommended",
         "env": {
+            "jest/globals": true,
             "node": true
         },
         "parserOptions": {
@@ -145,5 +147,10 @@
                 }
             ]
         }
+    },
+    "devDependencies": {
+        "eslint": "^6.8.0",
+        "eslint-plugin-jest": "^23.8.2",
+        "jest": "^25.3.0"
     }
 }
