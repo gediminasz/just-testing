@@ -1,9 +1,5 @@
 # Just Testing
 
-![last commit](https://img.shields.io/github/last-commit/gediminasz/just-testing.svg)
-![build](https://github.com/gediminasz/just-testing/workflows/CI/badge.svg?branch=master)
-![release](https://img.shields.io/github/release/gediminasz/just-testing.svg)
-
 A Visual Studio Code extension for running tests in integrated terminal.
 
 Available commands:
@@ -95,7 +91,7 @@ Point the base command to the `python` executable inside the virtualenv:
 ## Settings
 
 | Setting                          | Description                                        | Default value                       |
-| -------------------------------- | -------------------------------------------------- | ----------------------------------- |
+|----------------------------------|----------------------------------------------------|-------------------------------------|
 | `justTesting.baseCommand`        | Base terminal command.                             | `"python -m pytest -v"`             |
 | `justTesting.runAllCommand`      | Terminal command for "Run all tests".              | `"{base}"`                          |
 | `justTesting.runFileCommand`     | Terminal command for "Run all tests in file".      | `"{base} {fileName}"`               |
