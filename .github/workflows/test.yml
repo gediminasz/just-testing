@@ -15,6 +15,7 @@ jobs:
     - uses: actions/checkout@v1
     - uses: actions/setup-node@v1
     - run: |
+        npm audit
         npm install jest eslint
         npm run --silent ci:lint
         npm run --silent ci:test
