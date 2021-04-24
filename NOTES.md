@@ -20,3 +20,15 @@ Use "Publish extension" task or `vsce package`.
 ```
 code --install-extension just-testing-0.0.1.vsix
 ```
+
+## Updating dependencies
+
+```
+npm install --dev eslint@latest
+npm install --dev eslint-plugin-jest@latest
+npm install --dev jest@latest
+rm package-lock.json
+rm -rf node_modules
+npm lock
+npm install
+```
