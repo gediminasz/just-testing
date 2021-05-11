@@ -112,7 +112,6 @@
         ]
     },
     "scripts": {
-        "ci:lint": "eslint .",
         "ci:test": "jest --coverage"
     },
     "jest": {
@@ -127,32 +126,7 @@
             }
         }
     },
-    "eslintConfig": {
-        "plugins": [
-            "jest"
-        ],
-        "extends": "eslint:recommended",
-        "env": {
-            "jest/globals": true,
-            "node": true
-        },
-        "parserOptions": {
-            "ecmaVersion": 2018
-        },
-        "rules": {
-            "no-console": "warn",
-            "indent": [
-                "error",
-                2,
-                {
-                    "SwitchCase": 1
-                }
-            ]
-        }
-    },
     "devDependencies": {
-        "eslint": "^7.25.0",
-        "eslint-plugin-jest": "^24.3.5",
         "jest": "^26.6.3"
     },
     "standard": {
