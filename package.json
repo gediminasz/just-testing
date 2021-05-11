@@ -112,6 +112,7 @@
         ]
     },
     "scripts": {
+        "ci:lint": "standard",
         "ci:test": "jest --coverage"
     },
     "jest": {
@@ -133,5 +134,8 @@
         "env": [
             "jest"
         ]
+    },
+    "dependencies": {
+        "standard": "^16.0.3"
     }
 }
