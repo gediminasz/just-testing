@@ -1,10 +1,10 @@
 const vscode = require('vscode')
 
-function getActiveEditor() {
+function getActiveEditor () {
   return vscode.window.activeTextEditor
 }
 
-function getActiveLanguageId() {
+function getActiveLanguageId () {
   const editor = getActiveEditor()
   return editor && editor.document.languageId
 }

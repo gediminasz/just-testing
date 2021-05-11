@@ -7,11 +7,11 @@ const TERMINAL_NAME = 'Just Testing'
 const LAST_COMMAND = 'lastCommand'
 
 class Command {
-  constructor(extensionContext) {
+  constructor (extensionContext) {
     this.extensionContext = extensionContext
   }
 
-  runInTerminal(command) {
+  runInTerminal (command) {
     vscode.workspace.saveAll()
     this.extensionContext.workspaceState.update(LAST_COMMAND, command)
 
@@ -20,7 +20,7 @@ class Command {
     terminal.sendText(command)
   }
 
-  obtainTerminal() {
+  obtainTerminal () {
     const terminal = vscode.window.terminals.find(terminal => terminal.name === TERMINAL_NAME)
     if (terminal) return terminal
 
@@ -29,12 +29,12 @@ class Command {
 }
 
 class TemplateCommand extends Command {
-  constructor(settingName, extensionContext) {
+  constructor (settingName, extensionContext) {
     super(extensionContext)
     this.settingName = settingName
   }
 
-  run() {
+  run () {
     try {
       this.runInTerminal(this.command)
     } catch (e) {
@@ -47,14 +47,14 @@ class TemplateCommand extends Command {
     }
   }
 
-  get command() {
+  get command () {
     const template = helpers.getSetting(this.settingName)
     return interpolate(template)
   }
 }
 
 class RunLastCommand extends Command {
-  run() {
+  run () {
     const command = this.extensionContext.workspaceState.get(LAST_COMMAND)
     if (command) {
       this.runInTerminal(command)

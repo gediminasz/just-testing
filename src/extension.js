@@ -2,10 +2,10 @@ const vscode = require('vscode')
 
 const { TemplateCommand, RunLastCommand } = require('./terminal')
 
-function activate(context) {
+function activate (context) {
   console.debug('Activating just-testing...')
 
-  function registerCommand(name, command) {
+  function registerCommand (name, command) {
     context.subscriptions.push(vscode.commands.registerCommand(name, () => command.run()))
   }
 
@@ -15,7 +15,7 @@ function activate(context) {
   registerCommand('justTesting.runLastCommand', new RunLastCommand(context))
 }
 
-function deactivate() {
+function deactivate () {
   console.debug('Deactivating just-testing...')
 }
 

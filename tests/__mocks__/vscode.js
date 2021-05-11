@@ -1,6 +1,6 @@
 const vscode = {
   window: {},
   workspace: {}
-};
+}
 
-module.exports = vscode;
+module.exports = vscode
