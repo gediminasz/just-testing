@@ -12,12 +12,13 @@ class Command {
   }
 
   runInTerminal (command) {
-    vscode.workspace.saveAll()
-    this.extensionContext.workspaceState.update(LAST_COMMAND, command)
+    vscode.workspace.saveAll().then(() => {
+      this.extensionContext.workspaceState.update(LAST_COMMAND, command)
 
-    const terminal = this.obtainTerminal()
-    terminal.show(true)
-    terminal.sendText(command)
+      const terminal = this.obtainTerminal()
+      terminal.show(true)
+      terminal.sendText(command)
+    })
   }
 
   obtainTerminal () {
