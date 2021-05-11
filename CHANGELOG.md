@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.7.1
+
+- Changed test commands to correctly run after vscode file save is complete.
+
 ## 0.7.0
 
 - Settings can now be language specific.
