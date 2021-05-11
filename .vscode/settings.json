@@ -6,5 +6,9 @@
     "justTesting.baseCommand": "jest",
     "justTesting.runAllCommand": "{base} --coverage",
     "justTesting.runOnCursorRegex": "it\\((.+),",
-    "justTesting.runOnCursorCommand": "{base} -t {testName}"
+    "justTesting.runOnCursorCommand": "{base} -t {testName}",
+    // Standard js profile:
+    "javascript.format.semicolons": "remove",
+    "javascript.format.insertSpaceBeforeFunctionParenthesis": true,
+    "javascript.format.insertSpaceAfterConstructor": true
 }
