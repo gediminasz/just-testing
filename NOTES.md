@@ -20,3 +20,7 @@ Use "Publish extension" task or `vsce package`.
 ```
 code --install-extension just-testing-0.0.1.vsix
 ```
+
+## External links
+
+- https://code.visualstudio.com/api/references/vscode-api
