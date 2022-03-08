@@ -1,9 +1,5 @@
 # Development notes
 
-## Test projects
-
-https://github.com/gediminasz/just-testing-examples
-
 ## Packaging a release
 
 Use "Publish extension" task or `vsce package`.
@@ -23,4 +19,5 @@ code --install-extension just-testing-0.0.1.vsix
 
 ## External links
 
+- https://github.com/gediminasz/just-testing-examples
 - https://code.visualstudio.com/api/references/vscode-api

@@ -89,6 +89,11 @@
                     "scope": "language-overridable",
                     "default": {},
                     "description": "Custom expressions for template variables"
+                },
+                "justTesting.contextMenusEnabled": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Should right click context menu actions be enabled"
                 }
             }
         },
@@ -109,7 +114,15 @@
                 "command": "justTesting.runLastCommand",
                 "title": "Just Testing: Run last command"
             }
-        ]
+        ],
+        "menus": {
+            "editor/context": [
+                {
+                    "command": "justTesting.runOnCursor",
+                    "when": "config.justTesting.contextMenusEnabled"
+                }
+            ]
+        }
     },
     "scripts": {
         "ci:lint": "standard",

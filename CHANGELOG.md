@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- Added right click context menu item for the "Run test on cursor" command.
+- Added `justTesting.contextMenusEnabled` setting to enable or disable context menu items.
+
 ## 0.7.1
 
 - Changed test commands to correctly run after vscode file save is complete.
