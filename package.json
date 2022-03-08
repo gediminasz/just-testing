@@ -46,7 +46,8 @@
         "onCommand:justTesting.runAll",
         "onCommand:justTesting.runFile",
         "onCommand:justTesting.runOnCursor",
-        "onCommand:justTesting.runLastCommand"
+        "onCommand:justTesting.runLastCommand",
+        "onCommand:justTesting.copyOnCursor"
     ],
     "main": "./src/extension.js",
     "contributes": {
@@ -113,12 +114,20 @@
             {
                 "command": "justTesting.runLastCommand",
                 "title": "Just Testing: Run last command"
+            },
+            {
+                "command": "justTesting.copyOnCursor",
+                "title": "Just Testing: Copy test command"
             }
         ],
         "menus": {
             "editor/context": [
                 {
                     "command": "justTesting.runOnCursor",
+                    "when": "config.justTesting.contextMenusEnabled"
+                },
+                {
+                    "command": "justTesting.copyOnCursor",
                     "when": "config.justTesting.contextMenusEnabled"
                 }
             ]

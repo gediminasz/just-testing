@@ -1,6 +1,7 @@
 const vscode = require('vscode')
 
 const { TemplateCommand, RunLastCommand } = require('./terminal')
+const { CopyOnCursorCommand } = require('./copy')
 
 function activate (context) {
   console.debug('Activating just-testing...')
@@ -13,6 +14,7 @@ function activate (context) {
   registerCommand('justTesting.runFile', new TemplateCommand('runFileCommand', context))
   registerCommand('justTesting.runOnCursor', new TemplateCommand('runOnCursorCommand', context))
   registerCommand('justTesting.runLastCommand', new RunLastCommand(context))
+  registerCommand('justTesting.copyOnCursor', new CopyOnCursorCommand())
 }
 
 function deactivate () {

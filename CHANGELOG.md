@@ -2,7 +2,8 @@
 
 ## Unreleased
 
-- Added right click context menu item for the "Run test on cursor" command.
+- Added "Run test on cursor" context menu item.
+- Added "Copy test command" context menu item.
 - Added `justTesting.contextMenusEnabled` setting to enable or disable context menu items.
 
 ## 0.7.1
