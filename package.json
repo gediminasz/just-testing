@@ -151,8 +151,8 @@
         }
     },
     "devDependencies": {
-        "jest": "^27.2.0",
-        "standard": "^16.0.3"
+        "jest": "^27.5.1",
+        "standard": "^16.0.4"
     },
     "standard": {
         "env": [
