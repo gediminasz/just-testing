@@ -1,6 +1,6 @@
 const vscode = require('vscode')
 
-const { interpolate, InterpolationError } = require('./interpolate')
+const { interpolate } = require('./interpolate')
 const helpers = require('./helpers')
 
 const TERMINAL_NAME = 'Just Testing'
@@ -36,16 +36,7 @@ class TemplateCommand extends Command {
   }
 
   run () {
-    try {
-      this.runInTerminal(this.command)
-    } catch (e) {
-      if (e instanceof InterpolationError) {
-        vscode.window.showErrorMessage(e.message)
-      } else {
-        console.error(e)
-        throw e
-      }
-    }
+    this.runInTerminal(this.command)
   }
 
   get command () {

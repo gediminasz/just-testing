@@ -1,4 +1,4 @@
-class InterpolationError extends Error { }
+const { ExtensionError } = require('./errors')
 
 class Interpolator {
   constructor (helpers = require('./helpers')) {
@@ -36,7 +36,7 @@ class Interpolator {
   buildValueFunction (key, expression) {
     if (expression.regex) return () => this.findMatch(expression.regex)
     if (expression.value) return () => expression.value
-    throw new InterpolationError(`Invalid expression for "${key}"`)
+    throw new ExtensionError(`Invalid expression for "${key}"`)
   }
 
   applyInterpolation (template, key, valueFunction) {
@@ -66,7 +66,7 @@ class Interpolator {
       lineNumber--
     }
 
-    throw new InterpolationError('No test detected!')
+    throw new ExtensionError('No test detected!')
   }
 
   get activeLine () {
@@ -75,13 +75,12 @@ class Interpolator {
 
   get activeEditor () {
     const editor = this.helpers.getActiveEditor()
-    if (!editor) throw new InterpolationError('No file open!')
+    if (!editor) throw new ExtensionError('No file open!')
     return editor
   }
 }
 
 module.exports = {
   interpolate: (template) => (new Interpolator()).interpolate(template),
-  Interpolator,
-  InterpolationError
+  Interpolator
 }
