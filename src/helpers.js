@@ -14,5 +14,6 @@ module.exports = {
   asRelativePath: (path) => vscode.workspace.asRelativePath(path),
   getSetting: (property) => vscode.workspace.getConfiguration('justTesting', {
     languageId: getActiveLanguageId()
-  }).get(property)
+  }).get(property),
+  writeClipboard: (value) => vscode.env.clipboard.writeText(value)
 }
