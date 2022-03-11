@@ -10,7 +10,7 @@ update:
 	rm -rf node_modules
 	npm install
 
-package:
+package: ci
 	vsce package
 
 publish: package
