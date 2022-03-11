@@ -8,8 +8,9 @@ Use "Publish extension" task or `vsce package`.
 
 1. Bump version in `package.json` and `npm install`
 1. Ensure `CHANGELOG.md` is up to date
-1. Run through all commands in all [test projects](https://github.com/gediminasz/just-testing-examples)
+1. Manually test a few of the [test projects](https://github.com/gediminasz/just-testing-examples)
 1. Run "Publish extension" task
+1. Create a release in GitHub
 
 ## Installing from file
 
