@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 2022.3.0
 
 - Added "Run test on cursor" context menu item.
 - Added "Copy test command" context menu item.
