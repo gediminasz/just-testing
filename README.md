@@ -71,6 +71,15 @@ Point the base command to the `python` executable inside the virtualenv:
 
 ### JavaScript
 
+#### NPM
+
+```
+"justTesting.baseCommand": "npm test",
+"justTesting.runFileCommand": "{base} -- {fileName}",
+"justTesting.runOnCursorCommand": "{base} -- {fileName} -t {testName}",
+"justTesting.runOnCursorRegex": "it\\((.+),",
+```
+
 #### Jest
 
 ```

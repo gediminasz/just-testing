@@ -3,10 +3,10 @@
         "node_modules": true,
         "*.vsix": true,
     },
-    "justTesting.baseCommand": "npx jest",
-    "justTesting.runAllCommand": "{base} --coverage",
+    "justTesting.baseCommand": "npm test",
+    "justTesting.runFileCommand": "{base} -- {fileName}",
+    "justTesting.runOnCursorCommand": "{base} -- {fileName} -t {testName}",
     "justTesting.runOnCursorRegex": "it\\((.+),",
-    "justTesting.runOnCursorCommand": "{base} {fileName} -t {testName}",
     // Standard js profile:
     "javascript.format.semicolons": "remove",
     "javascript.format.insertSpaceBeforeFunctionParenthesis": true,
