@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Added "Run Tests" context menu item to file explorer.
+
 ## 2022.3.0
 
 - Added "Run test on cursor" context menu item.

@@ -118,9 +118,19 @@
             {
                 "command": "justTesting.copyOnCursor",
                 "title": "Just Testing: Copy test command"
+            },
+            {
+                "command": "justTesting.runFromExplorer",
+                "title": "Just Testing: Run Tests"
             }
         ],
         "menus": {
+            "commandPalette": [
+                {
+                    "command": "justTesting.runFromExplorer",
+                    "when": "false"
+                }
+            ],
             "editor/context": [
                 {
                     "command": "justTesting.runOnCursor",
@@ -130,12 +140,19 @@
                     "command": "justTesting.copyOnCursor",
                     "when": "config.justTesting.contextMenusEnabled"
                 }
+            ],
+            "explorer/context": [
+                {
+                    "command": "justTesting.runFromExplorer",
+                    "when": "config.justTesting.contextMenusEnabled"
+                }
             ]
         }
     },
     "scripts": {
         "ci:lint": "standard",
         "ci:test": "jest --coverage",
+        "fix": "standard --fix",
         "test": "jest"
     },
     "jest": {
@@ -144,9 +161,10 @@
         ],
         "coverageThreshold": {
             "global": {
-                "statements": 50,
-                "branch": 55,
-                "lines": 50
+                "statements": 65,
+                "branch": 60,
+                "functions": 70,
+                "lines": 65
             }
         }
     },
