@@ -16,8 +16,13 @@ function pathToModule (path) {
   return components.length ? components.join('.') + '.' + moduleName : moduleName
 }
 
+function getConfiguration () {
+  return vscode.workspace.getConfiguration('justTesting', { languageId: getActiveLanguageId() })
+}
+
 module.exports = {
   getActiveEditor,
+  getConfiguration,
   asRelativePath: (path) => vscode.workspace.asRelativePath(path),
   getSetting: (property) => vscode.workspace.getConfiguration('justTesting', {
     languageId: getActiveLanguageId()

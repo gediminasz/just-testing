@@ -1,9 +1,10 @@
 const vscode = require('vscode')
 
-const { TemplateCommand, RunLastCommand } = require('./terminal')
 const { CopyOnCursorCommand } = require('./copy')
 const { ExtensionError } = require('./errors')
+const { getConfiguration } = require('./helpers')
 const { runAllTestsInPath } = require('./commands')
+const { TemplateCommand, RunLastCommand } = require('./terminal')
 
 function activate (context) {
   console.debug('Activating just-testing...')
@@ -32,7 +33,7 @@ function activate (context) {
 
   function registerCommand (name, callback) {
     context.subscriptions.push(
-      vscode.commands.registerCommand(name, (...args) => callback(context, ...args))
+      vscode.commands.registerCommand(name, (...args) => callback(context, getConfiguration(), ...args))
     )
   }
 

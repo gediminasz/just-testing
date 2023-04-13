@@ -1,11 +1,11 @@
 const { runTerminalCommand } = require('./terminal')
 const helpers = require('./helpers')
 
-function runAllTestsInPath (extensionContext, uri) {
-  const template = helpers.getSetting('runFileCommand')
+function runAllTestsInPath (extensionContext, configuration, uri) {
+  const template = configuration.get('runFileCommand')
   const fileName = helpers.asRelativePath(uri.path)
   const context = {
-    base: helpers.getSetting('baseCommand'),
+    base: configuration.get('baseCommand'),
     fileName,
     module: helpers.pathToModule(fileName)
   }
