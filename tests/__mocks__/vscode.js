@@ -50,7 +50,7 @@ const vscode = {
       return _configuration[section][languageId]
     },
     asRelativePath (path) {
-      return path
+      return path.replace(/^\/root\//, "")
     },
     async saveAll () { return true }
   },
