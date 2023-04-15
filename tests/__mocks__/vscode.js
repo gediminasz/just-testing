@@ -9,6 +9,7 @@ const _configuration = {
   justTesting: {
     python: new Map([
       ['baseCommand', 'pytest'],
+      ['runFileCommand', '{base} {fileName}'],
       ['runOnCursorRegex', 'def (test_.+)\\('],
       ['runOnCursorCommand', '{base} {fileName} -k {testName}'],
       ['expressions', {
@@ -30,7 +31,18 @@ const vscode = {
         languageId: 'python'
       },
       selection: { active: { line: 3 } }
-    }
+    },
+    terminals: [
+      {
+        name: 'Just Testing',
+        show () {
+          this.wasShown = true
+        },
+        sendText (command) {
+          this.lastCommand = command
+        }
+      }
+    ]
   },
 
   workspace: {
@@ -38,8 +50,9 @@ const vscode = {
       return _configuration[section][languageId]
     },
     asRelativePath (path) {
-      return path
-    }
+      return path.replace(/^\/root\//, '')
+    },
+    async saveAll () { return true }
   },
 
   env: {

@@ -9,11 +9,24 @@ function getActiveLanguageId () {
   return editor && editor.document.languageId
 }
 
+function pathToModule (path) {
+  const components = path.split('/')
+  const baseName = components.pop()
+  const moduleName = baseName.split('.')[0]
+  return components.length ? components.join('.') + '.' + moduleName : moduleName
+}
+
+function getConfiguration () {
+  return vscode.workspace.getConfiguration('justTesting', { languageId: getActiveLanguageId() })
+}
+
 module.exports = {
   getActiveEditor,
+  getConfiguration,
   asRelativePath: (path) => vscode.workspace.asRelativePath(path),
   getSetting: (property) => vscode.workspace.getConfiguration('justTesting', {
     languageId: getActiveLanguageId()
   }).get(property),
-  writeClipboard: (value) => vscode.env.clipboard.writeText(value)
+  writeClipboard: (value) => vscode.env.clipboard.writeText(value),
+  pathToModule
 }

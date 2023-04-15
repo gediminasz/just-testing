@@ -45,10 +45,7 @@ class Interpolator {
   }
 
   get module () {
-    const components = this.activeFileName.split('/')
-    const baseName = components.pop()
-    const moduleName = baseName.split('.')[0]
-    return components.length ? components.join('.') + '.' + moduleName : moduleName
+    return this.helpers.pathToModule(this.activeFileName)
   }
 
   get activeFileName () {
