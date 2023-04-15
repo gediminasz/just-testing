@@ -1,6 +1,15 @@
 const { runTerminalCommand } = require('./terminal')
 const helpers = require('./helpers')
 
+function runallTests (extensionContext, configuration) {
+  const template = configuration.get('runAllCommand')
+  const context = {
+    base: configuration.get('baseCommand')
+  }
+  const command = interpolate(template, context)
+  runTerminalCommand(extensionContext, command)
+}
+
 function runAllTestsInPath (extensionContext, configuration, uri) {
   const template = configuration.get('runFileCommand')
   const fileName = helpers.asRelativePath(uri.path)
@@ -21,5 +30,6 @@ function interpolate (template, context) {
 }
 
 module.exports = {
+  runallTests,
   runAllTestsInPath
 }

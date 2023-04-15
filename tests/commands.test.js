@@ -1,4 +1,4 @@
-const { runAllTestsInPath } = require('../src/commands')
+const { runallTests, runAllTestsInPath } = require('../src/commands')
 const vscode = require('vscode')
 
 const makeExtensionContext = () => (
@@ -11,6 +11,20 @@ const makeExtensionContext = () => (
     }
   }
 )
+
+describe('runAllTestsInPath', () => {
+  it('runs all tests', async () => {
+    const extensionContext = makeExtensionContext()
+    const configuration = new Map([
+      ['baseCommand', 'pytest'],
+      ['runAllCommand', '{base} --cov']
+    ])
+
+    await runallTests(extensionContext, configuration)
+
+    expect(vscode.window.terminals[0].lastCommand).toBe('pytest --cov')
+  })
+})
 
 describe('runAllTestsInPath', () => {
   it('runs tests in a selected file', async () => {

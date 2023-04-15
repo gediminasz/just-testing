@@ -3,7 +3,7 @@ const vscode = require('vscode')
 const { CopyOnCursorCommand } = require('./copy')
 const { ExtensionError } = require('./errors')
 const { getConfiguration } = require('./helpers')
-const { runAllTestsInPath } = require('./commands')
+const commands = require('./commands')
 const { TemplateCommand, RunLastCommand } = require('./terminal')
 
 function activate (context) {
@@ -25,7 +25,6 @@ function activate (context) {
   }
 
   // TODO rework class based commands into functions like runAllTestsInPath below
-  registerOldStyleCommand('justTesting.runAll', new TemplateCommand('runAllCommand', context))
   registerOldStyleCommand('justTesting.runFile', new TemplateCommand('runFileCommand', context))
   registerOldStyleCommand('justTesting.runOnCursor', new TemplateCommand('runOnCursorCommand', context))
   registerOldStyleCommand('justTesting.runLastCommand', new RunLastCommand(context))
@@ -37,7 +36,8 @@ function activate (context) {
     )
   }
 
-  registerCommand('justTesting.runFromExplorer', runAllTestsInPath)
+  registerCommand('justTesting.runAll', commands.runallTests)
+  registerCommand('justTesting.runFromExplorer', commands.runAllTestsInPath)
 }
 
 function deactivate () {
