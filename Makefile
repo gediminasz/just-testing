@@ -4,6 +4,9 @@ ci:
 	npm run --silent ci:lint
 	npm run --silent ci:test
 
+fix:
+	npm run fix
+
 update:
 	npm add --include=dev jest@latest standard@latest
 

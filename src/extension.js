@@ -25,7 +25,6 @@ function activate (context) {
   }
 
   // TODO rework class based commands into functions like runAllTestsInPath below
-  registerOldStyleCommand('justTesting.runFile', new TemplateCommand('runFileCommand', context))
   registerOldStyleCommand('justTesting.runOnCursor', new TemplateCommand('runOnCursorCommand', context))
   registerOldStyleCommand('justTesting.runLastCommand', new RunLastCommand(context))
   registerOldStyleCommand('justTesting.copyOnCursor', new CopyOnCursorCommand())
@@ -37,6 +36,7 @@ function activate (context) {
   }
 
   registerCommand('justTesting.runAll', commands.runallTests)
+  registerCommand('justTesting.runFile', commands.runallTestsInActiveFile)
   registerCommand('justTesting.runFromExplorer', commands.runAllTestsInPath)
 }
 

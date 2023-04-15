@@ -24,7 +24,7 @@ const vscode = {
   window: {
     activeTextEditor: {
       document: {
-        fileName: 'foo/bar/baz.py',
+        fileName: '/root/foo/bar/baz.py',
         lineAt (i) {
           return { text: _lines[i] }
         },
@@ -36,13 +36,16 @@ const vscode = {
       {
         name: 'Just Testing',
         show () {
-          this.wasShown = true
+          this._wasShown = true
         },
         sendText (command) {
-          this.lastCommand = command
+          this._lastCommand = command
         }
       }
-    ]
+    ],
+    showErrorMessage (message) {
+      this._lastErrorMessage = message
+    }
   },
 
   workspace: {
