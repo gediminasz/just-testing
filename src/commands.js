@@ -54,7 +54,7 @@ function runTestOnCursor (extensionContext, configuration) {
   }
 
   for (const [key, expression] of Object.entries(configuration.get('expressions'))) {
-    const value = resolveExpression(expression, activeEditor.document, activeLine)
+    const value = findMatch(expression.regex, activeEditor.document, activeLine)
     if (value === undefined) {
       vscode.window.showErrorMessage(`Invalid expression for "${key}"`)
       return
@@ -84,11 +84,6 @@ function interpolate (template, context) {
     (result, [key, value]) => result.replace(`{${key}}`, value),
     template
   )
-}
-
-function resolveExpression (expression, activeDocument, activeLine) {
-  if (expression.regex) return findMatch(expression.regex, activeDocument, activeLine)
-  if (expression.value) return expression.value
 }
 
 function findMatch (regex, document, lineNumber) {

@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Added "Run Tests" context menu item to file explorer.
+- Removed support for `{"value": "..."}` kind expressions in the `justTesting.customExpressions` setting.
 
 ## 2022.3.0
 

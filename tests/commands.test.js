@@ -139,7 +139,7 @@ describe('runTestOnCursor', () => {
       expect(vscode.window.terminals[0]._lastCommand).toBe('python manage.py test foo.bar.baz.FooTestCase.test_foo')
     })
 
-    it('handles invalid custom expression', async () => {
+    it('handles custom expressions without a match', async () => {
       const badConfiguration = new Map(configuration)
       badConfiguration.set('expressions', {
         className: { regex: 'class (.+NotATestCase)\\(' }

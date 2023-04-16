@@ -136,21 +136,14 @@ The following interpolation tags can be used in settings `runAllCommand`, `runFi
 
 ## Custom expressions
 
-The `justTesting.expressions` setting may be used to define custom expressions of which there are two types:
+The `justTesting.expressions` setting may be used to capture extra values to be used in `justTesting.runOnCursorCommand`. For example:
 
-- `value` - translates to the provided static string
-- `regex` - translates to the closest matching string above active line
-
-For example:
-
-```json
-"justTesting.customExpressions": {
-    "foo": { "value": "bar" },
-    "className": { "regex": "class (.+TestCase)\\(" }
-}
 ```
-
-The above expressions may then be inserted in commands using interpolation tags, e.g. `{foo}` and `{className}`.
+"justTesting.customExpressions": {
+    "className": { "regex": "class (.+TestCase)\\(" }
+},
+"justTesting.runOnCursorCommand": "{base} {module}.{className}.{testName}"
+```
 
 ## Keyboard Shortcuts
 
