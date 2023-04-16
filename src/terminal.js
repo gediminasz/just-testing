@@ -1,8 +1,5 @@
 const vscode = require('vscode')
 
-const { interpolate } = require('./interpolate')
-const helpers = require('./helpers')
-
 const TERMINAL_NAME = 'Just Testing'
 const LAST_COMMAND = 'lastCommand'
 
@@ -32,22 +29,6 @@ class Command {
   }
 }
 
-class TemplateCommand extends Command {
-  constructor (settingName, extensionContext) {
-    super(extensionContext)
-    this.settingName = settingName
-  }
-
-  run () {
-    this.runInTerminal(this.command)
-  }
-
-  get command () {
-    const template = helpers.getSetting(this.settingName)
-    return interpolate(template)
-  }
-}
-
 class RunLastCommand extends Command {
   run () {
     const command = this.extensionContext.workspaceState.get(LAST_COMMAND)
@@ -59,4 +40,4 @@ class RunLastCommand extends Command {
   }
 }
 
-module.exports = { TemplateCommand, RunLastCommand, runTerminalCommand }
+module.exports = { RunLastCommand, runTerminalCommand }

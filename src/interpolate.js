@@ -1,3 +1,5 @@
+// TODO remove this file
+
 const { ExtensionError } = require('./errors')
 
 class Interpolator {
