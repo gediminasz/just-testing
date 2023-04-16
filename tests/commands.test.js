@@ -117,7 +117,7 @@ describe('runTestOnCursor', () => {
     const extensionContext = makeExtensionContext()
     vscode.window.activeTextEditor = undefined
 
-    await runallTestsInActiveFile(extensionContext, configuration)
+    await runTestOnCursor(extensionContext, configuration)
 
     expect(vscode.window.terminals[0]._lastCommand).toBe(undefined)
     expect(vscode.window._lastErrorMessage).toBe('No file open!')
