@@ -34,8 +34,8 @@ function activate (context) {
     )
   }
 
-  registerCommand('justTesting.runAll', commands.runallTests)
-  registerCommand('justTesting.runFile', commands.runallTestsInActiveFile)
+  registerCommand('justTesting.runAll', commands.runAllTests)
+  registerCommand('justTesting.runFile', commands.runAllTestsInActiveFile)
   registerCommand('justTesting.runOnCursor', commands.runTestOnCursor)
   registerCommand('justTesting.runFromExplorer', commands.runAllTestsInPath)
 }

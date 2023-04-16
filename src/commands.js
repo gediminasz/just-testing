@@ -3,7 +3,9 @@ const vscode = require('vscode')
 const { runTerminalCommand } = require('./terminal')
 const helpers = require('./helpers')
 
-function runallTests (extensionContext, configuration) {
+// TODO split this file up
+
+function runAllTests (extensionContext, configuration) {
   const template = configuration.get('runAllCommand')
   const context = {
     base: configuration.get('baseCommand')
@@ -12,7 +14,7 @@ function runallTests (extensionContext, configuration) {
   runTerminalCommand(extensionContext, command)
 }
 
-function runallTestsInActiveFile (extensionContext, configuration) {
+function runAllTestsInActiveFile (extensionContext, configuration) {
   const activeEditor = vscode.window.activeTextEditor
   if (!activeEditor) {
     vscode.window.showErrorMessage('No file open!')
@@ -97,8 +99,8 @@ function findMatch (regex, document, lineNumber) {
 }
 
 module.exports = {
-  runallTests,
-  runallTestsInActiveFile,
+  runAllTests,
+  runAllTestsInActiveFile,
   runTestOnCursor,
   runAllTestsInPath
 }

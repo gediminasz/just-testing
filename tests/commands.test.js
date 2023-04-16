@@ -1,6 +1,6 @@
 const vscode = require('vscode')
 
-const { runallTests, runallTestsInActiveFile, runTestOnCursor, runAllTestsInPath } = require('../src/commands')
+const { runAllTests, runAllTestsInActiveFile, runTestOnCursor, runAllTestsInPath } = require('../src/commands')
 
 const makeExtensionContext = () => (
   {
@@ -35,7 +35,7 @@ beforeEach(() => {
   vscode.window.terminals[0]._lastCommand = undefined
 })
 
-describe('runallTests', () => {
+describe('runAllTests', () => {
   it('runs all tests', async () => {
     const extensionContext = makeExtensionContext()
     const configuration = new Map([
@@ -43,13 +43,13 @@ describe('runallTests', () => {
       ['runAllCommand', '{base} --cov']
     ])
 
-    await runallTests(extensionContext, configuration)
+    await runAllTests(extensionContext, configuration)
 
     expect(vscode.window.terminals[0]._lastCommand).toBe('pytest --cov')
   })
 })
 
-describe('runallTestsInActiveFile', () => {
+describe('runAllTestsInActiveFile', () => {
   it('runs all tests in the active file', async () => {
     const extensionContext = makeExtensionContext()
     const configuration = new Map([
@@ -57,7 +57,7 @@ describe('runallTestsInActiveFile', () => {
       ['runFileCommand', '{base} {fileName}']
     ])
 
-    await runallTestsInActiveFile(extensionContext, configuration)
+    await runAllTestsInActiveFile(extensionContext, configuration)
 
     expect(vscode.window.terminals[0]._lastCommand).toBe('pytest foo/bar/baz.py')
   })
@@ -69,7 +69,7 @@ describe('runallTestsInActiveFile', () => {
       ['runFileCommand', '{base} {module}']
     ])
 
-    await runallTestsInActiveFile(extensionContext, configuration)
+    await runAllTestsInActiveFile(extensionContext, configuration)
 
     expect(vscode.window.terminals[0]._lastCommand).toBe('pytest foo.bar.baz')
   })
@@ -82,7 +82,7 @@ describe('runallTestsInActiveFile', () => {
     ])
     vscode.window.activeTextEditor = undefined
 
-    await runallTestsInActiveFile(extensionContext, configuration)
+    await runAllTestsInActiveFile(extensionContext, configuration)
 
     expect(vscode.window.terminals[0]._lastCommand).toBe(undefined)
     expect(vscode.window._lastErrorMessage).toBe('No file open!')
