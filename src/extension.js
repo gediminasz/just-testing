@@ -4,10 +4,10 @@ const { CopyOnCursorCommand } = require('./copy')
 const { ExtensionError } = require('./errors')
 const { getConfiguration } = require('./helpers')
 const { runAllTests } = require('./commands/runAllTests')
+const { runAllTestsInActiveFile } = require('./commands/runAllTestsInActiveFile')
+const { runAllTestsInPath } = require('./commands/runAllTestsInPath')
 const { RunLastCommand } = require('./terminal')
 const { runTestOnCursor } = require('./commands/runTestOnCursor')
-const { runAllTestsInActiveFile } = require('./commands/runAllTestsInActiveFile')
-const commands = require('./commands')
 
 function activate (context) {
   console.debug('Activating just-testing...')
@@ -40,7 +40,7 @@ function activate (context) {
   registerCommand('justTesting.runAll', runAllTests)
   registerCommand('justTesting.runFile', runAllTestsInActiveFile)
   registerCommand('justTesting.runOnCursor', runTestOnCursor)
-  registerCommand('justTesting.runFromExplorer', commands.runAllTestsInPath)
+  registerCommand('justTesting.runFromExplorer', runAllTestsInPath)
 }
 
 function deactivate () {

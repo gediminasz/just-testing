@@ -1,7 +1,7 @@
 const vscode = require('vscode')
 
-const { runAllTestsInPath } = require('../src/commands')
-const { makeExtensionContext } = require('./helpers')
+const { runAllTestsInPath } = require('../../src/commands/runAllTestsInPath')
+const { makeExtensionContext } = require('../helpers')
 
 beforeEach(() => {
   vscode.window.activeTextEditor = {
