@@ -1,3 +1,5 @@
+// TODO delete many of these mocks when command refactoring is completed
+
 const _lines = [
   'def test_foo():',
   '    assert True',

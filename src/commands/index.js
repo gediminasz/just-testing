@@ -1,18 +1,20 @@
 const vscode = require('vscode')
 
-const { runTerminalCommand } = require('./terminal')
-const helpers = require('./helpers')
+const { runTerminalCommand } = require('../terminal')
+const helpers = require('../helpers')
 
-function runallTests (extensionContext, configuration) {
+// TODO split this file up
+
+function runAllTests (extensionContext, configuration) {
   const template = configuration.get('runAllCommand')
   const context = {
     base: configuration.get('baseCommand')
   }
-  const command = interpolate(template, context)
+  const command = helpers.interpolate(template, context)
   runTerminalCommand(extensionContext, command)
 }
 
-function runallTestsInActiveFile (extensionContext, configuration) {
+function runAllTestsInActiveFile (extensionContext, configuration) {
   const activeEditor = vscode.window.activeTextEditor
   if (!activeEditor) {
     vscode.window.showErrorMessage('No file open!')
@@ -26,7 +28,7 @@ function runallTestsInActiveFile (extensionContext, configuration) {
     fileName,
     module: helpers.pathToModule(fileName)
   }
-  const command = interpolate(template, context)
+  const command = helpers.interpolate(template, context)
   runTerminalCommand(extensionContext, command)
 }
 
@@ -38,19 +40,12 @@ function runAllTestsInPath (extensionContext, configuration, uri) {
     fileName,
     module: helpers.pathToModule(fileName)
   }
-  const command = interpolate(template, context)
+  const command = helpers.interpolate(template, context)
   runTerminalCommand(extensionContext, command)
 }
 
-function interpolate (template, context) {
-  return Object.entries(context).reduce(
-    (result, [key, value]) => result.replace(`{${key}}`, value),
-    template
-  )
-}
-
 module.exports = {
-  runallTests,
-  runallTestsInActiveFile,
+  runAllTests,
+  runAllTestsInActiveFile,
   runAllTestsInPath
 }

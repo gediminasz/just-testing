@@ -1,24 +1,31 @@
 const vscode = require('vscode')
 
-const { runallTests, runallTestsInActiveFile, runAllTestsInPath } = require('../src/commands')
-
-const makeExtensionContext = () => (
-  {
-    workspaceState: {
-      data: new Map(),
-      update (key, value) {
-        this.data.set(key, value)
-      }
-    }
-  }
-)
+const { runAllTests, runAllTestsInActiveFile, runAllTestsInPath } = require('../src/commands')
+const { makeExtensionContext } = require('./helpers')
 
 beforeEach(() => {
+  vscode.window.activeTextEditor = {
+    document: {
+      _lines: [
+        'class FooTestCase(TestCase):',
+        '    def bar_test():',
+        '        ...',
+        '    def test_foo():',
+        '        ...'
+      ],
+      fileName: '/root/foo/bar/baz.py',
+      lineAt (i) {
+        return { text: this._lines[i] }
+      },
+      languageId: 'python'
+    },
+    selection: { active: { line: 4 } }
+  }
   vscode.window._lastErrorMessage = undefined
   vscode.window.terminals[0]._lastCommand = undefined
 })
 
-describe('runallTests', () => {
+describe('runAllTests', () => {
   it('runs all tests', async () => {
     const extensionContext = makeExtensionContext()
     const configuration = new Map([
@@ -26,13 +33,13 @@ describe('runallTests', () => {
       ['runAllCommand', '{base} --cov']
     ])
 
-    await runallTests(extensionContext, configuration)
+    await runAllTests(extensionContext, configuration)
 
     expect(vscode.window.terminals[0]._lastCommand).toBe('pytest --cov')
   })
 })
 
-describe('runallTestsInActiveFile', () => {
+describe('runAllTestsInActiveFile', () => {
   it('runs all tests in the active file', async () => {
     const extensionContext = makeExtensionContext()
     const configuration = new Map([
@@ -40,7 +47,7 @@ describe('runallTestsInActiveFile', () => {
       ['runFileCommand', '{base} {fileName}']
     ])
 
-    await runallTestsInActiveFile(extensionContext, configuration)
+    await runAllTestsInActiveFile(extensionContext, configuration)
 
     expect(vscode.window.terminals[0]._lastCommand).toBe('pytest foo/bar/baz.py')
   })
@@ -52,7 +59,7 @@ describe('runallTestsInActiveFile', () => {
       ['runFileCommand', '{base} {module}']
     ])
 
-    await runallTestsInActiveFile(extensionContext, configuration)
+    await runAllTestsInActiveFile(extensionContext, configuration)
 
     expect(vscode.window.terminals[0]._lastCommand).toBe('pytest foo.bar.baz')
   })
@@ -65,7 +72,7 @@ describe('runallTestsInActiveFile', () => {
     ])
     vscode.window.activeTextEditor = undefined
 
-    await runallTestsInActiveFile(extensionContext, configuration)
+    await runAllTestsInActiveFile(extensionContext, configuration)
 
     expect(vscode.window.terminals[0]._lastCommand).toBe(undefined)
     expect(vscode.window._lastErrorMessage).toBe('No file open!')

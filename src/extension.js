@@ -4,7 +4,8 @@ const { CopyOnCursorCommand } = require('./copy')
 const { ExtensionError } = require('./errors')
 const { getConfiguration } = require('./helpers')
 const commands = require('./commands')
-const { TemplateCommand, RunLastCommand } = require('./terminal')
+const { RunLastCommand } = require('./terminal')
+const { runTestOnCursor } = require('./commands/runTestOnCursor')
 
 function activate (context) {
   console.debug('Activating just-testing...')
@@ -25,7 +26,6 @@ function activate (context) {
   }
 
   // TODO rework class based commands into functions like runAllTestsInPath below
-  registerOldStyleCommand('justTesting.runOnCursor', new TemplateCommand('runOnCursorCommand', context))
   registerOldStyleCommand('justTesting.runLastCommand', new RunLastCommand(context))
   registerOldStyleCommand('justTesting.copyOnCursor', new CopyOnCursorCommand())
 
@@ -35,8 +35,9 @@ function activate (context) {
     )
   }
 
-  registerCommand('justTesting.runAll', commands.runallTests)
-  registerCommand('justTesting.runFile', commands.runallTestsInActiveFile)
+  registerCommand('justTesting.runAll', commands.runAllTests)
+  registerCommand('justTesting.runFile', commands.runAllTestsInActiveFile)
+  registerCommand('justTesting.runOnCursor', runTestOnCursor)
   registerCommand('justTesting.runFromExplorer', commands.runAllTestsInPath)
 }
 
