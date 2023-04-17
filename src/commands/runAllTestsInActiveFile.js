@@ -1,11 +1,17 @@
+const vscode = require('vscode')
+
 const { runTerminalCommand } = require('../terminal')
 const helpers = require('../helpers')
 
-// TODO split this file up
+function runAllTestsInActiveFile (extensionContext, configuration) {
+  const activeEditor = vscode.window.activeTextEditor
+  if (!activeEditor) {
+    vscode.window.showErrorMessage('No file open!')
+    return
+  }
 
-function runAllTestsInPath (extensionContext, configuration, uri) {
   const template = configuration.get('runFileCommand')
-  const fileName = helpers.asRelativePath(uri.path)
+  const fileName = helpers.asRelativePath(activeEditor.document.fileName)
   const context = {
     base: configuration.get('baseCommand'),
     fileName,
@@ -15,6 +21,4 @@ function runAllTestsInPath (extensionContext, configuration, uri) {
   runTerminalCommand(extensionContext, command)
 }
 
-module.exports = {
-  runAllTestsInPath
-}
+module.exports = { runAllTestsInActiveFile }

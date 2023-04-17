@@ -6,6 +6,7 @@ const { getConfiguration } = require('./helpers')
 const { runAllTests } = require('./commands/runAllTests')
 const { RunLastCommand } = require('./terminal')
 const { runTestOnCursor } = require('./commands/runTestOnCursor')
+const { runAllTestsInActiveFile } = require('./commands/runAllTestsInActiveFile')
 const commands = require('./commands')
 
 function activate (context) {
@@ -37,7 +38,7 @@ function activate (context) {
   }
 
   registerCommand('justTesting.runAll', runAllTests)
-  registerCommand('justTesting.runFile', commands.runAllTestsInActiveFile)
+  registerCommand('justTesting.runFile', runAllTestsInActiveFile)
   registerCommand('justTesting.runOnCursor', runTestOnCursor)
   registerCommand('justTesting.runFromExplorer', commands.runAllTestsInPath)
 }
