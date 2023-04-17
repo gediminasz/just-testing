@@ -1,17 +1,7 @@
 const vscode = require('vscode')
 
-const { runAllTests, runAllTestsInActiveFile, runTestOnCursor, runAllTestsInPath } = require('../src/commands')
-
-const makeExtensionContext = () => (
-  {
-    workspaceState: {
-      data: new Map(),
-      update (key, value) {
-        this.data.set(key, value)
-      }
-    }
-  }
-)
+const { runAllTests, runAllTestsInActiveFile, runAllTestsInPath } = require('../src/commands')
+const { makeExtensionContext } = require('./helpers')
 
 beforeEach(() => {
   vscode.window.activeTextEditor = {
@@ -86,71 +76,6 @@ describe('runAllTestsInActiveFile', () => {
 
     expect(vscode.window.terminals[0]._lastCommand).toBe(undefined)
     expect(vscode.window._lastErrorMessage).toBe('No file open!')
-  })
-})
-
-describe('runTestOnCursor', () => {
-  const configuration = new Map([
-    ['baseCommand', 'pytest'],
-    ['runOnCursorCommand', '{base} {fileName} -k {testName}'],
-    ['runOnCursorRegex', 'def (test_.+)\\('],
-    ['expressions', {}]
-  ])
-
-  it('runs a single test', async () => {
-    const extensionContext = makeExtensionContext()
-    await runTestOnCursor(extensionContext, configuration)
-    expect(vscode.window.terminals[0]._lastCommand).toBe('pytest foo/bar/baz.py -k test_foo')
-  })
-
-  it('handles no test detected', async () => {
-    const extensionContext = makeExtensionContext()
-    vscode.window.activeTextEditor.selection.active.line = 2
-
-    await runTestOnCursor(extensionContext, configuration)
-
-    expect(vscode.window.terminals[0]._lastCommand).toBe(undefined)
-    expect(vscode.window._lastErrorMessage).toBe('No test detected!')
-  })
-
-  it('handles no file being open', async () => {
-    const extensionContext = makeExtensionContext()
-    vscode.window.activeTextEditor = undefined
-
-    await runTestOnCursor(extensionContext, configuration)
-
-    expect(vscode.window.terminals[0]._lastCommand).toBe(undefined)
-    expect(vscode.window._lastErrorMessage).toBe('No file open!')
-  })
-
-  describe('given django-like configuration', () => {
-    const configuration = new Map([
-      ['baseCommand', 'python manage.py test'],
-      ['runOnCursorCommand', '{base} {module}.{className}.{testName}'],
-      ['runOnCursorRegex', 'def (test_.+)\\('],
-      ['expressions', {
-        className: { regex: 'class (.+TestCase)\\(' }
-      }]
-    ])
-
-    it('runs a single test', async () => {
-      const extensionContext = makeExtensionContext()
-      await runTestOnCursor(extensionContext, configuration)
-      expect(vscode.window.terminals[0]._lastCommand).toBe('python manage.py test foo.bar.baz.FooTestCase.test_foo')
-    })
-
-    it('handles custom expressions without a match', async () => {
-      const badConfiguration = new Map(configuration)
-      badConfiguration.set('expressions', {
-        className: { regex: 'class (.+NotATestCase)\\(' }
-      })
-      const extensionContext = makeExtensionContext()
-
-      await runTestOnCursor(extensionContext, badConfiguration)
-
-      expect(vscode.window.terminals[0]._lastCommand).toBe(undefined)
-      expect(vscode.window._lastErrorMessage).toBe('Invalid expression for "className"')
-    })
   })
 })
 

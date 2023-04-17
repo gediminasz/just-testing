@@ -20,6 +20,12 @@ function getConfiguration () {
   return vscode.workspace.getConfiguration('justTesting', { languageId: getActiveLanguageId() })
 }
 
+function interpolate (template, context) {
+  return Object.entries(context).reduce(
+    (result, [key, value]) => result.replace(`{${key}}`, value),
+    template
+  )
+}
 module.exports = {
   getActiveEditor,
   getConfiguration,
@@ -28,5 +34,6 @@ module.exports = {
     languageId: getActiveLanguageId()
   }).get(property),
   writeClipboard: (value) => vscode.env.clipboard.writeText(value),
-  pathToModule
+  pathToModule,
+  interpolate
 }

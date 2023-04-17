@@ -8,6 +8,7 @@
     "justTesting.runOnCursorCommand": "{base} -- {fileName} -t {testName}",
     "justTesting.runOnCursorRegex": "it\\((.+),",
     // Standard js profile:
+    "editor.tabSize": 2,
     "javascript.format.semicolons": "remove",
     "javascript.format.insertSpaceBeforeFunctionParenthesis": true,
     "javascript.format.insertSpaceAfterConstructor": true

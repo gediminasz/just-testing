@@ -5,6 +5,7 @@ const { ExtensionError } = require('./errors')
 const { getConfiguration } = require('./helpers')
 const commands = require('./commands')
 const { RunLastCommand } = require('./terminal')
+const { runTestOnCursor } = require('./commands/runTestOnCursor')
 
 function activate (context) {
   console.debug('Activating just-testing...')
@@ -36,7 +37,7 @@ function activate (context) {
 
   registerCommand('justTesting.runAll', commands.runAllTests)
   registerCommand('justTesting.runFile', commands.runAllTestsInActiveFile)
-  registerCommand('justTesting.runOnCursor', commands.runTestOnCursor)
+  registerCommand('justTesting.runOnCursor', runTestOnCursor)
   registerCommand('justTesting.runFromExplorer', commands.runAllTestsInPath)
 }
 
