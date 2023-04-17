@@ -16,8 +16,7 @@ beforeEach(() => {
       fileName: '/root/foo/bar/baz.py',
       lineAt (i) {
         return { text: this._lines[i] }
-      },
-      languageId: 'python'
+      }
     },
     selection: { active: { line: 4 } }
   }

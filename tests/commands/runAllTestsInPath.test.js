@@ -4,24 +4,6 @@ const { runAllTestsInPath } = require('../../src/commands/runAllTestsInPath')
 const { makeExtensionContext } = require('../helpers')
 
 beforeEach(() => {
-  vscode.window.activeTextEditor = {
-    document: {
-      _lines: [
-        'class FooTestCase(TestCase):',
-        '    def bar_test():',
-        '        ...',
-        '    def test_foo():',
-        '        ...'
-      ],
-      fileName: '/root/foo/bar/baz.py',
-      lineAt (i) {
-        return { text: this._lines[i] }
-      },
-      languageId: 'python'
-    },
-    selection: { active: { line: 4 } }
-  }
-  vscode.window._lastErrorMessage = undefined
   vscode.window.terminals[0]._lastCommand = undefined
 })
 
