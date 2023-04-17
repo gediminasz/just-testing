@@ -3,9 +3,10 @@ const vscode = require('vscode')
 const { CopyOnCursorCommand } = require('./copy')
 const { ExtensionError } = require('./errors')
 const { getConfiguration } = require('./helpers')
-const commands = require('./commands')
+const { runAllTests } = require('./commands/runAllTests')
 const { RunLastCommand } = require('./terminal')
 const { runTestOnCursor } = require('./commands/runTestOnCursor')
+const commands = require('./commands')
 
 function activate (context) {
   console.debug('Activating just-testing...')
@@ -35,7 +36,7 @@ function activate (context) {
     )
   }
 
-  registerCommand('justTesting.runAll', commands.runAllTests)
+  registerCommand('justTesting.runAll', runAllTests)
   registerCommand('justTesting.runFile', commands.runAllTestsInActiveFile)
   registerCommand('justTesting.runOnCursor', runTestOnCursor)
   registerCommand('justTesting.runFromExplorer', commands.runAllTestsInPath)

@@ -1,6 +1,6 @@
 const vscode = require('vscode')
 
-const { runAllTests, runAllTestsInActiveFile, runAllTestsInPath } = require('../src/commands')
+const { runAllTestsInActiveFile, runAllTestsInPath } = require('../src/commands')
 const { makeExtensionContext } = require('./helpers')
 
 beforeEach(() => {
@@ -23,20 +23,6 @@ beforeEach(() => {
   }
   vscode.window._lastErrorMessage = undefined
   vscode.window.terminals[0]._lastCommand = undefined
-})
-
-describe('runAllTests', () => {
-  it('runs all tests', async () => {
-    const extensionContext = makeExtensionContext()
-    const configuration = new Map([
-      ['baseCommand', 'pytest'],
-      ['runAllCommand', '{base} --cov']
-    ])
-
-    await runAllTests(extensionContext, configuration)
-
-    expect(vscode.window.terminals[0]._lastCommand).toBe('pytest --cov')
-  })
 })
 
 describe('runAllTestsInActiveFile', () => {
