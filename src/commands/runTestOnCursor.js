@@ -4,6 +4,11 @@ const { runTerminalCommand } = require('../terminal')
 const helpers = require('../helpers')
 
 function runTestOnCursor (extensionContext, configuration) {
+  const command = renderTestOnCursorCommand(configuration)
+  runTerminalCommand(extensionContext, command)
+}
+
+function renderTestOnCursorCommand (configuration) {
   const activeEditor = vscode.window.activeTextEditor
   if (!activeEditor) {
     vscode.window.showErrorMessage('No file open!')
@@ -36,8 +41,7 @@ function runTestOnCursor (extensionContext, configuration) {
   }
 
   const template = configuration.get('runOnCursorCommand')
-  const command = helpers.interpolate(template, context)
-  runTerminalCommand(extensionContext, command)
+  return helpers.interpolate(template, context)
 }
 
 function findMatch (regex, document, lineNumber) {
@@ -50,4 +54,4 @@ function findMatch (regex, document, lineNumber) {
   }
 }
 
-module.exports = { runTestOnCursor }
+module.exports = { runTestOnCursor, renderTestOnCursorCommand }

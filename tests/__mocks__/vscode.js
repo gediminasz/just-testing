@@ -58,17 +58,6 @@ const vscode = {
       return path.replace(/^\/root\//, '')
     },
     async saveAll () { return true }
-  },
-
-  env: {
-    clipboard: {
-      writeText (value) {
-        this._value = value
-      },
-      readText () {
-        return this._value
-      }
-    }
   }
 }
 

@@ -1,6 +1,6 @@
 const vscode = require('vscode')
 
-const { CopyOnCursorCommand } = require('./copy')
+const { copyTestOnCursor } = require('./commands/copyTestOnCursor')
 const { ExtensionError } = require('./errors')
 const { getConfiguration } = require('./helpers')
 const { runAllTests } = require('./commands/runAllTests')
@@ -29,7 +29,6 @@ function activate (context) {
 
   // TODO rework class based commands into functions like runAllTestsInPath below
   registerOldStyleCommand('justTesting.runLastCommand', new RunLastCommand(context))
-  registerOldStyleCommand('justTesting.copyOnCursor', new CopyOnCursorCommand())
 
   function registerCommand (name, callback) {
     context.subscriptions.push(
@@ -41,6 +40,7 @@ function activate (context) {
   registerCommand('justTesting.runFile', runAllTestsInActiveFile)
   registerCommand('justTesting.runOnCursor', runTestOnCursor)
   registerCommand('justTesting.runFromExplorer', runAllTestsInPath)
+  registerCommand('justTesting.copyOnCursor', copyTestOnCursor)
 }
 
 function deactivate () {

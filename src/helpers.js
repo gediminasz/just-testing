@@ -33,7 +33,6 @@ module.exports = {
   getSetting: (property) => vscode.workspace.getConfiguration('justTesting', {
     languageId: getActiveLanguageId()
   }).get(property),
-  writeClipboard: (value) => vscode.env.clipboard.writeText(value),
   pathToModule,
   interpolate
 }
