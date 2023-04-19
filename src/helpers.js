@@ -1,11 +1,7 @@
 const vscode = require('vscode')
 
-function getActiveEditor () {
-  return vscode.window.activeTextEditor
-}
-
 function getActiveLanguageId () {
-  const editor = getActiveEditor()
+  const editor = vscode.window.activeTextEditor
   return editor && editor.document.languageId
 }
 
@@ -27,12 +23,8 @@ function interpolate (template, context) {
   )
 }
 module.exports = {
-  getActiveEditor,
   getConfiguration,
   asRelativePath: (path) => vscode.workspace.asRelativePath(path),
-  getSetting: (property) => vscode.workspace.getConfiguration('justTesting', {
-    languageId: getActiveLanguageId()
-  }).get(property),
   pathToModule,
   interpolate
 }

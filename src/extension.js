@@ -25,11 +25,6 @@ function activate (context) {
   registerCommand('justTesting.runOnCursor', runTestOnCursor)
 }
 
-function deactivate () {
-  console.debug('Deactivating just-testing...')
-}
-
 module.exports = {
   activate,
-  deactivate
 }
