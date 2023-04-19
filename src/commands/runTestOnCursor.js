@@ -41,6 +41,7 @@ function renderTestOnCursorCommand (configuration) {
   }
 
   const template = configuration.get('runOnCursorCommand')
+
   return helpers.interpolate(template, context)
 }
 

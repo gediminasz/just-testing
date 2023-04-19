@@ -6,7 +6,9 @@ function runAllTests (extensionContext, configuration) {
   const context = {
     base: configuration.get('baseCommand')
   }
+
   const command = helpers.interpolate(template, context)
+
   runTerminalCommand(extensionContext, command)
 }
 

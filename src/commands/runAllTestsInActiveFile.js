@@ -17,7 +17,9 @@ function runAllTestsInActiveFile (extensionContext, configuration) {
     fileName,
     module: helpers.pathToModule(fileName)
   }
+
   const command = helpers.interpolate(template, context)
+
   runTerminalCommand(extensionContext, command)
 }
 
