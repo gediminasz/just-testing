@@ -19,6 +19,7 @@ describe('runAllTestsInActiveFile', () => {
     await runAllTestsInActiveFile(extensionContext, configuration)
 
     expect(vscode.window.terminals[0]._lastCommand).toBe('pytest foo/bar/baz.py')
+    expect(extensionContext.workspaceState.get('lastCommand')).toBe('pytest foo/bar/baz.py')
   })
 
   it('runs all tests in the active file as module', async () => {

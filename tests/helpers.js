@@ -1,9 +1,12 @@
 const makeExtensionContext = () => (
   {
     workspaceState: {
-      data: new Map(),
+      _data: new Map(),
       update (key, value) {
-        this.data.set(key, value)
+        this._data.set(key, value)
+      },
+      get (key) {
+        return this._data.get(key)
       }
     }
   }
