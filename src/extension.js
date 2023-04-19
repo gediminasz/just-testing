@@ -1,34 +1,15 @@
 const vscode = require('vscode')
 
 const { copyTestOnCursor } = require('./commands/copyTestOnCursor')
-const { ExtensionError } = require('./errors')
 const { getConfiguration } = require('./helpers')
 const { runAllTests } = require('./commands/runAllTests')
 const { runAllTestsInActiveFile } = require('./commands/runAllTestsInActiveFile')
 const { runAllTestsInPath } = require('./commands/runAllTestsInPath')
-const { RunLastCommand } = require('./terminal')
+const { runLastCommand } = require('./commands/runLastCommand')
 const { runTestOnCursor } = require('./commands/runTestOnCursor')
 
 function activate (context) {
   console.debug('Activating just-testing...')
-
-  function registerOldStyleCommand (name, command) {
-    context.subscriptions.push(vscode.commands.registerCommand(name, () => {
-      try {
-        command.run()
-      } catch (e) {
-        if (e instanceof ExtensionError) {
-          vscode.window.showErrorMessage(e.message)
-        } else {
-          console.error(e)
-          throw e
-        }
-      }
-    }))
-  }
-
-  // TODO rework class based commands into functions like runAllTestsInPath below
-  registerOldStyleCommand('justTesting.runLastCommand', new RunLastCommand(context))
 
   function registerCommand (name, callback) {
     context.subscriptions.push(
@@ -36,11 +17,12 @@ function activate (context) {
     )
   }
 
+  registerCommand('justTesting.copyOnCursor', copyTestOnCursor)
   registerCommand('justTesting.runAll', runAllTests)
   registerCommand('justTesting.runFile', runAllTestsInActiveFile)
-  registerCommand('justTesting.runOnCursor', runTestOnCursor)
   registerCommand('justTesting.runFromExplorer', runAllTestsInPath)
-  registerCommand('justTesting.copyOnCursor', copyTestOnCursor)
+  registerCommand('justTesting.runLastCommand', runLastCommand)
+  registerCommand('justTesting.runOnCursor', runTestOnCursor)
 }
 
 function deactivate () {

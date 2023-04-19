@@ -19,25 +19,4 @@ function obtainTerminal () {
   return vscode.window.createTerminal(TERMINAL_NAME)
 }
 
-class Command {
-  constructor (extensionContext) {
-    this.extensionContext = extensionContext
-  }
-
-  runInTerminal (command) {
-    runTerminalCommand(this.extensionContext, command)
-  }
-}
-
-class RunLastCommand extends Command {
-  run () {
-    const command = this.extensionContext.workspaceState.get(LAST_COMMAND)
-    if (command) {
-      this.runInTerminal(command)
-    } else {
-      vscode.window.showInformationMessage('No tests ran yet!')
-    }
-  }
-}
-
-module.exports = { RunLastCommand, runTerminalCommand }
+module.exports = { LAST_COMMAND, runTerminalCommand }
