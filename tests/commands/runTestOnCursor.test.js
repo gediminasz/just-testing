@@ -90,4 +90,21 @@ describe('runTestOnCursor', () => {
       expect(vscode.window._lastErrorMessage).toBe('Invalid expression for "className"')
     })
   })
+
+  describe('given rspec-like configuration', () => {
+    const configuration = new Map([
+      ['baseCommand', 'rspec'],
+      ['runOnCursorCommand', '{base} {fileName}:{line}'],
+      ['expressions', {}],
+    ])
+
+    it('runs a single test', async () => {
+      const extensionContext = makeExtensionContext()
+
+      await runTestOnCursor(extensionContext, configuration)
+
+      expect(vscode.window._lastErrorMessage).toBe(undefined)
+      expect(vscode.window.terminals[0]._lastCommand).toBe('rspec foo/bar/baz.py:5')
+    })
+  })
 })

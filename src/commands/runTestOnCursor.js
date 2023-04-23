@@ -28,7 +28,8 @@ function renderTestOnCursorCommand (configuration) {
     base: configuration.get('baseCommand'),
     fileName,
     module: helpers.pathToModule(fileName),
-    testName
+    testName,
+    line: activeLine + 1
   }
 
   for (const [key, expression] of Object.entries(configuration.get('expressions'))) {
