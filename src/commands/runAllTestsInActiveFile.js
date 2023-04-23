@@ -1,13 +1,13 @@
 const vscode = require('vscode')
 
+const { ExtensionError } = require('../errors')
 const { runTerminalCommand } = require('../terminal')
 const helpers = require('../helpers')
 
 function runAllTestsInActiveFile (extensionContext, configuration) {
   const activeEditor = vscode.window.activeTextEditor
   if (!activeEditor) {
-    vscode.window.showErrorMessage('No file open!')
-    return
+    throw new ExtensionError('No file open!')
   }
 
   const template = configuration.get('runFileCommand')

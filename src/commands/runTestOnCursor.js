@@ -2,6 +2,7 @@ const vscode = require('vscode')
 
 const { runTerminalCommand } = require('../terminal')
 const helpers = require('../helpers')
+const { ExtensionError } = require('../errors')
 
 function runTestOnCursor (extensionContext, configuration) {
   const command = renderTestOnCursorCommand(configuration)
@@ -11,16 +12,17 @@ function runTestOnCursor (extensionContext, configuration) {
 function renderTestOnCursorCommand (configuration) {
   const activeEditor = vscode.window.activeTextEditor
   if (!activeEditor) {
-    vscode.window.showErrorMessage('No file open!')
-    return
+    throw new ExtensionError('No file open!')
   }
 
   const activeLine = activeEditor.selection.active.line
 
-  const testName = findMatch(configuration.get('runOnCursorRegex'), activeEditor.document, activeLine)
-  if (!testName) {
-    vscode.window.showErrorMessage('No test detected!')
-    return
+  const testName = () => {
+    const value = findMatch(configuration.get('runOnCursorRegex'), activeEditor.document, activeLine)
+    if (!value) {
+      throw new ExtensionError('No test detected!')
+    }
+    return value
   }
 
   const fileName = helpers.asRelativePath(activeEditor.document.fileName)
@@ -33,12 +35,13 @@ function renderTestOnCursorCommand (configuration) {
   }
 
   for (const [key, expression] of Object.entries(configuration.get('expressions'))) {
-    const value = findMatch(expression.regex, activeEditor.document, activeLine)
-    if (value === undefined) {
-      vscode.window.showErrorMessage(`Invalid expression for "${key}"`)
-      return
+    context[key] = () => {
+      const value = findMatch(expression.regex, activeEditor.document, activeLine)
+      if (!value) {
+        throw new ExtensionError(`Invalid expression for "${key}"`)
+      }
+      return value
     }
-    context[key] = value
   }
 
   const template = configuration.get('runOnCursorCommand')

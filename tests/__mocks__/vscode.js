@@ -44,10 +44,7 @@ const vscode = {
           this._lastCommand = command
         }
       }
-    ],
-    showErrorMessage (message) {
-      this._lastErrorMessage = message
-    }
+    ]
   },
 
   workspace: {

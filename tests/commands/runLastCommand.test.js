@@ -1,5 +1,6 @@
 const vscode = require('vscode')
 
+const { ExtensionError } = require('../../src/errors')
 const { makeExtensionContext } = require('../helpers')
 const { runAllTests } = require('../../src/commands/runAllTests')
 const { runLastCommand } = require('../../src/commands/runLastCommand')
@@ -32,9 +33,8 @@ describe('runLastCommand', () => {
   it('shows an error when no command was run', async () => {
     const extensionContext = makeExtensionContext()
 
-    await runLastCommand(extensionContext)
+    expect(() => runLastCommand(extensionContext)).toThrow(new ExtensionError('No tests ran yet!'))
 
     expect(vscode.window.terminals[0]._lastCommand).toBe(undefined)
-    expect(vscode.window._lastErrorMessage).toBe('No tests ran yet!')
   })
 })

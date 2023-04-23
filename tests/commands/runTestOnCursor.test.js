@@ -2,6 +2,7 @@ const vscode = require('vscode')
 
 const { makeExtensionContext } = require('../helpers')
 const { runTestOnCursor } = require('../../src/commands/runTestOnCursor')
+const { ExtensionError } = require('../../src/errors')
 
 beforeEach(() => {
   vscode.window.activeTextEditor = {
@@ -20,7 +21,6 @@ beforeEach(() => {
     },
     selection: { active: { line: 4 } }
   }
-  vscode.window._lastErrorMessage = undefined
   vscode.window.terminals[0]._lastCommand = undefined
 })
 
@@ -45,20 +45,18 @@ describe('runTestOnCursor', () => {
     const extensionContext = makeExtensionContext()
     vscode.window.activeTextEditor.selection.active.line = 2
 
-    await runTestOnCursor(extensionContext, configuration)
+    expect(() => runTestOnCursor(extensionContext, configuration)).toThrow(new ExtensionError('No test detected!'))
 
     expect(vscode.window.terminals[0]._lastCommand).toBe(undefined)
-    expect(vscode.window._lastErrorMessage).toBe('No test detected!')
   })
 
   it('handles no file being open', async () => {
     const extensionContext = makeExtensionContext()
     vscode.window.activeTextEditor = undefined
 
-    await runTestOnCursor(extensionContext, configuration)
+    expect(() => runTestOnCursor(extensionContext, configuration)).toThrow(new ExtensionError('No file open!'))
 
     expect(vscode.window.terminals[0]._lastCommand).toBe(undefined)
-    expect(vscode.window._lastErrorMessage).toBe('No file open!')
   })
 
   describe('given django-like configuration', () => {
@@ -84,10 +82,10 @@ describe('runTestOnCursor', () => {
       })
       const extensionContext = makeExtensionContext()
 
-      await runTestOnCursor(extensionContext, badConfiguration)
+      expect(() => runTestOnCursor(extensionContext, badConfiguration))
+        .toThrow(new ExtensionError('Invalid expression for "className"'))
 
       expect(vscode.window.terminals[0]._lastCommand).toBe(undefined)
-      expect(vscode.window._lastErrorMessage).toBe('Invalid expression for "className"')
     })
   })
 
@@ -95,7 +93,7 @@ describe('runTestOnCursor', () => {
     const configuration = new Map([
       ['baseCommand', 'rspec'],
       ['runOnCursorCommand', '{base} {fileName}:{line}'],
-      ['expressions', {}],
+      ['expressions', {}]
     ])
 
     it('runs a single test', async () => {
@@ -103,7 +101,6 @@ describe('runTestOnCursor', () => {
 
       await runTestOnCursor(extensionContext, configuration)
 
-      expect(vscode.window._lastErrorMessage).toBe(undefined)
       expect(vscode.window.terminals[0]._lastCommand).toBe('rspec foo/bar/baz.py:5')
     })
   })

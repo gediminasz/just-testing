@@ -1,5 +1,4 @@
-const vscode = require('vscode')
-
+const { ExtensionError } = require('../errors')
 const { runTerminalCommand, LAST_COMMAND } = require('../terminal')
 
 function runLastCommand (extensionContext) {
@@ -7,7 +6,7 @@ function runLastCommand (extensionContext) {
   if (command) {
     runTerminalCommand(extensionContext, command)
   } else {
-    vscode.window.showErrorMessage('No tests ran yet!')
+    throw new ExtensionError('No tests ran yet!')
   }
 }
 

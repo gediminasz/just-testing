@@ -1,10 +1,10 @@
 const vscode = require('vscode')
 
+const { ExtensionError } = require('../../src/errors')
 const { makeExtensionContext } = require('../helpers')
 const { runAllTestsInActiveFile } = require('../../src/commands/runAllTestsInActiveFile')
 
 beforeEach(() => {
-  vscode.window._lastErrorMessage = undefined
   vscode.window.terminals[0]._lastCommand = undefined
 })
 
@@ -42,9 +42,8 @@ describe('runAllTestsInActiveFile', () => {
     ])
     vscode.window.activeTextEditor = undefined
 
-    await runAllTestsInActiveFile(extensionContext, configuration)
+    expect(() => runAllTestsInActiveFile(extensionContext, configuration)).toThrow(new ExtensionError('No file open!'))
 
     expect(vscode.window.terminals[0]._lastCommand).toBe(undefined)
-    expect(vscode.window._lastErrorMessage).toBe('No file open!')
   })
 })
