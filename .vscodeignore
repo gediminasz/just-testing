@@ -1,3 +1,11 @@
+.DS_Store
+.git
+.github
+.gitignore
+.ignored
+.vscode
+assets
 coverage
+Makefile
 NOTES.md
 tests
