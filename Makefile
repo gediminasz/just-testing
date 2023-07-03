@@ -8,7 +8,7 @@ fix:
 	npm run fix
 
 update:
-	npm add --include=dev jest@latest standard@latest
+	npm add --save-dev jest@latest standard@latest
 
 package: ci
 	vsce package
