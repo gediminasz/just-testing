@@ -1,5 +1,5 @@
 ci:
-	npm audit
+	npm audit --audit-level high
 	npm install
 	npm run --silent ci:lint
 	npm run --silent ci:test
