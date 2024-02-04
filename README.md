@@ -1,6 +1,6 @@
 # Just Testing
 
-A Visual Studio Code extension for running tests in integrated terminal.
+A Visual Studio Code extension for running tests in the integrated terminal.
 
 Available commands:
 
