@@ -2,17 +2,16 @@ const vscode = require('vscode')
 
 const LAST_COMMAND = 'lastCommand'
 
-async function runTerminalCommand (extensionContext, command) {
+async function runTerminalCommand (extensionContext, command, workspaceFolder = undefined) {
   await vscode.workspace.saveAll()
   extensionContext.workspaceState.update(LAST_COMMAND, command)
 
-  const terminal = obtainTerminal()
+  const terminal = obtainTerminal(workspaceFolder || getActiveWorkspaceFolder())
   terminal.show(true)
   terminal.sendText(command)
 }
 
-function obtainTerminal () {
-  const workspaceFolder = getActiveWorkspaceFolder()
+function obtainTerminal (workspaceFolder) {
   const name = `Just Testing: ${workspaceFolder.name}`
   const terminal = vscode.window.terminals.find(terminal => terminal.name === name)
   if (terminal) return terminal
