@@ -46,7 +46,6 @@
         "onCommand:justTesting.runAll",
         "onCommand:justTesting.runFile",
         "onCommand:justTesting.runOnCursor",
-        "onCommand:justTesting.runLastCommand",
         "onCommand:justTesting.copyOnCursor"
     ],
     "main": "./src/extension.js",
@@ -110,10 +109,6 @@
             {
                 "command": "justTesting.runOnCursor",
                 "title": "Just Testing: Run test on cursor"
-            },
-            {
-                "command": "justTesting.runLastCommand",
-                "title": "Just Testing: Run last command"
             },
             {
                 "command": "justTesting.copyOnCursor",

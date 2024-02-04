@@ -1,11 +1,8 @@
 const vscode = require('vscode')
 
-const LAST_COMMAND = 'lastCommand'
 
-async function runTerminalCommand (extensionContext, command, workspaceFolder = undefined) {
+async function runTerminalCommand (command, workspaceFolder = undefined) {
   await vscode.workspace.saveAll()
-  extensionContext.workspaceState.update(LAST_COMMAND, command)
-
   const terminal = obtainTerminal(workspaceFolder || getActiveWorkspaceFolder())
   terminal.show(true)
   terminal.sendText(command)
@@ -26,4 +23,4 @@ function getActiveWorkspaceFolder () {
   return vscode.workspace.getWorkspaceFolder(editor.document.uri)
 }
 
-module.exports = { LAST_COMMAND, runTerminalCommand }
+module.exports = { runTerminalCommand }

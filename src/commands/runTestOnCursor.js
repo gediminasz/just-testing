@@ -4,9 +4,9 @@ const { runTerminalCommand } = require('../terminal')
 const helpers = require('../helpers')
 const { ExtensionError } = require('../errors')
 
-function runTestOnCursor (extensionContext, configuration) {
+function runTestOnCursor (configuration) {
   const command = renderTestOnCursorCommand(configuration)
-  runTerminalCommand(extensionContext, command)
+  runTerminalCommand(command)
 }
 
 function renderTestOnCursorCommand (configuration) {

@@ -1,7 +1,7 @@
 const { runTerminalCommand } = require('../terminal')
 const helpers = require('../helpers')
 
-function runAllTests (extensionContext, configuration) {
+function runAllTests (configuration) {
   const template = configuration.get('runAllCommand')
   const context = {
     base: configuration.get('baseCommand')
@@ -9,7 +9,7 @@ function runAllTests (extensionContext, configuration) {
 
   const command = helpers.interpolate(template, context)
 
-  runTerminalCommand(extensionContext, command)
+  runTerminalCommand(command)
 }
 
 module.exports = { runAllTests }

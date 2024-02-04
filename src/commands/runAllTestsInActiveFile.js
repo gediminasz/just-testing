@@ -4,7 +4,7 @@ const { ExtensionError } = require('../errors')
 const { runTerminalCommand } = require('../terminal')
 const helpers = require('../helpers')
 
-function runAllTestsInActiveFile (extensionContext, configuration) {
+function runAllTestsInActiveFile (configuration) {
   const activeEditor = vscode.window.activeTextEditor
   if (!activeEditor) {
     throw new ExtensionError('No file open!')
@@ -20,7 +20,7 @@ function runAllTestsInActiveFile (extensionContext, configuration) {
 
   const command = helpers.interpolate(template, context)
 
-  runTerminalCommand(extensionContext, command)
+  runTerminalCommand(command)
 }
 
 module.exports = { runAllTestsInActiveFile }

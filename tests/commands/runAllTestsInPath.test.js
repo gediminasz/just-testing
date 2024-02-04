@@ -21,7 +21,6 @@ describe('runAllTestsInPath', () => {
     await runAllTestsInPath(extensionContext, undefined, uri)
 
     expect(vscode.window.terminals[0]._lastCommand).toBe('pytest tests/foo/test_bar.py')
-    expect(extensionContext.workspaceState.get('lastCommand')).toBe('pytest tests/foo/test_bar.py')
   })
 
   it('runs tests in a selected directory', async () => {

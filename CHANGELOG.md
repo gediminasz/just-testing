@@ -4,6 +4,7 @@
 
 - Added support for [multi-root workspaces](https://code.visualstudio.com/docs/editor/multi-root-workspaces).
 - Removed support for settings being overridable at language level.
+- Removed "Run last command".
 
 ## 2023.7.0
 

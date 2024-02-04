@@ -3,7 +3,7 @@ const vscode = require('vscode')
 const { runTerminalCommand } = require('../terminal')
 const helpers = require('../helpers')
 
-function runAllTestsInPath (extensionContext, _, uri) {
+function runAllTestsInPath (_, uri) {
   const configuration = vscode.workspace.getConfiguration('justTesting', uri)
   const template = configuration.get('runFileCommand')
   const fileName = helpers.asRelativePath(uri.path)
@@ -16,7 +16,7 @@ function runAllTestsInPath (extensionContext, _, uri) {
   const command = helpers.interpolate(template, context)
 
   const workspaceFolder = vscode.workspace.getWorkspaceFolder(uri)
-  runTerminalCommand(extensionContext, command, workspaceFolder)
+  runTerminalCommand(command, workspaceFolder)
 }
 
 module.exports = { runAllTestsInPath }
