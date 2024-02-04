@@ -29,7 +29,7 @@ function interpolate (template, context) {
 
 module.exports = {
   getConfiguration,
-  asRelativePath: (path) => vscode.workspace.asRelativePath(path),
+  asRelativePath: (path) => vscode.workspace.asRelativePath(path, false),
   pathToModule,
   interpolate
 }
