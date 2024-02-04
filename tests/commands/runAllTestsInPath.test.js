@@ -7,8 +7,8 @@ beforeEach(() => {
   vscode.window.terminals[0]._lastCommand = undefined
   vscode.workspace._configuration = {
     justTesting: {
-      baseCommand: "pytest",
-      runFileCommand: "{base} {fileName}",
+      baseCommand: 'pytest',
+      runFileCommand: '{base} {fileName}'
     }
   }
 })
@@ -37,8 +37,8 @@ describe('runAllTestsInPath', () => {
     beforeEach(() => {
       vscode.workspace._configuration = {
         justTesting: {
-          baseCommand: "pytest",
-          runFileCommand: "{base} {module}",
+          baseCommand: 'pytest',
+          runFileCommand: '{base} {module}'
         }
       }
     })
@@ -61,5 +61,4 @@ describe('runAllTestsInPath', () => {
       expect(vscode.window.terminals[0]._lastCommand).toBe('pytest tests.foo')
     })
   })
-
 })
