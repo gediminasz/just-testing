@@ -1,6 +1,5 @@
 const vscode = require('vscode')
 
-const TERMINAL_NAME = 'Just Testing'
 const LAST_COMMAND = 'lastCommand'
 
 async function runTerminalCommand (extensionContext, command) {
@@ -13,10 +12,19 @@ async function runTerminalCommand (extensionContext, command) {
 }
 
 function obtainTerminal () {
-  const terminal = vscode.window.terminals.find(terminal => terminal.name === TERMINAL_NAME)
+  const workspaceFolder = getActiveWorkspaceFolder()
+  const name = `Just Testing: ${workspaceFolder.name}`
+  const terminal = vscode.window.terminals.find(terminal => terminal.name === name)
   if (terminal) return terminal
+  return vscode.window.createTerminal({ name, cwd: workspaceFolder.uri })
+}
 
-  return vscode.window.createTerminal(TERMINAL_NAME)
+function getActiveWorkspaceFolder () {
+  const editor = vscode.window.activeTextEditor
+  if (editor === undefined) {
+    return vscode.workspace.workspaceFolders[0]
+  }
+  return vscode.workspace.workspaceFolders.find(f => editor.document.uri.fsPath.includes(f.uri.fsPath))
 }
 
 module.exports = { LAST_COMMAND, runTerminalCommand }
