@@ -7,21 +7,6 @@ const _lines = [
   '    assert True'
 ]
 
-const _configuration = {
-  justTesting: {
-    python: new Map([
-      ['baseCommand', 'pytest'],
-      ['runFileCommand', '{base} {fileName}'],
-      ['runOnCursorRegex', 'def (test_.+)\\('],
-      ['runOnCursorCommand', '{base} {fileName} -k {testName}'],
-      ['expressions', {
-        valueExpression: { value: 'static-value' },
-        regexExpression: { regex: 'def (.+_test)' }
-      }]
-    ])
-  }
-}
-
 const vscode = {
   window: {
     activeTextEditor: {
@@ -36,7 +21,7 @@ const vscode = {
     },
     terminals: [
       {
-        name: 'Just Testing',
+        name: 'Just Testing: foo',
         show () {
           this._wasShown = true
         },
@@ -48,11 +33,15 @@ const vscode = {
   },
 
   workspace: {
-    getConfiguration (section, { languageId }) {
-      return _configuration[section][languageId]
+    _configuration: { justTesting: {} },
+    getConfiguration (section) {
+      return new Map(Object.entries(this._configuration[section]))
     },
     asRelativePath (path) {
       return path.replace(/^\/root\//, '')
+    },
+    getWorkspaceFolder () {
+      return { name: 'foo', uri: '/root/' }
     },
     async saveAll () { return true }
   }

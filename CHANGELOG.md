@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- Added support for [multi-root workspaces](https://code.visualstudio.com/docs/editor/multi-root-workspaces).
+- Removed support for settings being overridable at language level.
+
 ## 2023.7.0
 
 - Added "Run Tests" context menu item to file explorer.
