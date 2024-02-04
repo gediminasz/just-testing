@@ -1,6 +1,5 @@
 const vscode = require('vscode')
 
-
 async function runTerminalCommand (command, workspaceFolder = undefined) {
   await vscode.workspace.saveAll()
   const terminal = obtainTerminal(workspaceFolder || getActiveWorkspaceFolder())
