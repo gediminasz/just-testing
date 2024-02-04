@@ -1,6 +1,5 @@
 const vscode = require('vscode')
 
-const { makeExtensionContext } = require('../helpers')
 const { runTestOnCursor } = require('../../src/commands/runTestOnCursor')
 const { ExtensionError } = require('../../src/errors')
 
@@ -33,27 +32,23 @@ describe('runTestOnCursor', () => {
   ])
 
   it('runs a single test', async () => {
-    const extensionContext = makeExtensionContext()
-
-    await runTestOnCursor(extensionContext, configuration)
+    await runTestOnCursor(configuration)
 
     expect(vscode.window.terminals[0]._lastCommand).toBe('pytest foo/bar/baz.py -k test_foo')
   })
 
   it('handles no test detected', async () => {
-    const extensionContext = makeExtensionContext()
     vscode.window.activeTextEditor.selection.active.line = 2
 
-    expect(() => runTestOnCursor(extensionContext, configuration)).toThrow(new ExtensionError('No test detected!'))
+    expect(() => runTestOnCursor(configuration)).toThrow(new ExtensionError('No test detected!'))
 
     expect(vscode.window.terminals[0]._lastCommand).toBe(undefined)
   })
 
   it('handles no file being open', async () => {
-    const extensionContext = makeExtensionContext()
     vscode.window.activeTextEditor = undefined
 
-    expect(() => runTestOnCursor(extensionContext, configuration)).toThrow(new ExtensionError('No file open!'))
+    expect(() => runTestOnCursor(configuration)).toThrow(new ExtensionError('No file open!'))
 
     expect(vscode.window.terminals[0]._lastCommand).toBe(undefined)
   })
@@ -69,8 +64,7 @@ describe('runTestOnCursor', () => {
     ])
 
     it('runs a single test', async () => {
-      const extensionContext = makeExtensionContext()
-      await runTestOnCursor(extensionContext, configuration)
+      await runTestOnCursor(configuration)
       expect(vscode.window.terminals[0]._lastCommand).toBe('python manage.py test foo.bar.baz.FooTestCase.test_foo')
     })
 
@@ -79,9 +73,8 @@ describe('runTestOnCursor', () => {
       badConfiguration.set('expressions', {
         className: { regex: 'class (.+NotATestCase)\\(' }
       })
-      const extensionContext = makeExtensionContext()
 
-      expect(() => runTestOnCursor(extensionContext, badConfiguration))
+      expect(() => runTestOnCursor(badConfiguration))
         .toThrow(new ExtensionError('Invalid expression for "className"'))
 
       expect(vscode.window.terminals[0]._lastCommand).toBe(undefined)
@@ -96,9 +89,7 @@ describe('runTestOnCursor', () => {
     ])
 
     it('runs a single test', async () => {
-      const extensionContext = makeExtensionContext()
-
-      await runTestOnCursor(extensionContext, configuration)
+      await runTestOnCursor(configuration)
 
       expect(vscode.window.terminals[0]._lastCommand).toBe('rspec foo/bar/baz.py:5')
     })

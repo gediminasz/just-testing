@@ -1,6 +1,5 @@
 const vscode = require('vscode')
 
-const { makeExtensionContext } = require('../helpers')
 const { copyTestOnCursor } = require('../../src/commands/copyTestOnCursor')
 
 beforeEach(() => {
@@ -33,7 +32,6 @@ beforeEach(() => {
 
 describe('copyTestOnCursor', () => {
   it('copies the command to run the test on cursor', async () => {
-    const extensionContext = makeExtensionContext()
     const configuration = new Map([
       ['baseCommand', 'pytest'],
       ['runOnCursorCommand', '{base} {fileName} -k {testName}'],
@@ -41,7 +39,7 @@ describe('copyTestOnCursor', () => {
       ['expressions', {}]
     ])
 
-    await copyTestOnCursor(extensionContext, configuration)
+    await copyTestOnCursor(configuration)
 
     expect(vscode.window.terminals[0]._lastCommand).toBe(undefined)
     expect(vscode.env.clipboard._value).toBe('pytest foo/bar/baz.py -k test_foo')
