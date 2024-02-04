@@ -1,23 +1,16 @@
 const vscode = require('vscode')
 
-// function getActiveLanguageId () {
-//   const editor = vscode.window.activeTextEditor
-//   return editor && editor.document.languageId
-// }
-
 function pathToModule (path) {
   const components = path.split('/')
   const baseName = components.pop()
   const moduleName = baseName.split('.')[0]
-  // TODO GZL return [...components, moduleName].join('.')
-  return components.length ? components.join('.') + '.' + moduleName : moduleName
+  return [...components, moduleName].join('.')
 }
 
-function getConfiguration () {
+function getActiveConfiguration () {
   const editor = vscode.window.activeTextEditor
   const scope = editor && editor.document.uri
   return vscode.workspace.getConfiguration('justTesting', scope)
-  // return vscode.workspace.getConfiguration('justTesting', { languageId: getActiveLanguageId() })
 }
 
 function interpolate (template, context) {
@@ -28,7 +21,7 @@ function interpolate (template, context) {
 }
 
 module.exports = {
-  getConfiguration,
+  getActiveConfiguration,
   asRelativePath: (path) => vscode.workspace.asRelativePath(path, false),
   pathToModule,
   interpolate

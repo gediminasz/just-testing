@@ -2,7 +2,7 @@ const vscode = require('vscode')
 
 const { copyTestOnCursor } = require('./commands/copyTestOnCursor')
 const { ExtensionError } = require('./errors')
-const { getConfiguration } = require('./helpers')
+const { getActiveConfiguration } = require('./helpers')
 const { runAllTests } = require('./commands/runAllTests')
 const { runAllTestsInActiveFile } = require('./commands/runAllTestsInActiveFile')
 const { runAllTestsInPath } = require('./commands/runAllTestsInPath')
@@ -16,7 +16,7 @@ function activate (context) {
     context.subscriptions.push(
       vscode.commands.registerCommand(name, (...args) => {
         try {
-          callback(context, getConfiguration(), ...args)
+          callback(context, getActiveConfiguration(), ...args)
         } catch (e) {
           if (e instanceof ExtensionError) {
             vscode.window.showErrorMessage(e.message)
