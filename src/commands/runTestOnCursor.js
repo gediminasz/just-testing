@@ -4,11 +4,17 @@ const { runTerminalCommand } = require('../terminal')
 const helpers = require('../helpers')
 const { ExtensionError } = require('../errors')
 
+/**
+ * @param {vscode.WorkspaceConfiguration} configuration
+ */
 function runTestOnCursor (configuration) {
   const command = renderTestOnCursorCommand(configuration)
   runTerminalCommand(command)
 }
 
+/**
+ * @param {vscode.WorkspaceConfiguration} configuration
+ */
 function renderTestOnCursorCommand (configuration) {
   const activeEditor = vscode.window.activeTextEditor
   if (!activeEditor) {
@@ -26,6 +32,8 @@ function renderTestOnCursorCommand (configuration) {
   }
 
   const fileName = helpers.asRelativePath(activeEditor.document.fileName)
+
+  /** @type {Record<string, any>} */
   const context = {
     base: configuration.get('baseCommand'),
     fileName,
@@ -49,6 +57,12 @@ function renderTestOnCursorCommand (configuration) {
   return helpers.interpolate(template, context)
 }
 
+/**
+ * @param {string} regex
+ * @param {vscode.TextDocument} document
+ * @param {number} lineNumber
+ * @returns
+ */
 function findMatch (regex, document, lineNumber) {
   for (let i = lineNumber; i >= 0; i--) {
     const line = document.lineAt(i).text

@@ -3,6 +3,10 @@ const vscode = require('vscode')
 const { runTerminalCommand } = require('../terminal')
 const helpers = require('../helpers')
 
+/**
+ * @param {vscode.WorkspaceConfiguration} _
+ * @param {vscode.Uri} uri
+ */
 function runAllTestsInPath (_, uri) {
   const configuration = vscode.workspace.getConfiguration('justTesting', uri)
   const template = configuration.get('runFileCommand')

@@ -8,30 +8,38 @@ const { runAllTestsInActiveFile } = require('./commands/runAllTestsInActiveFile'
 const { runAllTestsInPath } = require('./commands/runAllTestsInPath')
 const { runTestOnCursor } = require('./commands/runTestOnCursor')
 
+/**
+ * @param {vscode.ExtensionContext} context
+ */
 function activate (context) {
   console.debug('Activating just-testing...')
 
-  function registerCommand (name, callback) {
-    context.subscriptions.push(
-      vscode.commands.registerCommand(name, (...args) => {
-        try {
-          callback(getActiveConfiguration(), ...args)
-        } catch (e) {
-          if (e instanceof ExtensionError) {
-            vscode.window.showErrorMessage(e.message)
-          } else {
-            throw e
-          }
-        }
-      })
-    )
-  }
+  registerCommand(context, 'justTesting.copyOnCursor', copyTestOnCursor)
+  registerCommand(context, 'justTesting.runAll', runAllTests)
+  registerCommand(context, 'justTesting.runFile', runAllTestsInActiveFile)
+  registerCommand(context, 'justTesting.runFromExplorer', runAllTestsInPath)
+  registerCommand(context, 'justTesting.runOnCursor', runTestOnCursor)
+}
 
-  registerCommand('justTesting.copyOnCursor', copyTestOnCursor)
-  registerCommand('justTesting.runAll', runAllTests)
-  registerCommand('justTesting.runFile', runAllTestsInActiveFile)
-  registerCommand('justTesting.runFromExplorer', runAllTestsInPath)
-  registerCommand('justTesting.runOnCursor', runTestOnCursor)
+/**
+ * @param {vscode.ExtensionContext} context
+ * @param {string} name
+ * @param {function} callback
+ */
+function registerCommand (context, name, callback) {
+  context.subscriptions.push(
+    vscode.commands.registerCommand(name, (...args) => {
+      try {
+        callback(getActiveConfiguration(), ...args)
+      } catch (e) {
+        if (e instanceof ExtensionError) {
+          vscode.window.showErrorMessage(e.message)
+        } else {
+          throw e
+        }
+      }
+    })
+  )
 }
 
 module.exports = {

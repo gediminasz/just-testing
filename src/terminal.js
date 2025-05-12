@@ -1,5 +1,9 @@
 const vscode = require('vscode')
 
+/**
+ * @param {string} command
+ * @param {vscode.WorkspaceFolder | undefined} workspaceFolder
+ */
 async function runTerminalCommand (command, workspaceFolder = undefined) {
   await vscode.workspace.saveAll()
   const terminal = obtainTerminal(workspaceFolder || getActiveWorkspaceFolder())
@@ -7,6 +11,9 @@ async function runTerminalCommand (command, workspaceFolder = undefined) {
   terminal.sendText(command)
 }
 
+/**
+ * @param {vscode.WorkspaceFolder} workspaceFolder
+ */
 function obtainTerminal (workspaceFolder) {
   const name = `Just Testing: ${workspaceFolder.name}`
   const terminal = vscode.window.terminals.find(terminal => terminal.name === name)
