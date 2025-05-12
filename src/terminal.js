@@ -1,14 +1,21 @@
 const vscode = require('vscode')
+const { ExtensionError } = require('./errors')
 
 /**
  * @param {string} command
  * @param {vscode.WorkspaceFolder | undefined} workspaceFolder
  */
-async function runTerminalCommand (command, workspaceFolder = undefined) {
-  await vscode.workspace.saveAll()
-  const terminal = obtainTerminal(workspaceFolder || getActiveWorkspaceFolder())
-  terminal.show(true)
-  terminal.sendText(command)
+function runTerminalCommand (command, workspaceFolder = undefined) {
+  workspaceFolder ||= getActiveWorkspaceFolder()
+  if (workspaceFolder === undefined) {
+    throw new ExtensionError("No workspace open!")
+  }
+
+  vscode.workspace.saveAll().then(() => {
+    const terminal = obtainTerminal(workspaceFolder)
+    terminal.show(true)
+    terminal.sendText(command)
+  })
 }
 
 /**
@@ -21,12 +28,15 @@ function obtainTerminal (workspaceFolder) {
   return vscode.window.createTerminal({ name, cwd: workspaceFolder.uri })
 }
 
+/**
+ * @returns {vscode.WorkspaceFolder | undefined}
+ */
 function getActiveWorkspaceFolder () {
   const editor = vscode.window.activeTextEditor
-  if (editor === undefined) {
-    return vscode.workspace.workspaceFolders[0]
+  if (editor !== undefined) {
+    return vscode.workspace.getWorkspaceFolder(editor.document.uri)
   }
-  return vscode.workspace.getWorkspaceFolder(editor.document.uri)
+  return vscode.workspace.workspaceFolders && vscode.workspace.workspaceFolders[0]
 }
 
 module.exports = { runTerminalCommand }

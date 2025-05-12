@@ -44,5 +44,5 @@ module.exports = {
   pathToModule,
   getActiveConfiguration,
   interpolate,
-  asRelativePath
+  asRelativePath,
 }
