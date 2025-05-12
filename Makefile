@@ -1,3 +1,6 @@
+test:
+	npm test
+
 ci:
 	npm audit --audit-level high
 	npm install
@@ -8,9 +11,8 @@ fix:
 	npm run fix
 
 update:
-	rm -rf node_modules
-	rm package-lock.json
-	npm add --save-dev jest@latest standard@latest
+	rm -r node_modules package-lock.json
+	npm install
 
 package: ci
 	vsce package
