@@ -1,11 +1,11 @@
 test:
-	npm test
+	npm run --silent test
 
 ci:
 	npm audit --audit-level high
 	npm install
-	npm run --silent ci:lint
-	npm run --silent ci:test
+	npm run --silent lint
+	npm run --silent test -- --coverage
 
 fix:
 	npm run fix
