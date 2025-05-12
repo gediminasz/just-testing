@@ -1,14 +1,14 @@
 const vscode = require('vscode')
+const path = require('path')
 
 /**
- * @param {string} path
+ * @param {string} value
  * @returns {string}
  */
-function pathToModule (path) {
-  const components = path.split('/')
-  const baseName = components.pop()
-  const moduleName = baseName.split('.')[0]
-  return [...components, moduleName].join('.')
+function pathToModule (value) {
+  const { dir, name } = path.parse(value)
+  const components = dir.split(path.sep)
+  return [...components, name].join('.')
 }
 
 /**
@@ -44,5 +44,5 @@ module.exports = {
   pathToModule,
   getActiveConfiguration,
   interpolate,
-  asRelativePath,
+  asRelativePath
 }

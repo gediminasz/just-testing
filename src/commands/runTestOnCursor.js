@@ -24,7 +24,8 @@ function renderTestOnCursorCommand (configuration) {
   const activeLine = activeEditor.selection.active.line
 
   const testName = () => {
-    const value = findMatch(configuration.get('runOnCursorRegex'), activeEditor.document, activeLine)
+    const regex = configuration.get('runOnCursorRegex')
+    const value = findMatch(regex, activeEditor.document, activeLine)
     if (!value) {
       throw new ExtensionError('No test detected!')
     }

@@ -8,7 +8,7 @@ const { ExtensionError } = require('./errors')
 function runTerminalCommand (command, workspaceFolder = undefined) {
   workspaceFolder ||= getActiveWorkspaceFolder()
   if (workspaceFolder === undefined) {
-    throw new ExtensionError("No workspace open!")
+    throw new ExtensionError('No workspace open!')
   }
 
   vscode.workspace.saveAll().then(() => {
