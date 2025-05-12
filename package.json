@@ -147,7 +147,7 @@
     "scripts": {
         "lint": "standard",
         "fix": "standard --fix",
-        "typecheck": "tsc --skipLibCheck --strict --noEmit --allowJs --checkJs ./src/extension.js",
+        "typecheck": "tsc",
         "test": "jest"
     },
     "jest": {
