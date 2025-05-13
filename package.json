@@ -100,23 +100,28 @@
         "commands": [
             {
                 "command": "justTesting.runAll",
-                "title": "Just Testing: Run all tests"
+                "title": "Just Testing: Run all tests",
+                "enablement": "workspaceFolderCount > 0"
             },
             {
                 "command": "justTesting.runFile",
-                "title": "Just Testing: Run all tests in file"
+                "title": "Just Testing: Run all tests in file",
+                "enablement": "workspaceFolderCount > 0 && editorIsOpen"
             },
             {
                 "command": "justTesting.runOnCursor",
-                "title": "Just Testing: Run test on cursor"
+                "title": "Just Testing: Run test on cursor",
+                "enablement": "workspaceFolderCount > 0 && editorTextFocus"
             },
             {
                 "command": "justTesting.copyOnCursor",
-                "title": "Just Testing: Copy test command"
+                "title": "Just Testing: Copy test command",
+                "enablement": "workspaceFolderCount > 0 && editorTextFocus"
             },
             {
                 "command": "justTesting.runFromExplorer",
-                "title": "Just Testing: Run Tests"
+                "title": "Just Testing: Run Tests",
+                "enablement": "workspaceFolderCount > 0"
             }
         ],
         "menus": {
