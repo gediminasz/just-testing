@@ -36,5 +36,7 @@ describe('runAllTests', () => {
     vscode.workspace.workspaceFolders = undefined
 
     expect(() => runAllTests(configuration)).toThrow(new ExtensionError('No workspace open!'))
+
+    expect(vscode.window.terminals[0]._lastCommand).toBe(undefined)
   })
 })

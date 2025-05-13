@@ -8,11 +8,14 @@ beforeEach(() => {
 })
 
 describe('runAllTestsInActiveFile', () => {
+  const configuration = new Map([
+    ['baseCommand', 'pytest'],
+    ['runFileCommand', '{base} {fileName}']
+  ])
+
   it('runs all tests in the active file', async () => {
-    const configuration = new Map([
-      ['baseCommand', 'pytest'],
-      ['runFileCommand', '{base} {fileName}']
-    ])
+    expect(vscode.window.activeTextEditor).not.toBe(undefined)
+    expect(vscode.workspace.workspaceFolders).not.toBe(undefined)
 
     await runAllTestsInActiveFile(configuration)
 
@@ -20,6 +23,8 @@ describe('runAllTestsInActiveFile', () => {
   })
 
   it('runs all tests in the active file as module', async () => {
+    expect(vscode.window.activeTextEditor).not.toBe(undefined)
+    expect(vscode.workspace.workspaceFolders).not.toBe(undefined)
     const configuration = new Map([
       ['baseCommand', 'pytest'],
       ['runFileCommand', '{base} {module}']
@@ -31,11 +36,8 @@ describe('runAllTestsInActiveFile', () => {
   })
 
   it('handles no file being open', async () => {
-    const configuration = new Map([
-      ['baseCommand', 'pytest'],
-      ['runFileCommand', '{base} {module}']
-    ])
     vscode.window.activeTextEditor = undefined
+    expect(vscode.workspace.workspaceFolders).not.toBe(undefined)
 
     expect(() => runAllTestsInActiveFile(configuration)).toThrow(new ExtensionError('No file open!'))
 

@@ -39,10 +39,10 @@ const vscode = {
       return path.replace(/^\/root\//, '')
     },
     getWorkspaceFolder () {
-      return { name: 'foo', uri: '/root/' }
+      return this.workspaceFolders[0]
     },
     async saveAll () { return true },
-    workspaceFolders: [{ name: 'foo' }]
+    workspaceFolders: [{ name: 'foo', uri: '/root/' }]
   }
 }
 
