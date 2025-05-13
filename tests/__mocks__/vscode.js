@@ -1,5 +1,3 @@
-// TODO delete many of these mocks when command refactoring is completed
-
 const _lines = [
   'def test_foo():',
   '    assert True',
@@ -43,7 +41,8 @@ const vscode = {
     getWorkspaceFolder () {
       return { name: 'foo', uri: '/root/' }
     },
-    async saveAll () { return true }
+    async saveAll () { return true },
+    workspaceFolders: [{ name: 'foo' }]
   }
 }
 

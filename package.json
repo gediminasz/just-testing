@@ -148,7 +148,7 @@
         "lint": "standard",
         "fix": "standard --fix",
         "typecheck": "tsc",
-        "test": "jest --coverage"
+        "test": "jest"
     },
     "jest": {
         "collectCoverageFrom": [
