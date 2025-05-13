@@ -14,6 +14,7 @@ function runTestOnCursor (configuration) {
 
 /**
  * @param {vscode.WorkspaceConfiguration} configuration
+ * @returns {string}
  */
 function renderTestOnCursorCommand (configuration) {
   const activeEditor = vscode.window.activeTextEditor
@@ -26,7 +27,7 @@ function renderTestOnCursorCommand (configuration) {
   const testName = () => {
     const regex = configuration.get('runOnCursorRegex')
     const value = findMatch(regex, activeEditor.document, activeLine)
-    if (!value) {
+    if (value === undefined) {
       throw new ExtensionError('No test detected!')
     }
     return value
@@ -46,7 +47,7 @@ function renderTestOnCursorCommand (configuration) {
   for (const [key, expression] of Object.entries(configuration.get('expressions'))) {
     context[key] = () => {
       const value = findMatch(expression.regex, activeEditor.document, activeLine)
-      if (!value) {
+      if (value === undefined) {
         throw new ExtensionError(`Invalid expression for "${key}"`)
       }
       return value
@@ -62,7 +63,7 @@ function renderTestOnCursorCommand (configuration) {
  * @param {string} regex
  * @param {vscode.TextDocument} document
  * @param {number} lineNumber
- * @returns
+ * @returns {string | undefined}
  */
 function findMatch (regex, document, lineNumber) {
   for (let i = lineNumber; i >= 0; i--) {

@@ -1,6 +1,7 @@
 const vscode = require('vscode')
 
 const { copyTestOnCursor } = require('../../src/commands/copyTestOnCursor')
+const { ExtensionError } = require('../../src/errors')
 
 beforeEach(() => {
   vscode.window.activeTextEditor = {
@@ -31,17 +32,26 @@ beforeEach(() => {
 })
 
 describe('copyTestOnCursor', () => {
+  const configuration = new Map([
+    ['baseCommand', 'pytest'],
+    ['runOnCursorCommand', '{base} {fileName} -k {testName}'],
+    ['runOnCursorRegex', 'def (test_.+)\\('],
+    ['expressions', {}]
+  ])
+
   it('copies the command to run the test on cursor', async () => {
-    const configuration = new Map([
-      ['baseCommand', 'pytest'],
-      ['runOnCursorCommand', '{base} {fileName} -k {testName}'],
-      ['runOnCursorRegex', 'def (test_.+)\\('],
-      ['expressions', {}]
-    ])
-
     await copyTestOnCursor(configuration)
-
     expect(vscode.window.terminals[0]._lastCommand).toBe(undefined)
     expect(vscode.env.clipboard._value).toBe('pytest foo/bar/baz.py -k test_foo')
+  })
+
+  it('handles no test being found', async () => {
+    vscode.window.activeTextEditor.selection.active.line = 1
+    expect(() => copyTestOnCursor(configuration)).toThrow(new ExtensionError('No test detected!'))
+  })
+
+  it('handles no editor being open', async () => {
+    vscode.window.activeTextEditor = undefined
+    expect(() => copyTestOnCursor(configuration)).toThrow(new ExtensionError('No file open!'))
   })
 })
