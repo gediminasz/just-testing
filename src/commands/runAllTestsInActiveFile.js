@@ -4,6 +4,10 @@ const { ExtensionError } = require('../errors')
 const { runTerminalCommand } = require('../terminal')
 const helpers = require('../helpers')
 
+/**
+ * @param {import('vscode').ExtensionContext} extensionContext
+ * @param {import('vscode').WorkspaceConfiguration} configuration
+ */
 function runAllTestsInActiveFile (extensionContext, configuration) {
   const activeEditor = vscode.window.activeTextEditor
   if (!activeEditor) {
