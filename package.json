@@ -2,7 +2,7 @@
     "name": "just-testing",
     "version": "2023.7.0",
     "displayName": "Just Testing",
-    "description": "A Visual Studio Code extension for running tests in integrated terminal",
+    "description": "A Visual Studio Code extension for running tests in the integrated terminal",
     "keywords": [
         "unit",
         "tests",
@@ -150,9 +150,9 @@
         }
     },
     "scripts": {
-        "ci:lint": "standard",
-        "ci:test": "jest --coverage",
+        "lint": "standard",
         "fix": "standard --fix",
+        "typecheck": "tsc",
         "test": "jest"
     },
     "jest": {
@@ -169,8 +169,10 @@
         }
     },
     "devDependencies": {
-        "jest": "^29.5.0",
-        "standard": "^17.1.0"
+        "@types/vscode": "*",
+        "jest": "*",
+        "standard": "*",
+        "typescript": "*"
     },
     "standard": {
         "env": [

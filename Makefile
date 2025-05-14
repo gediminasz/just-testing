@@ -1,14 +1,19 @@
+test:
+	npm run --silent test -- --coverage
+
 ci:
 	npm audit --audit-level high
 	npm install
-	npm run --silent ci:lint
-	npm run --silent ci:test
+	npm run --silent lint
+	npm run --silent typecheck
+	make test
 
 fix:
 	npm run fix
 
 update:
-	npm add --save-dev jest@latest standard@latest
+	rm -r node_modules package-lock.json
+	npm install
 
 package: ci
 	vsce package

@@ -1,4 +1,4 @@
-name: CI
+name: Continuous Integration
 
 on:
   push:
@@ -9,10 +9,10 @@ on:
       - master
 
 jobs:
-  test:
+  ci:
+    name: Continuous Integration
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-node@v3
-    - run: |
-        make ci
+    - run: make ci
