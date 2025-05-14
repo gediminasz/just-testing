@@ -13,7 +13,8 @@ const vscode = {
         lineAt (i) {
           return { text: _lines[i] }
         },
-        languageId: 'python'
+        languageId: 'python',
+        uri: { path: '/root/foo/bar/baz.py' }
       },
       selection: { active: { line: 3 } }
     },
@@ -32,9 +33,9 @@ const vscode = {
 
   workspace: {
     _configuration: { justTesting: {} },
-    getConfiguration (section) {
-      return new Map(Object.entries(this._configuration[section]))
-    },
+    getConfiguration: jest.fn((section, scope) => {
+      return new Map(Object.entries(vscode.workspace._configuration[section]))
+    }),
     asRelativePath (path) {
       return path.replace(/^\/root\//, '')
     },

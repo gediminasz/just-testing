@@ -36,7 +36,8 @@ function getActiveWorkspaceFolder () {
   if (editor !== undefined) {
     return vscode.workspace.getWorkspaceFolder(editor.document.uri)
   }
-  return vscode.workspace.workspaceFolders && vscode.workspace.workspaceFolders[0]
+
+  return vscode.workspace.workspaceFolders && vscode.workspace.workspaceFolders.at(0)
 }
 
 module.exports = { runTerminalCommand }

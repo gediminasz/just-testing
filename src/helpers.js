@@ -16,7 +16,11 @@ function pathToModule (value) {
  */
 function getActiveConfiguration () {
   const editor = vscode.window.activeTextEditor
-  const scope = editor && editor.document.uri
+  if (editor !== undefined) {
+    return vscode.workspace.getConfiguration('justTesting', editor.document.uri)
+  }
+
+  const scope = vscode.workspace.workspaceFolders && vscode.workspace.workspaceFolders.at(0)
   return vscode.workspace.getConfiguration('justTesting', scope)
 }
 
