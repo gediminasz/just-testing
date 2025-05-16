@@ -23,7 +23,7 @@ function obtainTerminal () {
   const terminal = vscode.window.terminals.find(terminal => terminal.name === TERMINAL_NAME)
   if (terminal) return terminal
 
-  return vscode.window.createTerminal(TERMINAL_NAME)
+  return vscode.window.createTerminal({ name: TERMINAL_NAME, iconPath: new vscode.ThemeIcon('test-view-icon') })
 }
 
 module.exports = { LAST_COMMAND, runTerminalCommand }
