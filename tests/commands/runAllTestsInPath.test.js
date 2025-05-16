@@ -12,27 +12,27 @@ describe('runAllTestsInPath', () => {
     const extensionContext = makeExtensionContext()
     const configuration = new Map([
       ['baseCommand', 'pytest'],
-      ['runFileCommand', '{base} {fileName}']
+      ['runFileCommand', '{base} {root}/{fileName}']
     ])
     const uri = { path: '/root/tests/foo/test_bar.py' }
 
     await runAllTestsInPath(extensionContext, configuration, uri)
 
-    expect(vscode.window.terminals[0]._lastCommand).toBe('pytest tests/foo/test_bar.py')
-    expect(extensionContext.workspaceState.get('lastCommand')).toBe('pytest tests/foo/test_bar.py')
+    expect(vscode.window.terminals[0]._lastCommand).toBe('pytest /path/to/workspace/tests/foo/test_bar.py')
+    expect(extensionContext.workspaceState.get('lastCommand')).toBe('pytest /path/to/workspace/tests/foo/test_bar.py')
   })
 
   it('runs tests in a selected directory', async () => {
     const extensionContext = makeExtensionContext()
     const configuration = new Map([
       ['baseCommand', 'pytest'],
-      ['runFileCommand', '{base} {fileName}']
+      ['runFileCommand', '{base} {root}/{fileName}']
     ])
     const uri = { path: '/root/tests/foo/' }
 
     await runAllTestsInPath(extensionContext, configuration, uri)
 
-    expect(vscode.window.terminals[0]._lastCommand).toBe('pytest tests/foo/')
+    expect(vscode.window.terminals[0]._lastCommand).toBe('pytest /path/to/workspace/tests/foo/')
   })
 
   it('runs tests in a selected file as module', async () => {

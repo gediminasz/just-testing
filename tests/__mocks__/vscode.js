@@ -48,6 +48,7 @@ const vscode = {
   },
 
   workspace: {
+    rootPath: '/path/to/workspace',
     getConfiguration (section, { languageId }) {
       return _configuration[section][languageId]
     },

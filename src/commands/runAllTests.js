@@ -8,7 +8,8 @@ const helpers = require('../helpers')
 function runAllTests (extensionContext, configuration) {
   const template = configuration.get('runAllCommand')
   const context = {
-    base: configuration.get('baseCommand')
+    base: configuration.get('baseCommand'),
+    root: helpers.getRootPath()
   }
 
   const command = helpers.interpolate(template, context)

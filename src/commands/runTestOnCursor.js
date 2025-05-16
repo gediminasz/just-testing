@@ -39,6 +39,7 @@ function renderTestOnCursorCommand (configuration) {
   /** @type {Record<string, any>} */
   const context = {
     base: configuration.get('baseCommand'),
+    root: helpers.getRootPath(),
     fileName,
     module: helpers.pathToModule(fileName),
     testName,
