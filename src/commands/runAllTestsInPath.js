@@ -11,6 +11,7 @@ function runAllTestsInPath (extensionContext, configuration, uri) {
   const fileName = helpers.asRelativePath(uri.path)
   const context = {
     base: configuration.get('baseCommand'),
+    root: helpers.getRootPath(),
     fileName,
     module: helpers.pathToModule(fileName)
   }

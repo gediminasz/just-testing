@@ -126,11 +126,11 @@ All settings can be made specific for a language, so it's possible to have multi
 
 ## Interpolation tags
 
-| Setting                          | Available interpolation tags                               |
-|----------------------------------|------------------------------------------------------------|
-| `justTesting.runAllCommand`      | `{base}`                                                   |
-| `justTesting.runFileCommand`     | `{base}`, `{fileName}`, `{module}`                         |
-| `justTesting.runOnCursorCommand` | `{base}`, `{fileName}`, `{module}`, `{testName}`, `{line}` |
+| Setting                          | Available interpolation tags                                                             |
+|----------------------------------|------------------------------------------------------------------------------------------|
+| `justTesting.runAllCommand`      | `{base}`, `{root}`                                                                       |
+| `justTesting.runFileCommand`     | `{base}`, `{root}`, `{fileName}`, `{module}`                                             |
+| `justTesting.runOnCursorCommand` | `{base}`, `{root}`, `{fileName}`, `{module}`, `{testName}`, `{line}`, custom expressions |
 
 ## Custom expressions
 

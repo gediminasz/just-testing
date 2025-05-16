@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Added `{root}` variable which contains the absolute path to current workspace.
+
 ## 2023.7.0
 
 - Added "Run Tests" context menu item to file explorer.
