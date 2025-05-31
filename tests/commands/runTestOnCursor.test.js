@@ -37,8 +37,8 @@ describe('runTestOnCursor', () => {
 
     await runTestOnCursor(extensionContext, configuration)
 
-    expect(vscode.window.terminals[0]._lastCommand).toBe('pytest /path/to/workspace/foo/bar/baz.py -k test_foo')
-    expect(extensionContext.workspaceState.get('lastCommand')).toBe('pytest /path/to/workspace/foo/bar/baz.py -k test_foo')
+    expect(vscode.window.terminals[0]._lastCommand).toBe('pytest /root/foo/bar/baz.py -k test_foo')
+    expect(extensionContext.workspaceState.get('lastCommand')).toBe('pytest /root/foo/bar/baz.py -k test_foo')
   })
 
   it('handles no test detected', async () => {

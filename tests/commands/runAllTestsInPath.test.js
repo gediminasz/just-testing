@@ -18,8 +18,8 @@ describe('runAllTestsInPath', () => {
 
     await runAllTestsInPath(extensionContext, configuration, uri)
 
-    expect(vscode.window.terminals[0]._lastCommand).toBe('pytest /path/to/workspace/tests/foo/test_bar.py')
-    expect(extensionContext.workspaceState.get('lastCommand')).toBe('pytest /path/to/workspace/tests/foo/test_bar.py')
+    expect(vscode.window.terminals[0]._lastCommand).toBe('pytest /root/tests/foo/test_bar.py')
+    expect(extensionContext.workspaceState.get('lastCommand')).toBe('pytest /root/tests/foo/test_bar.py')
   })
 
   it('runs tests in a selected directory', async () => {
@@ -32,7 +32,7 @@ describe('runAllTestsInPath', () => {
 
     await runAllTestsInPath(extensionContext, configuration, uri)
 
-    expect(vscode.window.terminals[0]._lastCommand).toBe('pytest /path/to/workspace/tests/foo/')
+    expect(vscode.window.terminals[0]._lastCommand).toBe('pytest /root/tests/foo/')
   })
 
   it('runs tests in a selected file as module', async () => {
