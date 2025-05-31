@@ -44,7 +44,7 @@ function getRootPath () {
  */
 function interpolate (template, context) {
   return Object.entries(context).reduce(
-    (result, [key, value]) => result.replace(`{${key}}`, value),
+    (result, [key, value]) => result.replaceAll(`{${key}}`, value),
     template
   )
 }

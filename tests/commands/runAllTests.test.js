@@ -20,4 +20,18 @@ describe('runAllTests', () => {
     expect(vscode.window.terminals[0]._lastCommand).toBe('pytest --cov /path/to/workspace')
     expect(extensionContext.workspaceState.get('lastCommand')).toBe('pytest --cov /path/to/workspace')
   })
+
+  it('interpolates all variables', async () => {
+    const extensionContext = makeExtensionContext()
+    const configuration = new Map([
+      ['baseCommand', 'conda run -p {root}/.venv pytest'],
+      ['runAllCommand', '{base} --cov {root}']
+    ])
+
+    await runAllTests(extensionContext, configuration)
+
+    const expectedValue = 'conda run -p /path/to/workspace/.venv pytest --cov /path/to/workspace'
+    expect(vscode.window.terminals[0]._lastCommand).toBe(expectedValue)
+    expect(extensionContext.workspaceState.get('lastCommand')).toBe(expectedValue)
+  })
 })
