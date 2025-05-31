@@ -31,13 +31,20 @@ function getConfiguration () {
 }
 
 /**
+ * @returns {string | undefined}
+ */
+function getRootPath () {
+  return vscode.workspace.rootPath
+}
+
+/**
  * @param {string} template
  * @param {object} context
  * @returns string
  */
 function interpolate (template, context) {
   return Object.entries(context).reduce(
-    (result, [key, value]) => result.replace(`{${key}}`, value),
+    (result, [key, value]) => result.replaceAll(`{${key}}`, value),
     template
   )
 }
@@ -52,6 +59,7 @@ function asRelativePath (path) {
 
 module.exports = {
   getConfiguration,
+  getRootPath,
   asRelativePath,
   pathToModule,
   interpolate
