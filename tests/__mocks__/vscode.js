@@ -14,6 +14,7 @@ const _configuration = {
       ['runFileCommand', '{base} {fileName}'],
       ['runOnCursorRegex', 'def (test_.+)\\('],
       ['runOnCursorCommand', '{base} {fileName} -k {testName}'],
+      ['environmentVariables', {}],
       ['expressions', {
         valueExpression: { value: 'static-value' },
         regexExpression: { regex: 'def (.+_test)' }
@@ -44,7 +45,27 @@ const vscode = {
           this._lastCommand = command
         }
       }
-    ]
+    ],
+    createTerminal (options) {
+      const terminal = {
+        name: options.name,
+        env: options.env,
+        show () {
+          this._wasShown = true
+        },
+        sendText (command) {
+          this._lastCommand = command
+        }
+      }
+      this.terminals.push(terminal)
+      return terminal
+    }
+  },
+
+  ThemeIcon: class {
+    constructor (id) {
+      this.id = id
+    }
   },
 
   workspace: {

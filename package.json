@@ -95,6 +95,12 @@
                     "type": "boolean",
                     "default": true,
                     "description": "Should right click context menu actions be enabled"
+                },
+                "justTesting.environmentVariables": {
+                    "type": "object",
+                    "scope": "language-overridable",
+                    "default": {},
+                    "description": "Environment variables to set when running test commands"
                 }
             }
         },

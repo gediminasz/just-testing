@@ -10,7 +10,8 @@ const { ExtensionError } = require('../errors')
  */
 function runTestOnCursor (extensionContext, configuration) {
   const command = renderTestOnCursorCommand(configuration)
-  runTerminalCommand(extensionContext, command)
+  const environmentVariables = helpers.getEnvironmentVariables(configuration)
+  runTerminalCommand(extensionContext, command, environmentVariables)
 }
 
 /**

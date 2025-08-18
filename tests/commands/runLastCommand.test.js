@@ -24,7 +24,7 @@ describe('runLastCommand', () => {
 
     vscode.window.terminals[0]._lastCommand = undefined
 
-    await runLastCommand(extensionContext)
+    await runLastCommand(extensionContext, configuration)
 
     expect(vscode.window.terminals[0]._lastCommand).toBe('pytest')
     expect(extensionContext.workspaceState.get('lastCommand')).toBe('pytest')
@@ -32,8 +32,9 @@ describe('runLastCommand', () => {
 
   it('shows an error when no command was run', async () => {
     const extensionContext = makeExtensionContext()
+    const configuration = new Map([])
 
-    expect(() => runLastCommand(extensionContext)).toThrow(new ExtensionError('No tests ran yet!'))
+    expect(() => runLastCommand(extensionContext, configuration)).toThrow(new ExtensionError('No tests ran yet!'))
 
     expect(vscode.window.terminals[0]._lastCommand).toBe(undefined)
   })

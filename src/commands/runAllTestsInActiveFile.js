@@ -23,8 +23,9 @@ function runAllTestsInActiveFile (extensionContext, configuration) {
   }
 
   const command = helpers.interpolate(template, context)
+  const environmentVariables = helpers.getEnvironmentVariables(configuration)
 
-  runTerminalCommand(extensionContext, command)
+  runTerminalCommand(extensionContext, command, environmentVariables)
 }
 
 module.exports = { runAllTestsInActiveFile }

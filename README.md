@@ -69,6 +69,24 @@ Point the base command to the `python` executable inside the virtualenv:
 "justTesting.runOnCursorCommand": "{base} {fileName} -m {testName}"
 ```
 
+#### Environment Variables
+
+Environment variables can be configured to be set when running test commands:
+
+```
+"justTesting.environmentVariables": {
+    "PYTHONPATH": "/path/to/modules",
+    "DEBUG": "1",
+    "TEST_DATABASE_URL": "sqlite:///test.db"
+}
+```
+
+This is particularly useful for:
+- Setting Python path for module discovery
+- Configuring test database connections
+- Enabling debug modes
+- Setting API keys for integration tests
+
 ### JavaScript
 
 #### NPM
@@ -86,6 +104,18 @@ Point the base command to the `python` executable inside the virtualenv:
 "justTesting.baseCommand": "jest",
 "justTesting.runOnCursorRegex": "test\\((.+),",
 "justTesting.runOnCursorCommand": "{base} -t {testName}"
+```
+
+#### Jest with Environment Variables
+
+```
+"justTesting.baseCommand": "jest",
+"justTesting.runOnCursorRegex": "test\\((.+),",
+"justTesting.runOnCursorCommand": "{base} -t {testName}",
+"justTesting.environmentVariables": {
+    "NODE_ENV": "test",
+    "CI": "true"
+}
 ```
 
 ### Ruby
@@ -107,6 +137,7 @@ Point the base command to the `python` executable inside the virtualenv:
 | `justTesting.runOnCursorRegex`    | Regular expression for matching closest test name. | `"def (test_.+)\\("`                |
 | `justTesting.runOnCursorCommand`  | Terminal command for "Run test on cursor".         | `"{base} {fileName} -k {testName}"` |
 | `justTesting.expressions`         | Custom expressions for template variables          | `{}`                                |
+| `justTesting.environmentVariables` | Environment variables to set when running tests   | `{}`                                |
 | `justTesting.contextMenusEnabled` | Should right click context menu actions be enabled | `true`                              |
 
 All settings can be made specific for a language, so it's possible to have multiple configurations in a single project:

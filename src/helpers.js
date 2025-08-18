@@ -50,9 +50,18 @@ function asRelativePath (path) {
   return vscode.workspace.asRelativePath(path, false)
 }
 
+/**
+ * @param {vscode.WorkspaceConfiguration} configuration
+ * @returns {object}
+ */
+function getEnvironmentVariables (configuration) {
+  return configuration.get('environmentVariables') || {}
+}
+
 module.exports = {
   getConfiguration,
   asRelativePath,
   pathToModule,
-  interpolate
+  interpolate,
+  getEnvironmentVariables
 }
