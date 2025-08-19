@@ -1,5 +1,3 @@
-// TODO delete many of these mocks when command refactoring is completed
-
 const _lines = [
   'def test_foo():',
   '    assert True',
@@ -48,6 +46,7 @@ const vscode = {
   },
 
   workspace: {
+    rootPath: '/root',
     getConfiguration (section, { languageId }) {
       return _configuration[section][languageId]
     },

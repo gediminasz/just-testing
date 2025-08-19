@@ -18,6 +18,7 @@ function runAllTestsInActiveFile (extensionContext, configuration) {
   const fileName = helpers.asRelativePath(activeEditor.document.fileName)
   const context = {
     base: configuration.get('baseCommand'),
+    root: helpers.getRootPath(),
     fileName,
     module: helpers.pathToModule(fileName)
   }

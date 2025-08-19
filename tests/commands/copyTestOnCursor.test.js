@@ -36,7 +36,7 @@ describe('copyTestOnCursor', () => {
     const extensionContext = makeExtensionContext()
     const configuration = new Map([
       ['baseCommand', 'pytest'],
-      ['runOnCursorCommand', '{base} {fileName} -k {testName}'],
+      ['runOnCursorCommand', '{base} {root}/{fileName} -k {testName}'],
       ['runOnCursorRegex', 'def (test_.+)\\('],
       ['expressions', {}]
     ])
@@ -44,6 +44,6 @@ describe('copyTestOnCursor', () => {
     await copyTestOnCursor(extensionContext, configuration)
 
     expect(vscode.window.terminals[0]._lastCommand).toBe(undefined)
-    expect(vscode.env.clipboard._value).toBe('pytest foo/bar/baz.py -k test_foo')
+    expect(vscode.env.clipboard._value).toBe('pytest /root/foo/bar/baz.py -k test_foo')
   })
 })
