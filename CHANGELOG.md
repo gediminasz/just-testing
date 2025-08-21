@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 2025.8.0
 
 - Added `{root}` variable which contains the absolute path to current workspace.
 

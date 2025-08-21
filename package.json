@@ -1,6 +1,6 @@
 {
     "name": "just-testing",
-    "version": "2023.7.0",
+    "version": "2025.8.0",
     "displayName": "Just Testing",
     "description": "A Visual Studio Code extension for running tests in the integrated terminal",
     "keywords": [
