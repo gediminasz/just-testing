@@ -19,3 +19,4 @@ code --install-extension just-testing-0.0.1.vsix
 
 - https://github.com/gediminasz/just-testing-examples
 - https://code.visualstudio.com/api/references/vscode-api
+- https://code.visualstudio.com/api/working-with-extensions/publishing-extension#get-a-personal-access-token
