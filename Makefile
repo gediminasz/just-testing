@@ -2,7 +2,7 @@ test:
 	npm run --silent test -- --coverage
 
 ci:
-	npm audit --audit-level high
+	npm audit
 	npm install
 	npm run --silent lint
 	npm run --silent typecheck
@@ -14,6 +14,7 @@ fix:
 update:
 	rm -r node_modules package-lock.json
 	npm install
+	npm audit
 
 package: ci
 	vsce package
