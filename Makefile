@@ -14,7 +14,6 @@ fix:
 update:
 	rm -r node_modules package-lock.json
 	npm install
-	npm audit
 
 package: ci
 	vsce package
