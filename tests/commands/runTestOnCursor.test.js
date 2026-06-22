@@ -116,7 +116,7 @@ describe('runTestOnCursor', () => {
             '  it("bar", () => {',
             '    ...',
             '  })',
-            '})',
+            '})'
           ],
           fileName: '/root/foo/bar/baz.js',
           lineAt (i) {
@@ -130,7 +130,7 @@ describe('runTestOnCursor', () => {
     const configuration = new Map([
       ['baseCommand', 'jest'],
       ['runOnCursorCommand', '{base} {fileName} -t {testName}'],
-      ['runOnCursorRegex', "(it|describe)\\((.+),"],
+      ['runOnCursorRegex', '(it|describe)\\((.+),'],
       ['expressions', {}]
     ])
 
@@ -139,7 +139,7 @@ describe('runTestOnCursor', () => {
 
       await runTestOnCursor(extensionContext, configuration)
 
-      expect(vscode.window.terminals[0]._lastCommand).toBe('jest foo/bar/baz.js -t \"bar\"')
+      expect(vscode.window.terminals[0]._lastCommand).toBe('jest foo/bar/baz.js -t "bar"')
     })
 
     it('runs a describe block', async () => {
@@ -148,7 +148,7 @@ describe('runTestOnCursor', () => {
 
       await runTestOnCursor(extensionContext, configuration)
 
-      expect(vscode.window.terminals[0]._lastCommand).toBe('jest foo/bar/baz.js -t \"foo\"')
+      expect(vscode.window.terminals[0]._lastCommand).toBe('jest foo/bar/baz.js -t "foo"')
     })
   })
 })
