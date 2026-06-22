@@ -2,7 +2,7 @@ test:
 	npm run --silent test -- --coverage
 
 ci:
-	# npm audit
+	npm audit --audit-level high
 	npm install
 	npm run --silent lint
 	npm run --silent typecheck
