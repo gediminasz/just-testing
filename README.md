@@ -14,7 +14,6 @@ Supported languages and frameworks:
 - Python `pytest` (default)
 - Python `unittest`
 - Python Django
-- Python Nose
 - JavaScript Jest
 - Ruby RSpec
 
@@ -60,13 +59,6 @@ Point the base command to the `python` executable inside the virtualenv:
 "justTesting.expressions": {
     "className": { "regex": "class (.+TestCase)\\(" }
 }
-```
-
-#### Nose
-
-```
-"justTesting.baseCommand": "python -m nose",
-"justTesting.runOnCursorCommand": "{base} {fileName} -m {testName}"
 ```
 
 ### JavaScript
