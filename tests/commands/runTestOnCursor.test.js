@@ -4,24 +4,26 @@ const { makeExtensionContext } = require('../helpers')
 const { runTestOnCursor } = require('../../src/commands/runTestOnCursor')
 const { ExtensionError } = require('../../src/errors')
 
+let lines = [
+  'class FooTestCase(TestCase):',
+  '    def not_test():',
+  '        ...',
+  '    def _test_ignored():',
+  '        ...',
+  '    def test_foo():',
+  '        ...'
+]
+let activeLine = 6
+
 beforeEach(() => {
   vscode.window.activeTextEditor = {
     document: {
-      _lines: [
-        'class FooTestCase(TestCase):',
-        '    def not_test():',
-        '        ...',
-        '    def _test_ignored():',
-        '        ...',
-        '    def test_foo():',
-        '        ...'
-      ],
-      fileName: '/root/foo/bar/baz.py',
+      fileName: '/root/foo/bar/baz',
       lineAt (i) {
-        return { text: this._lines[i] }
+        return { text: lines[i] }
       }
     },
-    selection: { active: { line: 6 } }
+    selection: { active: { line: activeLine } }
   }
   vscode.window.terminals[0]._lastCommand = undefined
 })
@@ -33,18 +35,16 @@ describe('runTestOnCursor', () => {
     ['runOnCursorRegex', 'def (test_.+)\\('],
     ['expressions', {}]
   ])
+  const extensionContext = makeExtensionContext()
 
   it('runs a single test', async () => {
-    const extensionContext = makeExtensionContext()
-
     await runTestOnCursor(extensionContext, configuration)
 
-    expect(vscode.window.terminals[0]._lastCommand).toBe('pytest /root/foo/bar/baz.py -k test_foo')
-    expect(extensionContext.workspaceState.get('lastCommand')).toBe('pytest /root/foo/bar/baz.py -k test_foo')
+    expect(vscode.window.terminals[0]._lastCommand).toBe('pytest /root/foo/bar/baz -k test_foo')
+    expect(extensionContext.workspaceState.get('lastCommand')).toBe('pytest /root/foo/bar/baz -k test_foo')
   })
 
   it('handles no test detected', async () => {
-    const extensionContext = makeExtensionContext()
     vscode.window.activeTextEditor.selection.active.line = 2
 
     expect(() => runTestOnCursor(extensionContext, configuration)).toThrow(new ExtensionError('No test detected!'))
@@ -53,7 +53,6 @@ describe('runTestOnCursor', () => {
   })
 
   it('handles no file being open', async () => {
-    const extensionContext = makeExtensionContext()
     vscode.window.activeTextEditor = undefined
 
     expect(() => runTestOnCursor(extensionContext, configuration)).toThrow(new ExtensionError('No file open!'))
@@ -72,7 +71,6 @@ describe('runTestOnCursor', () => {
     ])
 
     it('runs a single test', async () => {
-      const extensionContext = makeExtensionContext()
       await runTestOnCursor(extensionContext, configuration)
       expect(vscode.window.terminals[0]._lastCommand).toBe('python manage.py test foo.bar.baz.FooTestCase.test_foo')
     })
@@ -82,7 +80,6 @@ describe('runTestOnCursor', () => {
       badConfiguration.set('expressions', {
         className: { regex: 'class (.+NotATestCase)\\(' }
       })
-      const extensionContext = makeExtensionContext()
 
       expect(() => runTestOnCursor(extensionContext, badConfiguration))
         .toThrow(new ExtensionError('Invalid expression for "className"'))
@@ -99,32 +96,20 @@ describe('runTestOnCursor', () => {
     ])
 
     it('runs a single test', async () => {
-      const extensionContext = makeExtensionContext()
-
       await runTestOnCursor(extensionContext, configuration)
-
-      expect(vscode.window.terminals[0]._lastCommand).toBe('rspec foo/bar/baz.py:7')
+      expect(vscode.window.terminals[0]._lastCommand).toBe('rspec foo/bar/baz:7')
     })
   })
 
   describe('jest', () => {
-    beforeEach(() => {
-      vscode.window.activeTextEditor = {
-        document: {
-          _lines: [
-            'describe("foo", () => {',
-            '  it("bar", () => {',
-            '    ...',
-            '  })',
-            '})'
-          ],
-          fileName: '/root/foo/bar/baz.js',
-          lineAt (i) {
-            return { text: this._lines[i] }
-          }
-        },
-        selection: { active: { line: 2 } }
-      }
+    beforeAll(() => {
+      lines = [
+        'describe("foo", () => {',
+        '  it("bar", () => {',
+        '    ...',
+        '  })',
+        '})'
+      ]
     })
 
     const configuration = new Map([
@@ -134,21 +119,22 @@ describe('runTestOnCursor', () => {
       ['expressions', {}]
     ])
 
-    it('runs a single test', async () => {
-      const extensionContext = makeExtensionContext()
+    describe('when cursor is on "it" block', () => {
+      beforeAll(() => { activeLine = 2 })
 
-      await runTestOnCursor(extensionContext, configuration)
-
-      expect(vscode.window.terminals[0]._lastCommand).toBe('jest foo/bar/baz.js -t "bar"')
+      it('runs that test', async () => {
+        await runTestOnCursor(extensionContext, configuration)
+        expect(vscode.window.terminals[0]._lastCommand).toBe('jest foo/bar/baz -t "bar"')
+      })
     })
 
-    it('runs a describe block', async () => {
-      const extensionContext = makeExtensionContext()
-      vscode.window.activeTextEditor.selection.active.line = 0
+    describe('when cursor is on "describe" block', () => {
+      beforeAll(() => { activeLine = 0 })
 
-      await runTestOnCursor(extensionContext, configuration)
-
-      expect(vscode.window.terminals[0]._lastCommand).toBe('jest foo/bar/baz.js -t "foo"')
+      it('runs that test', async () => {
+        await runTestOnCursor(extensionContext, configuration)
+        expect(vscode.window.terminals[0]._lastCommand).toBe('jest foo/bar/baz -t "foo"')
+      })
     })
   })
 })
