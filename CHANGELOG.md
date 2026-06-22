@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 2026.6.0
 
 - Changed `runTestOnCursor` to use the last regex capture group for `{testName}`, improving support for patterns like Jest's `(it|describe)`.
 - Removed examples for Python Nose.
