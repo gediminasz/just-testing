@@ -19,6 +19,7 @@
 1. Commit changes.
 1. `make publish`
 1. Create a release together with a new tag in GitHub.
+    * Don't forget to attach the `.vsix` file to release assets.
 
 ## Installing from file
 
