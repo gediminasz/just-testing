@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Changed `runTestOnCursor` to use the last regex capture group for `{testName}`, improving support for patterns like Jest's `(it|describe)`.
+
 ## 2025.8.0
 
 - Added `{root}` variable which contains the absolute path to current workspace.

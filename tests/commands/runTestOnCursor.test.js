@@ -9,7 +9,9 @@ beforeEach(() => {
     document: {
       _lines: [
         'class FooTestCase(TestCase):',
-        '    def bar_test():',
+        '    def not_test():',
+        '        ...',
+        '    def _test_ignored():',
         '        ...',
         '    def test_foo():',
         '        ...'
@@ -19,7 +21,7 @@ beforeEach(() => {
         return { text: this._lines[i] }
       }
     },
-    selection: { active: { line: 4 } }
+    selection: { active: { line: 6 } }
   }
   vscode.window.terminals[0]._lastCommand = undefined
 })
@@ -101,7 +103,52 @@ describe('runTestOnCursor', () => {
 
       await runTestOnCursor(extensionContext, configuration)
 
-      expect(vscode.window.terminals[0]._lastCommand).toBe('rspec foo/bar/baz.py:5')
+      expect(vscode.window.terminals[0]._lastCommand).toBe('rspec foo/bar/baz.py:7')
+    })
+  })
+
+  describe('jest', () => {
+    beforeEach(() => {
+      vscode.window.activeTextEditor = {
+        document: {
+          _lines: [
+            'describe("foo", () => {',
+            '  it("bar", () => {',
+            '    ...',
+            '  })',
+            '})',
+          ],
+          fileName: '/root/foo/bar/baz.js',
+          lineAt (i) {
+            return { text: this._lines[i] }
+          }
+        },
+        selection: { active: { line: 2 } }
+      }
+    })
+
+    const configuration = new Map([
+      ['baseCommand', 'jest'],
+      ['runOnCursorCommand', '{base} {fileName} -t {testName}'],
+      ['runOnCursorRegex', "(it|describe)\\((.+),"],
+      ['expressions', {}]
+    ])
+
+    it('runs a single test', async () => {
+      const extensionContext = makeExtensionContext()
+
+      await runTestOnCursor(extensionContext, configuration)
+
+      expect(vscode.window.terminals[0]._lastCommand).toBe('jest foo/bar/baz.js -t \"bar\"')
+    })
+
+    it('runs a describe block', async () => {
+      const extensionContext = makeExtensionContext()
+      vscode.window.activeTextEditor.selection.active.line = 0
+
+      await runTestOnCursor(extensionContext, configuration)
+
+      expect(vscode.window.terminals[0]._lastCommand).toBe('jest foo/bar/baz.js -t \"foo\"')
     })
   })
 })

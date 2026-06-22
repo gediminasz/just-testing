@@ -84,8 +84,8 @@ Point the base command to the `python` executable inside the virtualenv:
 
 ```
 "justTesting.baseCommand": "jest",
-"justTesting.runOnCursorRegex": "test\\((.+),",
-"justTesting.runOnCursorCommand": "{base} -t {testName}"
+"justTesting.runOnCursorRegex": "(it|describe)\\((.+),",
+"justTesting.runOnCursorCommand": "{base} {fileName} -t {testName}"
 ```
 
 ### Ruby

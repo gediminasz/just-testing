@@ -72,7 +72,7 @@ function findMatch (regex, document, lineNumber) {
     const line = document.lineAt(i).text
     const match = line.match(regex)
     if (match) {
-      return match[1]
+      return match.at(-1)
     }
   }
 }
